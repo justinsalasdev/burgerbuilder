@@ -35,10 +35,12 @@
 
 html{
   font-size: 62.5%; /*default browser font = 16px => convert to 10px [16 * 62.5%]*/
+  height: 100%;
 }
 
 
 body {
+  min-height: 100%;
   box-sizing: border-box;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
