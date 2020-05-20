@@ -18,7 +18,7 @@ const orderSummary = (props) =>{
     return(
         <Wrapper>
             <h3 className={classes.modalHeading}>Your Order</h3>
-            <p>A delicious burger with the following ingredients:</p>
+            <p>A delicious burger with the following ingredients :</p>
             <ul className={classes.orderList}>
                 {ingredientSummary}
             </ul>
