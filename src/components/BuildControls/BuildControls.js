@@ -12,9 +12,16 @@ const controls = [
 
 const buildControls = (props) => {
 
+    const buttonStatus = {...props.disabled}
+    const orderStatus = !(Object.keys(buttonStatus).map(statusKey=>{
+        return (!buttonStatus[statusKey])
+    }).reduce((overallStatus, currentButtonStatus)=>{
+        return (overallStatus || currentButtonStatus)
+    },false))
+
     return (
         <div className={classes.BuildControls}>
-            <p>Current price: <strong>{props.price.toFixed(2)}</strong></p>
+            <p>Current price: <strong>${props.price.toFixed(2)}</strong></p>
             {controls.map(control => {
                 return (
                 <BuildControl 
@@ -26,6 +33,10 @@ const buildControls = (props) => {
                 />
                 )
             })}
+
+
+            <button className={classes.OrderButton} disabled={orderStatus}>ORDER NOW</button>
+
         </div>
     )
 }
