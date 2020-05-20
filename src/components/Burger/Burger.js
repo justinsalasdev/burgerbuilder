@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredient from '../BurgerIngredients/BurgerIngredients';
 
+const burgerClasses = [classes.Burger, classes.burgerScroll];
 const burger = (props) =>{
     let transformedIngredients = Object.keys(props.ingredients)
     .map(igKey => {
@@ -18,7 +19,8 @@ const burger = (props) =>{
     }
 
     return(
-        <div className={classes.Burger}>
+        
+        <div className={burgerClasses.join(' ')}>
             <BurgerIngredient type="bread-top"/>
             {transformedIngredients}
             <BurgerIngredient type="bread-bottom"/>
