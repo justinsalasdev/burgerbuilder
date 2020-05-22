@@ -14,33 +14,44 @@ const INGREDIENT_PRICES = {
 
 
 class BurgerBuilder extends Component {
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            ingredients: {
+                salad: 0,
+                bacon: 0,
+                cheese: 0,
+                meat: 0
+            },
+            totalPrice: 4,
+            purchasing: false
+        }
+
+        this.addIngredientHandler = this.addIngredientHandler.bind(this);
+        this.removeIngredientHandler = this.removeIngredientHandler.bind(this);
+        this.purchaseHandler = this.purchaseHandler.bind(this);
+        this.purchaseCancelHandler = this.purchaseCancelHandler.bind(this);
+        this.purchaseContinueHandler = this.purchaseContinueHandler.bind(this);
+    }
     
 
-    state = {
-        ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
-        totalPrice: 4,
-        purchasing: false
-    }
 
 
-    purchaseHandler = () => { 
+    purchaseHandler(){ 
         this.setState({purchasing: true})
     }
 
-    purchaseCancelHandler = () => {
+    purchaseCancelHandler(){
         this.setState({purchasing: false})
     }
 
-    purchaseContinueHandler = () => {
+    purchaseContinueHandler(){
         alert('You continue!');
     }
 
-    addIngredientHandler = (type) => {
+    addIngredientHandler(type){
         const oldCount = this.state.ingredients[type];
         const updatedCount = oldCount + 1;
         const updatedIngredients  = {
@@ -61,7 +72,7 @@ class BurgerBuilder extends Component {
 
     
 
-    removeIngredientHandler = (type) => {
+    removeIngredientHandler(type){
         const oldCount = this.state.ingredients[type];
 
         if (oldCount <= 0){return}//do nothing 
@@ -89,12 +100,7 @@ class BurgerBuilder extends Component {
 
 
     render(){
-        const ingredientAdded = this.addIngredientHandler.bind(this);
-        const ingredientRemoved = this.removeIngredientHandler.bind(this);
-        const ordered = this.purchaseHandler.bind(this);
-        const cancelOrder = this.purchaseCancelHandler.bind(this);
-        const continueOrder = this.purchaseContinueHandler.bind(this);
-
+        
         const disabledInfo = {
             ...this.state.ingredients
         }
@@ -105,22 +111,22 @@ class BurgerBuilder extends Component {
 
         return (
             <Wrapper>
-                <Modal show={this.state.purchasing} modalClosed={cancelOrder}>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary 
-                        cancelOrder={cancelOrder}
+                        cancelOrder={this.purchaseCancelHandler}
                         ingredients={this.state.ingredients}
-                        continueOrder={continueOrder}
+                        continueOrder={this.purchaseContinueHandler}
                         price={this.state.totalPrice}
                     />
                 </Modal>
 
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
-                    ingredientAdded={ingredientAdded}
-                    ingredientRemoved={ingredientRemoved}
+                    ingredientAdded={this.addIngredientHandler}
+                    ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
-                    ordered={ordered}
+                    ordered={this.purchaseHandler}
                 />
             </Wrapper>
         );
