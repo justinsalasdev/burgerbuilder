@@ -1,6 +1,7 @@
 import React from 'react';
 import Wrapper from '../../containers/Wrapper/Wrapper';
 import classes from './OrderSummary.module.css';
+import Button from '../Button/Button';
 
 
 const orderSummary = (props) =>{
@@ -22,7 +23,10 @@ const orderSummary = (props) =>{
             <ul className={classes.orderList}>
                 {ingredientSummary}
             </ul>
+            <p className={classes.orderP}>Total Price: ${props.price}</p>
             <p>Continue to checkout?</p>
+            <Button btnType="Danger" clicked={props.cancelOrder}>Cancel</Button>
+            <Button btnType="Success" clicked={props.continueOrder}>Continue</Button>
         </Wrapper>
     )
 }
