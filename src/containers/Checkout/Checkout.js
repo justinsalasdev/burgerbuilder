@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
+import {Route} from 'react-router-dom';
+import ContactData from '../ContactData/ContactData';
 
 
 class Checkout extends Component {
@@ -7,12 +9,8 @@ class Checkout extends Component {
         super(props)
         
         this.state={
-            ingredients: {
-                salad: 1,
-                meat: 1,
-                cheese: 1,
-                bacon: 1,
-            }
+            ingredients: {},
+            totalPrice: 0
         }
 
         this.checkoutCancelledHandler = this.checkoutCancelledHandler.bind(this);
@@ -21,13 +19,17 @@ class Checkout extends Component {
 
     componentDidMount(){
         const query = new URLSearchParams(this.props.location.search);
-        console.log(query);
         const ingredients = {};
-        for (let param of query.entries()){
-            ingredients[param[0]] = +param[1];
+        let price = 0;
+        for (let entry of query.entries()){
+            if(entry[0] ==='price'){
+                price = entry[1];
+            }else{
+                ingredients[entry[0]] = +entry[1];
+            }
         }
 
-        this.setState({ingredients: ingredients});
+        this.setState({ingredients: ingredients, totalPrice: price});
     }
 
 
@@ -48,6 +50,18 @@ class Checkout extends Component {
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler}
                     />
+                
+                <Route 
+                    path={this.props.match.path + '/contact-data'} 
+                    render={() => {
+                        return(
+                            <ContactData 
+                                ingredients={this.state.ingredients} 
+                                price={this.state.totalPrice}/>
+                        )
+                    }}
+                />
+
             </div>
         )
     }
