@@ -1,0 +1,24 @@
+[33m76f82ad[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m adjusted nav item alignment
+[33m3b70b9c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #1 from techmechanicservice/balsamiq
+[33m9fc5626[m[33m ([m[1;31morigin/balsamiq[m[33m, [m[1;32mbalsamiq[m[33m)[m tried balsamiq font
+[33ma2c6e2d[m added orders page
+[33ma783a0e[m added contact data
+[33md890c0c[m passed ingredients as query string
+[33mdc29846[m added routes and edited transitions
+[33m9d709a7[m crap commit
+[33md11097e[m just want to remove
+[33me74a7c3[m fixed temporary links
+[33m7fdd307[m modified packages.json for GH pages
+[33me7749e2[m add gh deployment process
+[33m6275f6a[m added error handler for retrieving ingredients
+[33mb9df54a[m added error handler HOC
+[33m6c4945f[m added behaviors in toolbar & side drawer
+[33m5989063[m added sidedrawer
+[33m24a8637[m added backdrop
+[33m1e8d2da[m added modal
+[33mf8abc16[m added scroll bar styles and total price
+[33m2f01ca2[m linked burger controls to state
+[33m1f92923[m converted px units to rems
+[33m3a752a5[m added burger controls
+[33me733afd[m updated starter
+[33mfabcfa7[m starter

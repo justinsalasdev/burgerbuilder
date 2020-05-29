@@ -52,11 +52,9 @@ class ContactData extends Component{
             .then(response => {
                 this.setState({loading: false})
                 this.props.history.replace('/');
-                console.log(response)
             })
             .catch(error => {
                 this.setState({loading: false})
-                console.log(error)
             });
     
     }
@@ -68,7 +66,7 @@ class ContactData extends Component{
                     <input className={classes.Input}type='email' name="email" placeholder="Your email"/>
                     <input className={classes.Input}type='text' name="street" placeholder="Street"/>
                     <input className={classes.Input}type='text' name="postal" placeholder="Postal Code"/>
-                </form>
+            </form>
         );
         if(this.state.loading){
             form = <Spinner/>

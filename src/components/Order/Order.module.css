@@ -1,7 +1,7 @@
 .Order{
-    width: 100%;
+    width: 80%;
     border: .1rem solid #eee;
     box-shadow: 0 .2rem .3rem #ccc;
     padding: 1rem;
-    margin: 1rem auto;
+    margin: 3rem auto;
 }
