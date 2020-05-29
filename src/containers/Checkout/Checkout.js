@@ -35,7 +35,7 @@ class Checkout extends Component {
 
 
     checkoutCancelledHandler(){
-        this.props.history.replace('/');
+        this.props.history.replace('/burger-builder');
     }
 
     checkoutContinuedHandler(){
