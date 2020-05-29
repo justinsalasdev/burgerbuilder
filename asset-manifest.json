@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/burger-builder/static/css/main.ae8d82c6.chunk.css",
-    "main.js": "/burger-builder/static/js/main.68b41b49.chunk.js",
-    "main.js.map": "/burger-builder/static/js/main.68b41b49.chunk.js.map",
-    "runtime-main.js": "/burger-builder/static/js/runtime-main.668bfeb5.js",
-    "runtime-main.js.map": "/burger-builder/static/js/runtime-main.668bfeb5.js.map",
-    "static/js/2.8d2014bc.chunk.js": "/burger-builder/static/js/2.8d2014bc.chunk.js",
-    "static/js/2.8d2014bc.chunk.js.map": "/burger-builder/static/js/2.8d2014bc.chunk.js.map",
-    "index.html": "/burger-builder/index.html",
-    "precache-manifest.9d0b3cf02f7eec134676a5bf58ba2d0a.js": "/burger-builder/precache-manifest.9d0b3cf02f7eec134676a5bf58ba2d0a.js",
-    "service-worker.js": "/burger-builder/service-worker.js",
-    "static/css/main.ae8d82c6.chunk.css.map": "/burger-builder/static/css/main.ae8d82c6.chunk.css.map",
-    "static/js/2.8d2014bc.chunk.js.LICENSE.txt": "/burger-builder/static/js/2.8d2014bc.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/burger-builder/static/media/balsamiq-sans-v1-latin-regular.deaa2661.eot",
-    "static/media/burger-logo.png": "/burger-builder/static/media/burger-logo.b8503d26.png"
+    "main.css": "/burger-builder-dev/static/css/main.d2f9829d.chunk.css",
+    "main.js": "/burger-builder-dev/static/js/main.38ffbc93.chunk.js",
+    "main.js.map": "/burger-builder-dev/static/js/main.38ffbc93.chunk.js.map",
+    "runtime-main.js": "/burger-builder-dev/static/js/runtime-main.dd74d3a2.js",
+    "runtime-main.js.map": "/burger-builder-dev/static/js/runtime-main.dd74d3a2.js.map",
+    "static/js/2.8d2014bc.chunk.js": "/burger-builder-dev/static/js/2.8d2014bc.chunk.js",
+    "static/js/2.8d2014bc.chunk.js.map": "/burger-builder-dev/static/js/2.8d2014bc.chunk.js.map",
+    "index.html": "/burger-builder-dev/index.html",
+    "precache-manifest.91b263166a7b6effbefa328afd502819.js": "/burger-builder-dev/precache-manifest.91b263166a7b6effbefa328afd502819.js",
+    "service-worker.js": "/burger-builder-dev/service-worker.js",
+    "static/css/main.d2f9829d.chunk.css.map": "/burger-builder-dev/static/css/main.d2f9829d.chunk.css.map",
+    "static/js/2.8d2014bc.chunk.js.LICENSE.txt": "/burger-builder-dev/static/js/2.8d2014bc.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/burger-builder-dev/static/media/balsamiq-sans-v1-latin-regular.deaa2661.eot",
+    "static/media/burger-logo.png": "/burger-builder-dev/static/media/burger-logo.b8503d26.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.668bfeb5.js",
+    "static/js/runtime-main.dd74d3a2.js",
     "static/js/2.8d2014bc.chunk.js",
-    "static/css/main.ae8d82c6.chunk.css",
-    "static/js/main.68b41b49.chunk.js"
+    "static/css/main.d2f9829d.chunk.css",
+    "static/js/main.38ffbc93.chunk.js"
   ]
 }
