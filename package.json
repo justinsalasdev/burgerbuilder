@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://techmechanicservice.github.io/burger-builder",
+  "homepage": "https://techmechanicservice.github.io/burger-builder-dev",
   "eslintConfig": {
     "extends": "react-app"
   },
