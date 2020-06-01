@@ -43,7 +43,7 @@ class ContactData extends Component{
                 zipCode: new Orderfield('input',{type:'text', placeholder:'ZIP Code'}, zipCodeValidation,''),
                 country: new Orderfield('input',{type:'text', placeholder:'Country'},{required:true,valid:false},''),
                 email: new Orderfield('email',{type:'email', placeholder:'Email'},{required:true,valid:false},''),
-                deliveryMethod:new Orderfield('select',deliveryConfig,{required:true,valid:true},'')   
+                deliveryMethod:new Orderfield('select',deliveryConfig,{required:true,valid:true},'fastest')   
             },
             loading: false
         }
