@@ -3,25 +3,21 @@
     padding: 1rem;
 }
 
-.Label {
+/* .Label {
     font-weight: 700;
     display: block;
     margin-bottom: .8rem;
-}
+} */
 
 .InputElement {
     display: block;
     width: 100%;
-    outline: none;
     border: 1px solid #ccc;
     background-color: white;
     font: inherit;
     padding: .6rem 1rem;
 }
 
-
-
 .InputElement:focus{
-    outline: none;
-    background-color: #ccc;
+    outline: 1px solid burlywood;
 }

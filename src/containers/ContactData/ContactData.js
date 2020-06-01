@@ -11,6 +11,8 @@ class ContactData extends Component{
     constructor(props){
         super(props)
         
+        console.log('constructor')
+
         function Orderfield(type,config,value){
                 this.elementType = type;
                 this.elementConfig = config;
@@ -61,13 +63,16 @@ class ContactData extends Component{
 
     orderHandler(event){
         event.preventDefault();
-        console.log(this.props)
-
         this.setState({loading: true})
-        // alert('You continue!');
+        const formData = {};
+        for (let formElement in this.state.orderForm){
+            formData[formElement] = this.state.orderForm[formElement].value;
+        }
+    
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
+            orderData: formData
         }
 
         axios.post('/orders.json',order)
@@ -94,7 +99,7 @@ class ContactData extends Component{
 
 
         let form = (
-            <form>
+            <form onSubmit={this.orderHandler}>
                     {formElementsArray.map(formElement => {
                         return (
                             <Input 
@@ -107,9 +112,10 @@ class ContactData extends Component{
                                 />
                         )
                     })}
-                    <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+                    <Button type='submit' btnType="Success" clicked={this.orderHandler}>ORDER</Button>
             </form>
         );
+
         if(this.state.loading){
             form = <Spinner/>
         }
