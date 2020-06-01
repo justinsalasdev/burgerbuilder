@@ -12,27 +12,38 @@ class ContactData extends Component{
         super(props)
         
         console.log('constructor')
+        function Orderfield(type,config,validation,value){
 
-        function Orderfield(type,config,value){
+                this.touched = false;
                 this.elementType = type;
                 this.elementConfig = config;
+                this.validation = validation;   
                 this.value = value;
+                
+        }
+
+        const zipCodeValidation = {
+            required:true,
+            minLength: 5,
+            maxLength: 5,
+            valid:false
+        }
+
+        const deliveryConfig = {
+            options:[
+                {value: 'fastest', displayValue:'Fastest'},
+                {value: 'cheapest',displayValue:'Cheapest'}
+            ]
         }
 
         this.state = {
             orderForm: {
-                name: new Orderfield('input',{type:'text', placeholder:'Your Name'},''),
-                street: new Orderfield('input',{type:'text', placeholder:'Street'},''),
-                zipCode: new Orderfield('input',{type:'text', placeholder:'ZIP Code'},''),
-                country: new Orderfield('input',{type:'text', placeholder:'Country'},''),
-                email: new Orderfield('email',{type:'email', placeholder:'Email'},''),
-                deliveryMethod:new Orderfield('select',{
-                        options:[
-                            {value: 'fastest', displayValue:'Fastest'},
-                            {value: 'cheapest',displayValue:'Cheapest'}
-                        ]
-                    },'')
-                
+                name: new Orderfield('input',{type:'text', placeholder:'Your Name'},{required:true,valid:false},''),
+                street: new Orderfield('input',{type:'text', placeholder:'Street'},{required:true,valid:false},''),
+                zipCode: new Orderfield('input',{type:'text', placeholder:'ZIP Code'}, zipCodeValidation,''),
+                country: new Orderfield('input',{type:'text', placeholder:'Country'},{required:true,valid:false},''),
+                email: new Orderfield('email',{type:'email', placeholder:'Email'},{required:true,valid:false},''),
+                deliveryMethod:new Orderfield('select',deliveryConfig,{required:true,valid:true},'')   
             },
             loading: false
         }
@@ -42,19 +53,23 @@ class ContactData extends Component{
 
         this.orderHandler = this.orderHandler.bind(this);
         this.inputChangedHandler = this.inputChangedHandler.bind(this);
+        this.submitScreen = this.submitScreen.bind(this);
 
     }
     
+
+
     inputChangedHandler(event){
         const updatedOrderForm = {
             ...this.state.orderForm
         }
-
         const updatedFormElement = {
             ...updatedOrderForm[event.target.name]
         }
 
         updatedFormElement.value = event.target.value;
+        updatedFormElement.validation.valid = this.validate(updatedFormElement.value,updatedFormElement.validation)
+        updatedFormElement.touched = true;
         updatedOrderForm[event.target.name] = updatedFormElement; 
         this.setState({orderForm: updatedOrderForm});
 
@@ -85,9 +100,36 @@ class ContactData extends Component{
             });
     
     }
+
+    validate(value,rules){
+
+        const isValid = [
+            rules.required? (value.trim() !== '') : true,
+            rules.minLength? (value.length >= rules.minLength) : true,
+            rules.maxLength? (value.length <= rules.maxLength) : true 
+        ].reduce((accumulator,currentValue) => accumulator && currentValue)
+
+        return isValid
+    }
+
+    submitScreen(){
+        const entries = {
+            ...this.state.orderForm
+        }
+
+        const validation = [
+            ...Object.keys(entries)
+            ].map(key => {
+                return entries[key].validation.valid
+            }).reduce((accumulator,currentValue) => {
+                return accumulator && currentValue
+            })
+        
+        return validation;
+    }
  
     render(){
-
+        
         const formElementsArray = [];
         for (let key in this.state.orderForm){
             formElementsArray.push({
@@ -96,7 +138,6 @@ class ContactData extends Component{
             });
 
         }
-
 
         let form = (
             <form onSubmit={this.orderHandler}>
@@ -109,10 +150,12 @@ class ContactData extends Component{
                                 name={formElement.id}
                                 value={formElement.config.value}
                                 changed={this.inputChangedHandler}
+                                valid={formElement.config.validation.valid}
+                                touched={formElement.config.touched}
                                 />
                         )
                     })}
-                    <Button type='submit' btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+                    <Button type='submit' btnType="Success" clicked={this.orderHandler} disabled={!this.submitScreen()}>ORDER</Button>
             </form>
         );
 

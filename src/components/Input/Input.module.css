@@ -19,5 +19,16 @@
 }
 
 .InputElement:focus{
-    outline: 1px solid burlywood;
+    outline: 2px solid burlywood;
 }
+
+
+.Invalid{
+    background-color:rgb(245, 132, 132) ;
+}
+
+.Invalid:focus{
+    outline: 2px solid rgb(247, 89, 89);
+}
+  
+
