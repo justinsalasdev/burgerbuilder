@@ -11,76 +11,39 @@ class ContactData extends Component{
     constructor(props){
         super(props)
         
+        function Orderfield(type,config,value){
+                this.elementType = type;
+                this.elementConfig = config;
+                this.value = value;
+        }
+
         this.state = {
             orderForm: {
-                name: {
-                    elementType:'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Your Name'
-                    },
-                    value:''
-                },
-
-                street: {
-                    elementType:'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Street'
-                    },
-                    value:''
-                },
-
-                zipCode: {
-                    elementType:'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'ZIP Code'
-                    },
-                    value:''
-                },
-
-                country: {
-                    elementType:'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Country'
-                    },
-                    value:''
-                },
-
-                email: {
-                    elementType:'input',
-                    elementConfig: {
-                        type: 'email',
-                        placeholder: 'Email'
-                    },
-                    value:''
-                },
-
-                deliveryMethod: {
-                    elementType:'select',
-                    elementConfig: {
+                name: new Orderfield('input',{type:'text', placeholder:'Your Name'},''),
+                street: new Orderfield('input',{type:'text', placeholder:'Street'},''),
+                zipCode: new Orderfield('input',{type:'text', placeholder:'ZIP Code'},''),
+                country: new Orderfield('input',{type:'text', placeholder:'Country'},''),
+                email: new Orderfield('email',{type:'email', placeholder:'Email'},''),
+                deliveryMethod:new Orderfield('select',{
                         options:[
                             {value: 'fastest', displayValue:'Fastest'},
                             {value: 'cheapest',displayValue:'Cheapest'}
                         ]
-                    },
-                    value:''
-                }
+                    },'')
+                
             },
-            
             loading: false
         }
         
+
+       
 
         this.orderHandler = this.orderHandler.bind(this);
         this.inputChangedHandler = this.inputChangedHandler.bind(this);
 
     }
-   
+    
     inputChangedHandler(event){
-
         const updatedOrderForm = {
             ...this.state.orderForm
         }
@@ -92,6 +55,7 @@ class ContactData extends Component{
         updatedFormElement.value = event.target.value;
         updatedOrderForm[event.target.name] = updatedFormElement; 
         this.setState({orderForm: updatedOrderForm});
+
 
     }
 

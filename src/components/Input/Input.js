@@ -48,7 +48,8 @@ const input = (props) => {
                             className={classes.InputElement} 
                             {...props.elementConfig}
                             name={props.name}
-                            value={props.value} />
+                            value={props.value}
+                            onChange={props.changed} />
 
     }
 
