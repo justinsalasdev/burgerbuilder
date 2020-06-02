@@ -4,12 +4,19 @@ import './assets/styles/index.css';
 import App from './containers/App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducer from './store/reducer';
 
+
+const store = createStore(reducer);
 
 const app = (
-  <BrowserRouter  basename="/burger-builder-dev">
-    <App/>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter  basename="/burger-builder-dev">
+      <App/>
+    </BrowserRouter>
+  </Provider>
 )
 
 ReactDOM.render(
