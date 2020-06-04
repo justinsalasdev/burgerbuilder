@@ -16,6 +16,7 @@ export const removeIngredient = (ingredient) => {
 }
 
 export const setIngredients = (ingredients) => {
+    console.log(ingredients)
     return {
         type: actions.SET_INGREDIENTS,
         ingredients: ingredients
@@ -31,16 +32,13 @@ export const fetchIngredientsFailed = () => {
 
 
 export const initIngredients = () => {
-
     return function dispatch(){
-
-        axios.get('/ingredients.json')
+       
+       return  axios.get('/ingredients.json')
         .then(response => {
             dispatch(setIngredients(response.data))
         })
         .catch(error => {
             dispatch(fetchIngredientsFailed())
         })
-        return {}
-    }
 }
