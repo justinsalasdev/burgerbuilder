@@ -41,9 +41,9 @@ const reducer = (state = initialState, action) => {
             return newStateSet;
         
         case actions.FETCH_INGREDIENTS_FAILED:
-            const newStateFail = deepClone(state);
+            const newStateFail = deepClone(state)
             newStateFail.error = true;
-            return newStateFail
+            return newStateFail;
 
         default:
             return state;

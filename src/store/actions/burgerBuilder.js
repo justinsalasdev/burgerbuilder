@@ -1,6 +1,24 @@
 import * as actions from './actions';
 import axios from '../../axios-orders';
 
+
+const setIngredients = (ingredients) => {
+    console.log(ingredients)
+    return {
+        type: actions.SET_INGREDIENTS,
+        ingredients: ingredients
+    }
+}
+
+
+const fetchIngredientsFailed = () => {
+    return {
+        type: actions.FETCH_INGREDIENTS_FAILED
+    }
+}
+
+//EXPORTS
+
 export const addIngredient = (ingredient) => {
     return {
         type: actions.ADD_INGREDIENT,
@@ -15,30 +33,15 @@ export const removeIngredient = (ingredient) => {
     }
 }
 
-export const setIngredients = (ingredients) => {
-    console.log(ingredients)
-    return {
-        type: actions.SET_INGREDIENTS,
-        ingredients: ingredients
-    }
-}
-
-
-export const fetchIngredientsFailed = () => {
-    return {
-        type: actions.FETCH_INGREDIENTS_FAILED
-    }
-}
-
 
 export const initIngredients = () => {
-    return function dispatch(){
-       
-       return  axios.get('/ingredients.json')
+    return dispatch  => (
+       axios.get('/ingredients')
         .then(response => {
             dispatch(setIngredients(response.data))
         })
         .catch(error => {
             dispatch(fetchIngredientsFailed())
         })
+    )
 }
