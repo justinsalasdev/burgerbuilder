@@ -13,7 +13,7 @@ class ContactData extends Component{
         
         console.log('constructor')
         function Orderfield(type,config,validation,value){
-
+            
                 this.touched = false;
                 this.elementType = type;
                 this.elementConfig = config;
