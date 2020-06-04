@@ -3,7 +3,6 @@ import axios from '../../axios-orders';
 
 
 const setIngredients = (ingredients) => {
-    console.log(ingredients)
     return {
         type: actions.SET_INGREDIENTS,
         ingredients: ingredients
@@ -36,7 +35,7 @@ export const removeIngredient = (ingredient) => {
 
 export const initIngredients = () => {
     return dispatch  => (
-       axios.get('/ingredients')
+       axios.get('/ingredients.json')
         .then(response => {
             dispatch(setIngredients(response.data))
         })

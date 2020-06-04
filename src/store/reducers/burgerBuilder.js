@@ -6,13 +6,14 @@ const initialState = {
     error: false
 }
 
+
+
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
     meat: 1.3,
     bacon: 0.7
 }
-
 
 function deepClone(object){
     return JSON.parse(JSON.stringify(object))
@@ -36,9 +37,25 @@ const reducer = (state = initialState, action) => {
         
         case actions.SET_INGREDIENTS:
             const newStateSet = deepClone(state);
-            newStateSet.ingredients = action.ingredients;
-            newStateSet.error = false;
-            return newStateSet;
+            if(!newStateSet.ingredients){
+                newStateSet.ingredients = {
+                    salad: action.ingredients.salad,
+                    bacon: action.ingredients.bacon,
+                    cheese: action.ingredients.cheese,
+                    meat: action.ingredients.meat
+                    }
+
+                newStateSet.error = false;
+                return newStateSet
+
+            } else {
+                newStateSet.error = false;
+                return newStateSet
+            }
+              
+            
+            
+
         
         case actions.FETCH_INGREDIENTS_FAILED:
             const newStateFail = deepClone(state)
