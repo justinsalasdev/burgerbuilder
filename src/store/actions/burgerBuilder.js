@@ -32,7 +32,6 @@ export const removeIngredient = (ingredient) => {
     }
 }
 
-
 export const initIngredients = () => {
     return dispatch  => (
        axios.get('/ingredients.json')

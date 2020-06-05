@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Button from '../../components/Button/Button';
 import Spinner from '../../components/Spinner/Spinner';
 import Input from '../../components/Input/Input';
@@ -7,13 +7,13 @@ import axios from '../../axios-orders';
 import {connect} from 'react-redux';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import * as orderActions from '../../store/actions/exports';
+import { Redirect } from 'react-router-dom';
 
 class ContactData extends Component{
 
     constructor(props){
         super(props)
         
-        console.log('constructor')
         function Orderfield(type,config,validation,value){
             
                 this.touched = false;
@@ -157,10 +157,13 @@ class ContactData extends Component{
         }
 
         return(
-            <div className={classes.ContactData}>
-                <h4>Enter your contact data</h4>
-                {form}
-            </div>
+            <Fragment>
+                {this.props.purchased ? <Redirect to="/"/> : null }
+                <div className={classes.ContactData}>
+                    <h4>Enter your contact data</h4>
+                    {form}
+                </div>
+            </Fragment>
         )
     }
 }
@@ -169,7 +172,8 @@ const mapStateToProps = (state) => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.price,
-        loading: state.order.loading
+        loading: state.order.loading,
+        purchased: state.order.purchased
     }
 }
 
