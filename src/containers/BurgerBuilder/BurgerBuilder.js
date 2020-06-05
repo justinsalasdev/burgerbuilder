@@ -8,7 +8,7 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Spinner from '../../components/Spinner/Spinner';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {connect} from 'react-redux';
-import * as burgerBuilderActions from '../../store/actions/exports';
+import * as buildBurger from '../../store/actions/exports';
 
 
 class BurgerBuilder extends Component {
@@ -96,18 +96,18 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings : state.burgerBuilder.ingredients,
-        price: state.burgerBuilder.totalPrice,
-        error: state.burgerBuilder.error
+        ings : state.buildBurger.ingredients,
+        price: state.buildBurger.totalPrice,
+        error: state.buildBurger.error
     }
 }
 
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded : (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
-        onIngredientRemoved : (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName)),
-        onInitIngredients : () => dispatch(burgerBuilderActions.initIngredients()),
+        onIngredientAdded : (ingName) => dispatch(buildBurger.addIngredient(ingName)),
+        onIngredientRemoved : (ingName) => dispatch(buildBurger.removeIngredient(ingName)),
+        onInitIngredients : () => dispatch(buildBurger.initIngredients()),
     }
 }
 

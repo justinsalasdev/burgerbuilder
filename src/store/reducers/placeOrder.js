@@ -1,7 +1,6 @@
 import * as actions from '../actions/actions';
 
 const initialState = {
-    orders: [],
     loading: false,
     purchased: false
 }
@@ -20,12 +19,6 @@ const reducer = (state = initialState, action) => {
 
         case actions.PURCHASE_BURGER_SUCCESS:
             const newStateSuccess = deepClone(state);
-            const newOrder = {
-                ...action.orderData,
-                id: action.orderId
-            }
-            console.log(newOrder)
-            newStateSuccess.orders.push(newOrder)
             newStateSuccess.loading = false;
             newStateSuccess.purchased = true;
             return newStateSuccess

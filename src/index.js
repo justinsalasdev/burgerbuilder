@@ -7,8 +7,9 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 // import reducer from './store/reducer';
-import burgerBuilderReducer from './store/reducers/burgerBuilder'
-import orderReducer from './store/reducers/order'
+import buildBurger from './store/reducers/buildBurger'
+import placeOrder from './store/reducers/placeOrder'
+import fetchOrders from './store/reducers/fetchOrders'
 import thunk from 'redux-thunk';
 
 //Basic redux setup
@@ -18,8 +19,9 @@ import thunk from 'redux-thunk';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  burgerBuilder: burgerBuilderReducer,
-  order: orderReducer
+  buildBurger: buildBurger,
+  placeOrder: placeOrder,
+  fetchOrders: fetchOrders
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(

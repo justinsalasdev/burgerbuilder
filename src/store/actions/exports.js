@@ -4,9 +4,14 @@ export {
     removeIngredient
 
     
-} from './burgerBuilder';
+} from './buildBurger';
 
 export {
     checkoutBurger,
     purchaseBurger
-} from './order';
+} from './placeOrder';
+
+
+export {
+    fetchOrders
+} from './fetchOrders'

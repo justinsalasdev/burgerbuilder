@@ -6,7 +6,7 @@ import classes from './ContactData.module.css';
 import axios from '../../axios-orders';
 import {connect} from 'react-redux';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
-import * as orderActions from '../../store/actions/exports';
+import * as actions from '../../store/actions/exports';
 import { Redirect } from 'react-router-dom';
 
 class ContactData extends Component{
@@ -87,7 +87,7 @@ class ContactData extends Component{
     
         const order = {
             ingredients: this.props.ings,
-            price: this.props.price,
+            price: this.props.price.toFixed(2),
             orderData: formData
         }
 
@@ -170,16 +170,16 @@ class ContactData extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.burgerBuilder.ingredients,
-        price: state.burgerBuilder.price,
-        loading: state.order.loading,
-        purchased: state.order.purchased
+        ings: state.buildBurger.ingredients,
+        price: state.buildBurger.totalPrice,
+        loading: state.placeOrder.loading,
+        purchased: state.placeOrder.purchased
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
    return {
-     onOrderBurger: (orderData) => dispatch(orderActions.purchaseBurger(orderData))
+     onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
    }
 }
 

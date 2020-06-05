@@ -3,7 +3,7 @@ import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import {Route, Redirect} from 'react-router-dom';
 import ContactData from '../ContactData/ContactData';
 import {connect} from 'react-redux';
-import {checkoutBurger} from '../../store/actions/exports'
+import * as actions from '../../store/actions/exports';
 
 class Checkout extends Component {
     constructor(props){
@@ -70,14 +70,14 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.burgerBuilder.ingredients,
-        purchased: state.order.purchased
+        ings: state.buildBurger.ingredients,
+        purchased: state.placeOrder.purchased
     }
 }
 
 const mapDispatchtoProps = (dispatch) => {
     return {
-        onCheckout: () => dispatch(checkoutBurger())
+        onCheckout: () => dispatch(actions.checkoutBurger())
     }
 }
 
