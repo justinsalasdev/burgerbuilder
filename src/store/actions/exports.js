@@ -19,5 +19,6 @@ export {
 
 
 export {
-    auth
+    auth,
+    logout
 } from './authenticate'

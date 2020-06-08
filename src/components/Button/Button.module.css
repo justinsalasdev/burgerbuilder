@@ -1,4 +1,5 @@
 .Button {
+    text-shadow: .2rem .2rem .4rem lightgray;
     background-color: transparent;
     border: none;
     color: white;
@@ -8,6 +9,10 @@
     padding: 1rem;
     margin: 1rem;
     font-weight: bold;
+}
+
+.Button:active{
+    text-shadow: .1rem .1rem .2rem rgb(146, 146, 146);
 }
 
 .Button:first-of-type {

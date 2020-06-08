@@ -35,6 +35,13 @@ const reducer = (state = initialState, action) => {
             _.loading = false
             return _;
         }
+
+        case actions.AUTH_LOGOUT:{
+            const _ = deepClone(state);
+            _.token = null
+            _.userId = null
+            return _;
+        }
         
         default: 
             return (state)
