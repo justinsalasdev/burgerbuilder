@@ -74,8 +74,6 @@ class ContactData extends Component{
         updatedFormElement.touched = true;
         updatedOrderForm[event.target.name] = updatedFormElement; 
         this.setState({orderForm: updatedOrderForm});
-
-
     }
 
     orderHandler(event){
