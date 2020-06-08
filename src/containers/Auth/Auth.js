@@ -1,51 +1,124 @@
 import React, {Component} from 'react';
-import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
+import classes from './Auth.module.css';
 
+class Auth extends Component{
 
-state = {
-    controls: {
-        email: {
-            elementType: 'input',
-            elementConfig: {
-                type:'email',
-                placeholder: 'Email'
-            },
-            value: '',
-            validation: {
-                required: true,
-                isEmail: true
-            },
-            valid: false,
-            touched: false
-        },
-        email: {
-            elementType: 'input',
-            elementConfig: {
-                type:'password',
-                placeholder: 'Password'
-            },
-            value: '',
-            validation: {
-                required: true,
-                minLength: 6,
-            },
-            valid: false,
-            touched: false
+    constructor(props){
+        super(props)
+        
+        function Orderfield(type,config,validation,value){
+            
+                this.touched = false;
+                this.elementType = type;
+                this.elementConfig = config;
+                this.validation = validation;   
+                this.value = value;
+                
         }
+
+        const passwordValidation = {
+            required:true,
+            minLength: 6,
+            valid:false
+        }
+
+    
+        this.state = {
+            orderForm: {
+                email: new Orderfield('email',{type:'email', placeholder:'Email'},{required:true,valid:false},''),
+                email: new Orderfield('password',{type:'password', placeholder:'Password'},passwordValidation,'')
+            }
+        }
+        
+        this.inputChangedHandler = this.inputChangedHandler.bind(this);
+        this.submitScreen = this.submitScreen.bind(this);
+
     }
-}
+    
+    inputChangedHandler(event){
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        }
+        const updatedFormElement = {
+            ...updatedOrderForm[event.target.name]
+        }
+
+        updatedFormElement.value = event.target.value;
+        updatedFormElement.validation.valid = this.validate(updatedFormElement.value,updatedFormElement.validation)
+        updatedFormElement.touched = true;
+        updatedOrderForm[event.target.name] = updatedFormElement; 
+        this.setState({orderForm: updatedOrderForm});
+    }
 
 
-class Auth extends Component {
+    validate(value,rules){
+
+        const isValid = [
+            rules.required? (value.trim() !== '') : true,
+            rules.minLength? (value.length >= rules.minLength) : true,
+            rules.maxLength? (value.length <= rules.maxLength) : true 
+        ].reduce((accumulator,currentValue) => accumulator && currentValue)
+
+        return isValid
+    }
+
+    submitScreen(){
+        const entries = {
+            ...this.state.orderForm
+        }
+
+        const validation = [
+            ...Object.keys(entries)
+            ].map(key => {
+                return entries[key].validation.valid
+            }).reduce((accumulator,currentValue) => {
+                return accumulator && currentValue
+            })
+        
+        return validation;
+    }
+ 
     render(){
-        return (
-            <div>
-                <form>
 
-                </form>
-            </div>
+        const formElementsArray = [];
+        for (let key in this.state.orderForm){
+            formElementsArray.push({
+                id: key,
+                config: this.state.orderForm[key],
+            });
+
+        }
+
+        let form = (
+            <form onSubmit={this.orderHandler}>
+                    {formElementsArray.map(formElement => {
+                        return (
+                            <Input 
+                                key={formElement.id}
+                                elementType={formElement.config.elementType}
+                                elementConfig={formElement.config.elementConfig}
+                                name={formElement.id}
+                                value={formElement.config.value}
+                                changed={this.inputChangedHandler}
+                                valid={formElement.config.validation.valid}
+                                touched={formElement.config.touched}
+                                />
+                        )
+                    })}
+                    <Button type='submit' btnType="Success" clicked={this.orderHandler} disabled={!this.submitScreen()}>SUBMIT</Button>
+            </form>
         );
+
+
+        return(
+
+                <div className={classes.ContactData}>
+                    <h4>Enter your contact data</h4>
+                    {form}
+                </div>
+        )
     }
 }
 
