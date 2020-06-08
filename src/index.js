@@ -5,12 +5,29 @@ import App from './containers/App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import reducer from './store/reducer';
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
+// import reducer from './store/reducer';
+import buildBurger from './store/reducers/buildBurger'
+import placeOrder from './store/reducers/placeOrder'
+import fetchOrders from './store/reducers/fetchOrders'
+import thunk from 'redux-thunk';
 
+//Basic redux setup
+// const store = createStore(burgerBuilderReducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-const store = createStore(reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = combineReducers({
+  buildBurger: buildBurger,
+  placeOrder: placeOrder,
+  fetchOrders: fetchOrders
+})
+
+const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
+      applyMiddleware(thunk)
+    ));
+
 
 const app = (
   <Provider store={store}>

@@ -13,6 +13,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
                     error: null
                 }
 
+                this.errorConfirmedHandler = this.errorConfirmedHandler.bind(this);
+
             }
 
             
