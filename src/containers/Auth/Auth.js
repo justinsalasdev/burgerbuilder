@@ -4,6 +4,7 @@ import Input from '../../components/Input/Input';
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions/exports';
 import {connect} from 'react-redux';
+import Spinner from '../../components/Spinner/Spinner';
 
 class Auth extends Component{
 
@@ -32,7 +33,7 @@ class Auth extends Component{
                 email: new Orderfield('email',{type:'email', placeholder:'Email'},{required:true,valid:false},''),
                 password: new Orderfield('password',{type:'password', placeholder:'Password'},passwordValidation,'')
             },
-            isSignup: true
+            isSignup: false
         }
         
         this.inputChangedHandler = this.inputChangedHandler.bind(this);
@@ -109,56 +110,66 @@ class Auth extends Component{
 
         }
 
-        let form = (
-            <form onSubmit={this.submitHandler}>
-                    {formElementsArray.map(formElement => {
-                        return (
-                            <Input 
-                                key={formElement.id}
-                                elementType={formElement.config.elementType}
-                                elementConfig={formElement.config.elementConfig}
-                                name={formElement.id}
-                                value={formElement.config.value}
-                                changed={this.inputChangedHandler}
-                                valid={formElement.config.validation.valid}
-                                touched={formElement.config.touched}
-                                />
-                        )
-                    })}
-                    <Button 
-                        type='submit' 
-                        btnType="Success" 
-                        clicked={this.submitHandler} 
-                        disabled={!this.submitScreen()}
-                    >{this.state.isSignup? 'SIGNUP' : 'LOGIN'}</Button>
-            </form>
-        );
-
-
         const switchButtonClasses = [classes.Auth__option, 
             this.state.isSignup? classes.Auth__option_login : classes.Auth__option_signup
         ].join(' ');
 
         return(
                 <div className={classes.Auth}>
+
+                    {this.props.error? <p style={{color:'crimson'}}>{this.props.error.message.replace(/_/g,' ') + ' :('}</p>:(
                     <h4>{this.state.isSignup? 'Please enter required information': 'Please provide login details'}</h4>
+                    )}
+
                     <h4  
                         type='button' 
                         className={switchButtonClasses}
                         onClick={this.handleSignChange}
                         >{this.state.isSignup? 'Login instead': 'Create account'}</h4>
 
-                    {form}
+                        {this.props.loading? <Spinner/> : (
+                            <form onSubmit={this.submitHandler}>
+                                {formElementsArray.map(formElement => {
+                                return (
+                                    <Input 
+                                        key={formElement.id}
+                                        elementType={formElement.config.elementType}
+                                        elementConfig={formElement.config.elementConfig}
+                                        name={formElement.id}
+                                        value={formElement.config.value}
+                                        changed={this.inputChangedHandler}
+                                        valid={formElement.config.validation.valid}
+                                        touched={formElement.config.touched}
+                                    />
+                                )})}
+
+                            <Button 
+                                type='submit' 
+                                btnType="Success" 
+                                clicked={this.submitHandler} 
+                                disabled={!this.submitScreen()}
+                            >{this.state.isSignup? 'SIGNUP' : 'LOGIN'}</Button>
+                            </form>
+                        )}
+                   
                 </div>
         )
     }
 }
 
-const mapDispatchToProps = dispatch => {
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.authenticate.loading,
+        error: state.authenticate.error
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
     return {
         onAuth: (email,password,isSignup) => dispatch(actions.auth(email,password,isSignup))
     }
 }
 
 
-export default connect(null,mapDispatchToProps)(Auth);
+export default connect(mapStateToProps,mapDispatchToProps)(Auth);

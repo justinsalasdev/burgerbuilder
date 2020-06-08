@@ -16,14 +16,24 @@ const reducer = (state = initialState, action) => {
         case actions.AUTH_START:{
             const _ = deepClone(state);
             _.loading = true;
+            _.error = null;
             return _;
         }
 
         case actions.AUTH_SUCCESS:{
             const _ = deepClone(state);
-            _.token = action.idToken
-            _.userId = action.userId
+            _.token = action.authData.idToken
+            _.userId = action.authData.localId
             _.error = null
+            _.loading = false
+            return _;
+        }
+
+        case actions.AUTH_FAIL:{
+            const _ = deepClone(state);
+            _.error = action.error
+            _.loading = false
+            return _;
         }
         
         default: 

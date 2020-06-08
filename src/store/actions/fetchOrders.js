@@ -31,7 +31,6 @@ export const fetchOrders = () => {
         dispatch(fetchOrdersStart())
         axios.get('/orders.json')
             .then(res => {
-                console.log(res)
                 const fetchedOrders = [];
                 for (let key in res.data){
                     fetchedOrders.unshift({
@@ -39,7 +38,6 @@ export const fetchOrders = () => {
                         id: key
                     })
                 }
-                console.log(fetchedOrders)
                 dispatch(fetchOrdersSuccess(fetchedOrders))
             })
             .catch(err => {

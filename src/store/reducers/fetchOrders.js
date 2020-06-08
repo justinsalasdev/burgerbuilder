@@ -2,7 +2,7 @@ import * as actions from '../actions/actions';
 
 const initialState = {
     orders: [],
-    fetching: false,
+    fetching: true,
 }
 
 function deepClone(object){
@@ -22,14 +22,14 @@ const reducer = (state = initialState, action) => {
         case actions.FETCH_ORDERS_SUCCESS:{
             const _ = deepClone(state);
             _.orders = action.orders;
-            _.fetching = false;
+            _.fetching = true;
             return _
         }
 
         
         case actions.FETCH_ORDERS_FAIL:{
             const _ = deepClone(state);
-            _.fetching = false;
+            _.fetching = true;
             return _
         }
         

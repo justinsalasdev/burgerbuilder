@@ -10,6 +10,7 @@ import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import buildBurger from './store/reducers/buildBurger'
 import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
+import authenticate from './store/reducers/authenticate'
 import thunk from 'redux-thunk';
 
 //Basic redux setup
@@ -21,7 +22,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   buildBurger: buildBurger,
   placeOrder: placeOrder,
-  fetchOrders: fetchOrders
+  fetchOrders: fetchOrders,
+  authenticate: authenticate
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
