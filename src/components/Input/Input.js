@@ -30,6 +30,16 @@ const input = (props) => {
                         onChange={props.changed} />
                         
         break;
+
+        case('password'):
+        inputElement = <input 
+                        className={inputClasses.join(' ')} 
+                        {...props.elementConfig}
+                        name={props.name}
+                        value={props.value}
+                        onChange={props.changed} />
+                        
+        break;
         
         case('textarea'):
             inputElement = <textarea 

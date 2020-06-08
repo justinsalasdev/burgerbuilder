@@ -3,15 +3,27 @@ import classes from './NavigationItems.module.css';
 import NavigationItem from '../NavigationItem/NavigationItem';
 
 
-const navigationItems = () =>{
+const navigationItems = (props) =>{
+
+    let navClass = [];
+    if(props.side){
+        navClass = [classes.NavigationItems, classes.NavigationItems__side].join(' ');
+    }else{
+        navClass = [classes.NavigationItems]
+    }
+
     return(
-        <ul className={classes.NavigationItems}>
+        <ul className={navClass}>
             <NavigationItem link='/'>
                 Burger Builder
             </NavigationItem>
 
             <NavigationItem link="/orders">
                 Orders
+            </NavigationItem>
+
+            <NavigationItem link="/auth">
+                Auth
             </NavigationItem>
         </ul>
     )

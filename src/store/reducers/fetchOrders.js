@@ -14,23 +14,24 @@ const reducer = (state = initialState, action) => {
 
         
         case actions.FETCH_ORDERS_START:
-            const newStateStart = deepClone(state);
-            newStateStart.fetching = true;
-            return newStateStart;
+            const _ = deepClone(state);
+            _.fetching = true;
+            return _;
 
 
-        case actions.FETCH_ORDERS_SUCCESS:
-            const newStateSuccess = deepClone(state);
-            newStateSuccess.orders = action.orders;
-            newStateSuccess.fetching = false;
-            return newStateSuccess
+        case actions.FETCH_ORDERS_SUCCESS:{
+            const _ = deepClone(state);
+            _.orders = action.orders;
+            _.fetching = false;
+            return _
+        }
 
         
-        case actions.FETCH_ORDERS_FAIL:
-            const newStateFail = deepClone(state);
-            newStateFail.fetching = false;
-            return newStateFail
-
+        case actions.FETCH_ORDERS_FAIL:{
+            const _ = deepClone(state);
+            _.fetching = false;
+            return _
+        }
         
         
         default:

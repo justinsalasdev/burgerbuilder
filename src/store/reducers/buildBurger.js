@@ -23,42 +23,48 @@ const reducer = (state = initialState, action) => {
     switch(action.type){
 
 
-        case actions.SET_INGREDIENTS:
-            const newStateSet = deepClone(state);
-            if(!newStateSet.ingredients){
-                newStateSet.ingredients = {
+        case actions.SET_INGREDIENTS:{
+            const _ = deepClone(state);
+            if(!_.ingredients){
+                _.ingredients = {
                     salad: action.ingredients.salad,
                     bacon: action.ingredients.bacon,
                     cheese: action.ingredients.cheese,
                     meat: action.ingredients.meat
                     }
 
-                newStateSet.error = false;
-                newStateSet.purchasing = false;
-                return newStateSet
+                _.error = false;
+                _.purchasing = false;
+                return _
 
             } else {
-                newStateSet.error = false;
-                return newStateSet
+                _.error = false;
+                return _
             }
+        }
               
         
-        case actions.FETCH_INGREDIENTS_FAILED:
-            const newStateFail = deepClone(state)
-            newStateFail.error = true;
-            return newStateFail;       
-        case actions.ADD_INGREDIENT:
-            const newStateAdd = deepClone(state);
-            newStateAdd.ingredients[action.ingredient] ++;  
-            newStateAdd.totalPrice += INGREDIENT_PRICES[action.ingredient];
+        case actions.FETCH_INGREDIENTS_FAILED:{
+            const _ = deepClone(state)
+            _.error = true;
+            return _;       
+        }
 
-            return newStateAdd;
+        case actions.ADD_INGREDIENT:{
+            const _ = deepClone(state);
+            _.ingredients[action.ingredient] ++;  
+            _.totalPrice += INGREDIENT_PRICES[action.ingredient];
 
-        case actions.REMOVE_INGREDIENT:
-            const newStateRemove = deepClone(state);
-            newStateRemove.ingredients[action.ingredient] --;   
-            newStateRemove.totalPrice -= INGREDIENT_PRICES[action.ingredient];        
-            return newStateRemove;
+            return _;
+        }
+
+        case actions.REMOVE_INGREDIENT:{
+            const _ = deepClone(state);
+            _.ingredients[action.ingredient] --;   
+            _.totalPrice -= INGREDIENT_PRICES[action.ingredient];        
+            return _;
+        }
+
         default:
             return state;
     }

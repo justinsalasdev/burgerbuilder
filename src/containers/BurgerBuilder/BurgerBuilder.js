@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Wrapper from '../Wrapper/Wrapper';
 import Burger from '../../components/Burger/Burger';
-import axios from '../../axios-orders';
+import axios from '../../axios/orders';
 import BuildControls from '../../components/BuildControls/BuildControls';
 import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';

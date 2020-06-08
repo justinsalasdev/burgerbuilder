@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import classes from './Auth.module.css';
+import * as actions from '../../store/actions/exports';
+import {connect} from 'react-redux';
 
 class Auth extends Component{
 
@@ -28,12 +30,15 @@ class Auth extends Component{
         this.state = {
             orderForm: {
                 email: new Orderfield('email',{type:'email', placeholder:'Email'},{required:true,valid:false},''),
-                email: new Orderfield('password',{type:'password', placeholder:'Password'},passwordValidation,'')
-            }
+                password: new Orderfield('password',{type:'password', placeholder:'Password'},passwordValidation,'')
+            },
+            isSignup: true
         }
         
         this.inputChangedHandler = this.inputChangedHandler.bind(this);
         this.submitScreen = this.submitScreen.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
+        this.handleSignChange = this.handleSignChange.bind(this);
 
     }
     
@@ -52,6 +57,11 @@ class Auth extends Component{
         this.setState({orderForm: updatedOrderForm});
     }
 
+
+    submitHandler(event){
+        event.preventDefault();
+        this.props.onAuth(this.state.orderForm.email.value,this.state.orderForm.password.value,this.state.isSignup)
+    }
 
     validate(value,rules){
 
@@ -79,6 +89,14 @@ class Auth extends Component{
         
         return validation;
     }
+
+
+    handleSignChange(){
+        this.setState(prevState => {
+            return {isSignup: !prevState.isSignup}
+        })
+    }
+    
  
     render(){
 
@@ -92,7 +110,7 @@ class Auth extends Component{
         }
 
         let form = (
-            <form onSubmit={this.orderHandler}>
+            <form onSubmit={this.submitHandler}>
                     {formElementsArray.map(formElement => {
                         return (
                             <Input 
@@ -107,20 +125,40 @@ class Auth extends Component{
                                 />
                         )
                     })}
-                    <Button type='submit' btnType="Success" clicked={this.orderHandler} disabled={!this.submitScreen()}>SUBMIT</Button>
+                    <Button 
+                        type='submit' 
+                        btnType="Success" 
+                        clicked={this.submitHandler} 
+                        disabled={!this.submitScreen()}
+                    >{this.state.isSignup? 'SIGNUP' : 'LOGIN'}</Button>
             </form>
         );
 
 
-        return(
+        const switchButtonClasses = [classes.Auth__option, 
+            this.state.isSignup? classes.Auth__option_login : classes.Auth__option_signup
+        ].join(' ');
 
-                <div className={classes.ContactData}>
-                    <h4>Enter your contact data</h4>
+        return(
+                <div className={classes.Auth}>
+                    <h4>{this.state.isSignup? 'Please enter required information': 'Please provide login details'}</h4>
+                    <h4  
+                        type='button' 
+                        className={switchButtonClasses}
+                        onClick={this.handleSignChange}
+                        >{this.state.isSignup? 'Login instead': 'Create account'}</h4>
+
                     {form}
                 </div>
         )
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email,password,isSignup) => dispatch(actions.auth(email,password,isSignup))
+    }
+}
 
-export default Auth;
+
+export default connect(null,mapDispatchToProps)(Auth);

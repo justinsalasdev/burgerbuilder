@@ -3,7 +3,7 @@ import Button from '../../components/Button/Button';
 import Spinner from '../../components/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import classes from './ContactData.module.css';
-import axios from '../../axios-orders';
+import axios from '../../axios/orders';
 import {connect} from 'react-redux';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/exports';

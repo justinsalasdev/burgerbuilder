@@ -1,0 +1,47 @@
+.Auth {
+    position: relative;
+    margin: 2rem auto;
+    width: 60%;
+    text-align: center;
+    box-shadow: 0 .2rem .3rem #ccc;
+    padding: 1rem;
+    padding-top: 5rem;
+}
+
+.Auth h4{
+    margin-bottom: 2rem;
+}
+
+
+.Auth__option{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    box-shadow: .2rem .2rem .4rem rgb(139, 147, 156);
+    font-weight: 400;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.Auth__option:active{
+    box-shadow: .1rem .1rem .2rem lightslategray;
+}
+
+.Auth__option_login{
+    color: whitesmoke;
+    background-color: crimson;
+}
+
+.Auth__option_signup{
+    color: whitesmoke;
+    background-color: darkgreen;
+}
+
+
+@media (min-width: 60em){
+    .Auth{
+        width: 50rem;
+    }
+}

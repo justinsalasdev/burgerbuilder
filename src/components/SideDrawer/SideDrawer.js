@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from './SideDrawer.module.css';
+import classes from './SideDrawer.module.css';
 
 import Logo from '../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
@@ -7,10 +7,10 @@ import Backdrop from '../Backdrop/Backdrop';
 import Wrapper from '../../containers/Wrapper/Wrapper';
 
 const sideDrawer = (props ) => {
-    let attachedClasses = [_.SideDrawer, _.Close ];
+    let attachedClasses = [classes.SideDrawer, classes.Close ];
 
     if(props.open){
-        attachedClasses = [_.SideDrawer, _.Open ];
+        attachedClasses = [classes.SideDrawer, classes.Open ];
     }
 
     return(
@@ -19,7 +19,7 @@ const sideDrawer = (props ) => {
             <div className={attachedClasses.join(' ')}>
                 <Logo side/>
                 <nav>
-                    <NavigationItems/>
+                    <NavigationItems side/>
                 </nav>
             </div>
         </Wrapper>

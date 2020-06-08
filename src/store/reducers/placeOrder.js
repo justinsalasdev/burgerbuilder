@@ -12,28 +12,32 @@ function deepClone(object){
 const reducer = (state = initialState, action) => {
     switch(action.type){
 
-        case actions.CHECKOUT_BURGER: 
-            const newStateCheckout = deepClone(state);
-            newStateCheckout.purchased = false
-            return newStateCheckout
+        case actions.CHECKOUT_BURGER: {
+            const _ = deepClone(state);
+            _.purchased = false
+            return _
+        }
 
-        case actions.PURCHASE_BURGER_SUCCESS:
-            const newStateSuccess = deepClone(state);
-            newStateSuccess.loading = false;
-            newStateSuccess.purchased = true;
-            return newStateSuccess
-
-        
-        case actions.PURCHASE_BURGER_FAIL:
-            const newStateFail = deepClone(state);
-            newStateFail.loading = false;
-            return newStateFail
+        case actions.PURCHASE_BURGER_SUCCESS:{
+            const _ = deepClone(state);
+            _.loading = false;
+            _.purchased = true;
+            return _
+        }
 
         
-        case actions.PURCHASE_BURGER_START:
-            const newStateStart = deepClone(state);
-            newStateStart.loading = true;
-            return newStateStart;
+        case actions.PURCHASE_BURGER_FAIL:{
+            const _ = deepClone(state);
+            _.loading = false;
+            return _
+        }
+
+        
+        case actions.PURCHASE_BURGER_START:{
+            const _ = deepClone(state);
+            _.loading = true;
+            return _;
+        }
         
         default:
             return state

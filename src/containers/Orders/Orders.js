@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Order from '../../components/Order/Order';
-import axios from '../../axios-orders';
+import axios from '../../axios/orders';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/exports';

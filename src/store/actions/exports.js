@@ -15,3 +15,9 @@ export {
 export {
     fetchOrders
 } from './fetchOrders'
+
+
+
+export {
+    auth
+} from './authenticate'
