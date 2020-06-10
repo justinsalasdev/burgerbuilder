@@ -19,6 +19,10 @@ const buildControls = (props) => {
         return (overallStatus || currentButtonStatus)
     },false))
 
+
+
+    
+
     return (
         <div className={classes.BuildControls}>
             <p>Current price: <strong>${props.price.toFixed(2)}</strong></p>
@@ -33,9 +37,12 @@ const buildControls = (props) => {
                 />
                 )
             })}
-
-
-            <button className={classes.OrderButton} disabled={orderStatus} onClick={props.ordered}>ORDER NOW</button>
+            
+            
+            <button 
+                className={classes.OrderButton} 
+                disabled={orderStatus} 
+                onClick={props.ordered}>ORDER NOW</button>
 
         </div>
     )

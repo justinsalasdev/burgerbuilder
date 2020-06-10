@@ -5,9 +5,16 @@ import Checkout from '../Checkout/Checkout';
 import Auth from '../Auth/Auth';
 import Logout from '../Logout/Logout';
 import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Orders from '../Orders/Orders';
+import * as actions from '../../store/actions/exports'
 
 class App extends Component {
+  
+  componentDidMount(){
+    this.props.onPageLoadSignUp();
+  }
+
   render(){
     return(
       <Layout>
@@ -24,4 +31,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onPageLoadSignUp: () => dispatch(actions.checkAuth())
+  }
+}
+
+export default connect(null,mapDispatchToProps)(App);

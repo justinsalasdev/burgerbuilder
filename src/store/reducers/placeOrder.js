@@ -2,7 +2,8 @@ import * as actions from '../actions/actions';
 
 const initialState = {
     loading: false,
-    purchased: false
+    purchased: false,
+    ordered: false
 }
 
 function deepClone(object){
@@ -11,6 +12,20 @@ function deepClone(object){
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
+
+        case actions.INIT_ORDER: {
+            const _ = deepClone(state)
+            _.ordered = true
+            return _
+            
+        }
+
+        case actions.CANCELED_ORDER: {
+            const _ = deepClone(state)
+            _.ordered = false
+            return _
+                
+        }
 
         case actions.CHECKOUT_BURGER: {
             const _ = deepClone(state);

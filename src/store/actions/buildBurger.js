@@ -2,13 +2,13 @@ import * as actions from './actions';
 import axios from '../../axios/orders';
 
 
+
 const setIngredients = (ingredients) => {
     return {
         type: actions.SET_INGREDIENTS,
         ingredients: ingredients
     }
 }
-
 
 const fetchIngredientsFailed = () => {
     return {

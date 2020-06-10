@@ -7,8 +7,11 @@ export {
 } from './buildBurger';
 
 export {
+    initOrder,
+    canceledOrder,
     checkoutBurger,
     purchaseBurger
+   
 } from './placeOrder';
 
 
@@ -20,5 +23,6 @@ export {
 
 export {
     auth,
-    logout
+    logout,
+    checkAuth
 } from './authenticate'

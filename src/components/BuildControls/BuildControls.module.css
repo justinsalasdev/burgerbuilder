@@ -9,7 +9,10 @@
     padding: 1rem 0;
 }
 
-
+.instruction {
+    margin-top: 1.5rem;
+    color: whitesmoke;
+}
 
 .OrderButton {
     font-weight: 700;

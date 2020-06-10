@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component} from 'react';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions/exports';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
+
 
 class Auth extends Component{
 
@@ -99,6 +101,7 @@ class Auth extends Component{
     }
     
  
+    //------------------------------------------------------RENDER-----------------------------------------------------------
     render(){
 
         const formElementsArray = [];
@@ -114,12 +117,40 @@ class Auth extends Component{
             this.state.isSignup? classes.Auth__option_login : classes.Auth__option_signup
         ].join(' ');
 
+
+        const loginHeading = function(loading,error,isSignup){
+            if(loading){
+                if(isSignup){
+                    return <p>Creating your account..</p>
+                } else{
+                    return <p>Logging you in..</p>
+                }   
+            }
+            else if(error){
+                return <p style={{color:'crimson'}}>{error.message.replace(/_/g,' ') + ' :('}</p>
+            }else{
+                if(isSignup){
+                    return <h4>Please enter required information</h4>
+                } else{
+                    return <h4>Please provide login details</h4>
+                }
+            }
+        }
+
+        const authRedirect = function(isAuthenticated){
+            if(isAuthenticated){
+                return <Redirect to = '/' />
+            } else {
+                return null;
+            }
+        }
+
         return(
+                <>
+                {authRedirect(this.props.isAuthenticated)}
                 <div className={classes.Auth}>
 
-                    {this.props.error? <p style={{color:'crimson'}}>{this.props.error.message.replace(/_/g,' ') + ' :('}</p>:(
-                    <h4>{this.state.isSignup? 'Please enter required information': 'Please provide login details'}</h4>
-                    )}
+                    {loginHeading(this.props.loading,this.props.error,this.state.isSignup)}
 
                     <h4  
                         type='button' 
@@ -153,6 +184,7 @@ class Auth extends Component{
                         )}
                    
                 </div>
+                </>
         )
     }
 }
@@ -161,7 +193,8 @@ class Auth extends Component{
 const mapStateToProps = (state) => {
     return {
         loading: state.authenticate.loading,
-        error: state.authenticate.error
+        error: state.authenticate.error,
+        isAuthenticated: state.authenticate.token !== null
     }
 }
 

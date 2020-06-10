@@ -20,6 +20,14 @@ class OrderSummary extends Component{
             )
         })
 
+        const continueButton = function(isAuthenticated, continueHandler, loginHandler){
+            if(isAuthenticated){
+                return <Button btnType="Success" clicked={continueHandler}>Continue</Button>
+            }else{
+                return <Button btnType="Success" clicked={loginHandler}>Login</Button>
+            }
+        }
+
         return(
             <Wrapper>
                 <h3 className={classes.modalHeading}>Your Order</h3>
@@ -28,9 +36,12 @@ class OrderSummary extends Component{
                     {ingredientSummary}
                 </ul>
                 <p className={classes.orderP}><strong>Total Price: ${this.props.price.toFixed(2)}</strong></p>
-                <p>Continue to checkout?</p>
+                {this.props.isAuthenticated?null : <p className={classes.instruction}>Please login in to continue</p>}
                 <Button btnType="Danger" clicked={this.props.cancelOrder}>Cancel</Button>
-                <Button btnType="Success" clicked={this.props.continueOrder}>Continue</Button>
+                {continueButton(this.props.isAuthenticated,this.props.continueOrder,this.props.loginHandler)}
+                {/* <Button btnType="Success" clicked={this.props.continueOrder}>Continue</Button> */}
+
+
             </Wrapper>
         )
     }

@@ -8,7 +8,7 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Spinner from '../../components/Spinner/Spinner';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {connect} from 'react-redux';
-import * as buildBurger from '../../store/actions/exports';
+import * as actions from '../../store/actions/exports';
 
 
 class BurgerBuilder extends Component {
@@ -23,6 +23,7 @@ class BurgerBuilder extends Component {
         this.purchaseHandler = this.purchaseHandler.bind(this);
         this.purchaseCancelHandler = this.purchaseCancelHandler.bind(this);
         this.purchaseContinueHandler = this.purchaseContinueHandler.bind(this);
+        this.purchaseLoginHandler = this.purchaseLoginHandler.bind(this);
     }
     
     componentDidMount(){
@@ -31,16 +32,20 @@ class BurgerBuilder extends Component {
     
 
     purchaseHandler(){ 
-        this.setState({purchasing: true})
+        this.props.onInitOrder();
     }
 
     purchaseCancelHandler(){
-        this.setState({purchasing: false})
+        this.props.onCanceledOrder();
     }
 
     purchaseContinueHandler(){
-        this.props.history.push('/checkout')
+        this.props.onCanceledOrder(); //sets order status to false
+        this.props.history.replace('/checkout')
+    }
 
+    purchaseLoginHandler(){
+        this.props.history.replace('/auth')
     }
 
     render(){
@@ -76,14 +81,16 @@ class BurgerBuilder extends Component {
                     cancelOrder={this.purchaseCancelHandler}
                     ingredients={this.props.ings}
                     continueOrder={this.purchaseContinueHandler}
+                    loginHandler={this.purchaseLoginHandler}
                     price={this.props.price}
+                    isAuthenticated={this.props.isAuthenticated}
                 />
             )
         }
 
         return (
             <Wrapper>
-                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                <Modal show={this.props.ordered} modalClosed={this.purchaseCancelHandler}>
                     {orderSummary}
                 </Modal>
 
@@ -98,16 +105,20 @@ const mapStateToProps = state => {
     return {
         ings : state.buildBurger.ingredients,
         price: state.buildBurger.totalPrice,
-        error: state.buildBurger.error
+        ordered: state.placeOrder.ordered,
+        error: state.buildBurger.error,
+        isAuthenticated: state.authenticate.token !== null
     }
 }
 
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded : (ingName) => dispatch(buildBurger.addIngredient(ingName)),
-        onIngredientRemoved : (ingName) => dispatch(buildBurger.removeIngredient(ingName)),
-        onInitIngredients : () => dispatch(buildBurger.initIngredients()),
+        onInitIngredients : () => dispatch(actions.initIngredients()),
+        onIngredientAdded : (ingName) => dispatch(actions.addIngredient(ingName)),
+        onIngredientRemoved : (ingName) => dispatch(actions.removeIngredient(ingName)),
+        onInitOrder: () => dispatch(actions.initOrder()),
+        onCanceledOrder: () => dispatch(actions.canceledOrder())
     }
 }
 
