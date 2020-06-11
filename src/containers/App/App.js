@@ -4,7 +4,7 @@ import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Checkout from '../Checkout/Checkout';
 import Auth from '../Auth/Auth';
 import Logout from '../Logout/Logout';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Orders from '../Orders/Orders';
 import * as actions from '../../store/actions/exports'
@@ -15,19 +15,45 @@ class App extends Component {
     this.props.onPageLoadSignUp();
   }
 
+
   render(){
-    return(
-      <Layout>
-          <Switch>
+    
+  const routes = function (isAuthenticated){
+    if(isAuthenticated){
+      return (
+          <>
             <Route path="/checkout" component={Checkout}/>
             <Route path="/orders" component={Orders}/>
-            <Route path="/auth" component={Auth}/>
             <Route path="/logout" component={Logout}/>
             <Route path="/" exact component={BurgerBuilder}/>
+            <Redirect to ="/" />
+          </>
+      )
+    } else {
+      return (
+        <>
+          <Route path="/auth" component={Auth}/>
+          <Route path="/" exact component={BurgerBuilder}/>
+          <Redirect to = "/"/>
+        </>
+      )
+    }
+  }
 
-          </Switch>
+    return(
+      <Layout>
+        <Switch>
+          {routes(this.props.isAuthenticated)}
+        </Switch>
       </Layout>
     )
+  }
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated :  state.authenticate.token !== null
   }
 }
 
@@ -37,4 +63,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(App);
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
