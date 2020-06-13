@@ -12,17 +12,19 @@ const navigationItems = (props) =>{
         navClass = [classes.NavigationItems]
     }
 
+
     return(
-        <ul className={navClass}>
+        <ul className={navClass}  onClick={props.sideDrawerClose}>
+            
             <NavigationItem link='/'>
                 Burger Builder
             </NavigationItem>
 
-            {props.isAuthenticated?<NavigationItem link="/orders">
+            {props.isAuthenticated?<NavigationItem link="/orders" >
                 Orders
             </NavigationItem> : null}
 
-            <NavigationItem link={props.isAuthenticated ? '/logout' : '/auth'}>
+            <NavigationItem link={props.isAuthenticated ? '/logout' : '/auth'} >
                 {props.isAuthenticated ? 'Logout': 'Login'}
             </NavigationItem>
         </ul>

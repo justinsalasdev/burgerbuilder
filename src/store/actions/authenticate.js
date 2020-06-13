@@ -47,7 +47,6 @@ export const logout = () => {
 export const checkAuth = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
-        console.log(token)
         if(!token){
             dispatch(logout());
             
@@ -60,7 +59,6 @@ export const checkAuth = () => {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess({idToken: token, localId: userId}))
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
-                console.log(expiry)
                 dispatch(checkAuthTimeout(expiry))
                 }
             }
@@ -86,9 +84,7 @@ export const auth = (email,password,isSignUp) =>{
     
         axios.post((isSignUp? endPoints.signUp : endPoints.signIn), authData)
             .then(response => {
-                console.log(response.data.expiresIn)
                 const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
-                console.log(expirationDate)
                 localStorage.setItem('token',response.data.idToken)
                 localStorage.setItem('expirationDate',expirationDate)
                 localStorage.setItem('userId',response.data.localId)
@@ -98,7 +94,6 @@ export const auth = (email,password,isSignUp) =>{
             })
             .catch(error => {
                 dispatch(authFail(error.response.data.error))
-                console.log(error.response.data.error.message)
             })
     }
 }
