@@ -1,21 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Wrapper from '../../containers/Wrapper/Wrapper';
 import classes from './OrderSummary.module.css';
 import Button from '../Button/Button';
 
 
+const OrderSummary = props => {
 
-class OrderSummary extends Component{
-
-    render(){
-
-        const ingredientSummary = Object.keys(this.props.ingredients)
+    const ingredientSummary = Object.keys(props.ingredients)
         .map(igKey => {
             return (
             <li key={igKey}>
                 <span style={{textTransform:'capitalize'}}>
                     {igKey}
-                </span> : {this.props.ingredients[igKey]}
+                </span> : {props.ingredients[igKey]}
             </li>
             )
         })
@@ -35,21 +32,14 @@ class OrderSummary extends Component{
                 <ul className={classes.orderList}>
                     {ingredientSummary}
                 </ul>
-                <p className={classes.orderP}><strong>Total Price: ${this.props.price.toFixed(2)}</strong></p>
-                {this.props.isAuthenticated?null : <p className={classes.instruction}>Please login in to continue</p>}
-                <Button btnType="Danger" clicked={this.props.cancelOrder}>Cancel</Button>
-                {continueButton(this.props.isAuthenticated,this.props.continueOrder,this.props.loginHandler)}
-                {/* <Button btnType="Success" clicked={this.props.continueOrder}>Continue</Button> */}
-
-
+                <p className={classes.orderP}><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
+                {props.isAuthenticated?null : <p className={classes.instruction}>Please login in to continue</p>}
+                <Button btnType="Danger" clicked={props.cancelOrder}>Cancel</Button>
+                {continueButton(props.isAuthenticated,props.continueOrder,props.loginHandler)}
+                {/* <Button btnType="Success" clicked={props.continueOrder}>Continue</Button> */}
             </Wrapper>
         )
-    }
 }
-
-
-
-
 
 
 

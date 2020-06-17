@@ -40,9 +40,11 @@ const app = (
 )
 
 ReactDOM.render(
-  <React.StrictMode>
-    {app}
-  </React.StrictMode>,
+  // <React.StrictMode>//disabled to show popUp :(
+    <>
+      {app}
+    </>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 

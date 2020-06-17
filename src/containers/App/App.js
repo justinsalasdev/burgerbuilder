@@ -1,27 +1,30 @@
-import React, {Component} from 'react';
+import React, {useEffect, Suspense} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
-import Checkout from '../Checkout/Checkout';
-import Auth from '../Auth/Auth';
 import Logout from '../Logout/Logout';
 import {Route, Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Orders from '../Orders/Orders';
 import * as actions from '../../store/actions/exports'
+import Spinner from '../../components/Spinner/Spinner'
 
-class App extends Component {
-  
-  componentDidMount(){
-    this.props.onPageLoadSignUp();
-  }
+const Checkout = React.lazy(() => {return import ('../Checkout/Checkout')})
+const Orders = React.lazy(() => {return import ('../Orders/Orders')})
+const Auth = React.lazy(() => {return import ('../Auth/Auth')})
 
 
-  render(){
-    
+const App = props => {
+
+  //componentDidMount
+  useEffect(() => {
+    props.onPageLoadSignUp();
+  // eslint-disable-next-line
+  },[])
+
   const routes = function (isAuthenticated){
     if(isAuthenticated){
       return (
           <>
+            {/* <Route path="/checkout" render={() => <Checkout/>}/> */}
             <Route path="/checkout" component={Checkout}/>
             <Route path="/orders" component={Orders}/>
             <Route path="/logout" component={Logout}/>
@@ -32,7 +35,7 @@ class App extends Component {
     } else {
       return (
         <>
-          <Route path="/auth" component={Auth}/>
+          <Route path="/auth" component={Auth} />
           <Route path="/" exact component={BurgerBuilder}/>
           <Redirect to = "/"/>
         </>
@@ -40,15 +43,18 @@ class App extends Component {
     }
   }
 
-    return(
-      <Layout>
-        <Switch>
-          {routes(this.props.isAuthenticated)}
-        </Switch>
-      </Layout>
-    )
-  }
+  return(
+    <Layout>
+      <Switch>
+        <Suspense fallback={<Spinner/>}>
+          {routes(props.isAuthenticated)}
+        </Suspense>
+      </Switch>
+    </Layout>
+  )
 }
+
+
 
 
 const mapStateToProps = (state) => {
