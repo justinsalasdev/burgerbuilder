@@ -1,27 +1,51 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "74dc7eb8be2975fcb89434ad53d65773",
+    "revision": "0fa89d889d642eea89e70adf8308893d",
     "url": "/burger-builder-dev/index.html"
   },
   {
-    "revision": "d9921b0671d8cfb9d694",
-    "url": "/burger-builder-dev/static/css/main.90a120fc.chunk.css"
+    "revision": "dd643abf15e99b6d7186",
+    "url": "/burger-builder-dev/static/css/3.530a02ac.chunk.css"
   },
   {
-    "revision": "cebc352ada8658a1f9b6",
-    "url": "/burger-builder-dev/static/js/2.4f94cb72.chunk.js"
+    "revision": "f60c1e625c890ad2af34",
+    "url": "/burger-builder-dev/static/css/4.7608d846.chunk.css"
+  },
+  {
+    "revision": "3d5e1f9449b29c91ec62",
+    "url": "/burger-builder-dev/static/css/5.ea716446.chunk.css"
+  },
+  {
+    "revision": "3462b96e2127f84e3014",
+    "url": "/burger-builder-dev/static/css/main.b9652cc6.chunk.css"
+  },
+  {
+    "revision": "d266e4afe752cdd9085a",
+    "url": "/burger-builder-dev/static/js/2.ab661ab8.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/burger-builder-dev/static/js/2.4f94cb72.chunk.js.LICENSE.txt"
+    "url": "/burger-builder-dev/static/js/2.ab661ab8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d9921b0671d8cfb9d694",
-    "url": "/burger-builder-dev/static/js/main.4a30b551.chunk.js"
+    "revision": "dd643abf15e99b6d7186",
+    "url": "/burger-builder-dev/static/js/3.b62ec0fc.chunk.js"
   },
   {
-    "revision": "7145bed5e3c670012742",
-    "url": "/burger-builder-dev/static/js/runtime-main.dd74d3a2.js"
+    "revision": "f60c1e625c890ad2af34",
+    "url": "/burger-builder-dev/static/js/4.cf073198.chunk.js"
+  },
+  {
+    "revision": "3d5e1f9449b29c91ec62",
+    "url": "/burger-builder-dev/static/js/5.34e2f774.chunk.js"
+  },
+  {
+    "revision": "3462b96e2127f84e3014",
+    "url": "/burger-builder-dev/static/js/main.83ca5275.chunk.js"
+  },
+  {
+    "revision": "52328c48ff3148f5d07e",
+    "url": "/burger-builder-dev/static/js/runtime-main.edf8343f.js"
   },
   {
     "revision": "0413ca85383d15e6b18c1e7c0c3be5c1",
