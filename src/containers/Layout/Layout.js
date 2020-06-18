@@ -3,9 +3,10 @@ import Wrapper from '../Wrapper/Wrapper';
 import classes from './Layout.module.css';
 import Toolbar from '../../components/Toolbar/Toolbar'; 
 import SideDrawer from '../../components/SideDrawer/SideDrawer';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const Layout = props => {
+    const isAuthenticated = useSelector(state => state.authenticate.token !== null)
     const [sideDrawerShown, showSideDrawer] = useState(false)
 
     const closeSideDrawer = () => {
@@ -20,9 +21,9 @@ const Layout = props => {
         <Wrapper>
             <Toolbar 
                 drawerToggleClicked={toggleSideDrawer}
-                isAuthenticated={props.isAuthenticated}/>
+                isAuthenticated={isAuthenticated}/>
             <SideDrawer 
-                isAuthenticated={props.isAuthenticated}
+                isAuthenticated={isAuthenticated}
                 open={sideDrawerShown} 
                 closed={closeSideDrawer}/>
             <main className={classes.main}>
@@ -35,11 +36,5 @@ const Layout = props => {
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.authenticate.token !== null
-    }
-}
 
-
-export default connect(mapStateToProps)(Layout) ;
+export default Layout;

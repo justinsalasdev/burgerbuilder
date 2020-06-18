@@ -1,9 +1,9 @@
-import React, {useEffect, Suspense} from 'react';
+import React, {useEffect, Suspense, useCallback} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Logout from '../Logout/Logout';
 import {Route, Switch,Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
 import Spinner from '../../components/Spinner/Spinner'
 
@@ -14,11 +14,13 @@ const Auth = React.lazy(() => {return import ('../Auth/Auth')})
 
 const App = props => {
 
-  //componentDidMount
+  const dispatch = useDispatch();
+  const onPageLoadSignUp = useCallback(() => dispatch(actions.checkAuth()),[dispatch])
+  const isAuthenticated = useSelector(state => state.authenticate.token !== null)
+
   useEffect(() => {
-    props.onPageLoadSignUp();
-  // eslint-disable-next-line
-  },[])
+    onPageLoadSignUp();
+  },[onPageLoadSignUp])
 
   const routes = function (isAuthenticated){
     if(isAuthenticated){
@@ -47,27 +49,11 @@ const App = props => {
     <Layout>
       <Switch>
         <Suspense fallback={<Spinner/>}>
-          {routes(props.isAuthenticated)}
+          {routes(isAuthenticated)}
         </Suspense>
       </Switch>
     </Layout>
   )
 }
 
-
-
-
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated :  state.authenticate.token !== null
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onPageLoadSignUp: () => dispatch(actions.checkAuth())
-  }
-}
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;

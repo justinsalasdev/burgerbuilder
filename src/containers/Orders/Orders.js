@@ -1,22 +1,30 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import Order from '../../components/Order/Order';
 import axios from '../../axios/orders';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
-import {connect} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
 import Spinner from '../../components/Spinner/Spinner';
 
 
 const Orders = props => {
+        
+    const orders = useSelector(state => state.fetchOrders.orders)
+    const fetching = useSelector(state => state.fetchOrders.fetching)
+    const token = useSelector(state => state.authenticate.token)
+    const userId = useSelector(state => state.authenticate.userId)
+
+    const dispatch = useDispatch()
+    const onFetchOrders = useCallback((token,userId) => dispatch(actions.fetchOrders(token,userId)),[dispatch])
+
 
     useEffect(() => {
-        props.onFetchOrders(props.token, props.userId)
-    // eslint-disable-next-line
-    },[])
+        onFetchOrders(token,userId)
+    },[onFetchOrders,token,userId])
 
-    let orders = <Spinner/>;
-            if (props.fetching){
-                orders = props.orders.map(order => {
+    let ordersList = <Spinner/>;
+            if (fetching){
+                ordersList = orders.map(order => {
                             return (
                                 <Order 
                                     key={order.id}
@@ -29,28 +37,11 @@ const Orders = props => {
     
     return(
         <div>
-            {orders}
+            {ordersList}
         </div>
         )
 }
 
-    
 
 
-const mapStateToProps = (state) => {
-    return {
-        orders: state.fetchOrders.orders,
-        fetching: state.fetchOrders.fetching,
-        token: state.authenticate.token,
-        userId: state.authenticate.userId
-    }
-}
-
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onFetchOrders: (token,userId) => dispatch(actions.fetchOrders(token,userId))
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(Orders,axios));
+export default withErrorHandler(Orders,axios);

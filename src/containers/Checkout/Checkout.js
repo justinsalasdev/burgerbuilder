@@ -2,25 +2,33 @@ import React, {Fragment} from 'react';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import {Route, Redirect} from 'react-router-dom';
 import ContactData from '../ContactData/ContactData';
-import {connect} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports';
 
 
 
 const Checkout = props => {
+        
+    
+
+    const dispatch = useDispatch();
+    const onCheckout = () => dispatch(actions.checkoutBurger())
+    const ings = useSelector(state => state.buildBurger.ingredients)
+
+
     const cancelCheckout = () => {
         props.history.replace('/');
     }
 
     const continueCheckout = () => {
-        props.onCheckout()
+        onCheckout()
         props.history.replace('/checkout/contact-data')
     }
 
     let summary = <Redirect to ="/"/>
-        if(props.ings){
+        if(ings){
             summary  = <Fragment><CheckoutSummary 
-                            ingredients={props.ings}
+                            ingredients={ings}
                             checkoutCancelled={cancelCheckout}
                             checkoutContinued={continueCheckout}
                         />
@@ -37,18 +45,4 @@ const Checkout = props => {
     )
 }
 
-
-const mapStateToProps = (state) => {
-    return {
-        ings: state.buildBurger.ingredients,
-        purchased: state.placeOrder.purchased
-    }
-}
-
-const mapDispatchtoProps = (dispatch) => {
-    return {
-        onCheckout: () => dispatch(actions.checkoutBurger())
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchtoProps)(Checkout);
+export default Checkout;
