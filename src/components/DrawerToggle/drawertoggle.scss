@@ -1,4 +1,4 @@
-.DrawerToggle {
+.drawertoggle {
     width: 4rem;
     height: 100%;
     display: flex;
@@ -8,16 +8,15 @@
     padding: 1rem 0;
     box-sizing: border-box;
     cursor: pointer;
-}
 
-.DrawerToggle div {
-    width: 90%;
-    height: .3rem;
-    background-color: white;
-}
-
-@media (min-width: 50em) {
-    .DrawerToggle {
+    @media (min-width: 30.2em) {
         display: none;
+    }
+
+    &__bar{
+        border-radius: 2rem;
+        width: 90%;
+        height: .5rem;
+        background-color: white;
     }
 }

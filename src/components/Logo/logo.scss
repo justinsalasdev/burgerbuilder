@@ -1,0 +1,18 @@
+.logo{
+    background-color: #FFF;
+    padding: .8rem;
+    border-radius: .5rem;
+    height: 80%;
+
+    &__img{
+        height: 100%;
+    }
+
+    @media screen and (max-width: 30.2em) {
+        display: none;
+    }
+}
+
+
+
+

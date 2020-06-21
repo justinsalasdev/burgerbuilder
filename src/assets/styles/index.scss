@@ -35,8 +35,24 @@
 }
 
 html{
-  font-size: 62.5%; /*default browser font = 16px => convert to 10px [16 * 62.5%]*/
   height: 100%;
+  
+  @media screen and (max-width: 1920px){
+    font-size: 66.406%; // 17/16* 62.5 
+  }
+
+  @media screen and (max-width: 1100px){
+    font-size: 62.5%; /*default browser font = 16px => convert to 10px [16 * 62.5%]*/
+  }
+
+  @media screen and (max-width: 800px){
+    font-size: 59.60%; // 15/16 * 62.5
+  }
+  @media screen and (max-width: 414px){ 
+    font-size: 54.68%; // 14/16 * 62.5
+  }
+  
+
 }
 
 

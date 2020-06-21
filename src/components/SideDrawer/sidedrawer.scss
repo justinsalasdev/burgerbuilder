@@ -1,4 +1,4 @@
-.SideDrawer{
+.sidedrawer{
     position: fixed;
     width: 28rem;
     max-width: 70%;
@@ -9,21 +9,18 @@
     background-color: #fff;
     padding: 3.2rem 1.6rem;
     transition: transform .3s cubic-bezier(.42,1,.13,.97);
-}
 
+    &--open{
+        transform: translateX(0);
+    }
 
+    &--close{
+        transform: translateX(-100%);
+    }
 
-@media (min-width: 50em){
-    .SideDrawer{
+    @media screen and (min-width: 30.2em) {
         display: none;
     }
 }
 
 
-.Open{
-    transform: translateX(0);
-}
-
-.Close{
-    transform: translateX(-100%);
-}

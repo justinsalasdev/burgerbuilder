@@ -1,13 +1,13 @@
 import React from 'react';
-import classes from './DrawerToggle.module.css';
+import './drawertoggle.scss';
 
 const drawerToggle = (props) => {
     return (
         // <div onClick={props.clicked}>MENU</div>
-        <div onClick={props.clicked} className={classes.DrawerToggle}>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div onClick={props.clicked} className={'drawertoggle'}>
+            <div className={'drawertoggle__bar'}></div>
+            <div className={'drawertoggle__bar'}></div>
+            <div className={'drawertoggle__bar'}></div>
         </div>
     )
 }

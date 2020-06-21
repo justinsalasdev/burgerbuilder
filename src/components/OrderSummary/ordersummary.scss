@@ -1,0 +1,18 @@
+
+.ordersummary{
+    &__heading{
+        margin-bottom: 1rem;
+    }
+
+    &__items{
+        padding-left: 3rem;
+        &>li{
+            margin: 1rem;
+        }
+    }
+
+    &__info{
+        margin-bottom: 1rem;
+    }
+}
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/styles/index.css';
+import './assets/styles/index.scss';
 import App from './containers/App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
@@ -33,7 +33,7 @@ const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter  basename="/burger-builder-dev">
+    <BrowserRouter  basename="/burgerbuilder">
       <App/>
     </BrowserRouter>
   </Provider>

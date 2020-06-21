@@ -9,30 +9,6 @@
     font-size: 1.2rem;
 }
 
-/* 
-
-@media (min-width: 50em) and (min-height: 40em){
-    .Burger{
-        width: 35rem;
-        height: 30rem;
-    }
-}
-
-
-@media (min-width: 50em) and (min-height: 40em){
-    .Burger{
-        width: 45rem;
-        height: 40rem;
-    }
-}
-
-
-@media (min-width: 100em) and (min-height: 70em){
-    .Burger{
-        width: 70rem;
-        height: 60rem;
-    }
-} */
 
 .burgerP{
     font-size: 1.6rem;
@@ -42,21 +18,21 @@
 
 .burgerScroll::-webkit-scrollbar-track
 {
-	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	box-shadow: inset 0 0 .6rem rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 .6rem rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
-	border-radius: 10px;
+	border-radius: 1rem;
 }
 
 .burgerScroll::-webkit-scrollbar
 {
-	width: 10px;
+	width: 1rem;
 	background-color: #F5F5F5;
 }
 
 .burgerScroll::-webkit-scrollbar-thumb
 {
-	border-radius: 10px;
+	border-radius: 1rem;
 	background-image: -webkit-gradient(linear,
 									   left bottom,
 									   left top,

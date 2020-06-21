@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Modal.module.css';
+import './modal.scss'
 import Wrapper from '../../containers/Wrapper/Wrapper';
 import Backdrop from '../Backdrop/Backdrop';
 
@@ -9,11 +9,7 @@ const Modal = props => {
         <Wrapper>
             <Backdrop show={props.show} clicked={props.modalClosed}/>
             <div 
-                className={classes.Modal}
-                style={{
-                    transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                    opacity: props.show ? '1' : '0'
-                }}
+                className={props.show? 'modal modal--show': 'modal'}
             >
                 {props.children}
             </div>

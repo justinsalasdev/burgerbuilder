@@ -1,19 +1,15 @@
 import React from 'react';
-import classes from './Input.module.css';
+import './input.scss';
 
 const input = (props) => {
 
     let inputElement = null;
-    const inputClasses = [classes.InputElement];
-
-    if(!props.valid && props.touched){
-        inputClasses.push(classes.Invalid)
-    }
+    const inputField = (!props.valid && props.touched)? 'input__field input__field--invalid' : 'input__field';
 
     switch(props.elementType){
         case('input'):
             inputElement = <input 
-                            className={inputClasses.join(' ')} 
+                            className={inputField} 
                             {...props.elementConfig}
                             name={props.name}
                             value={props.value}
@@ -23,7 +19,7 @@ const input = (props) => {
 
         case('email'):
         inputElement = <input 
-                        className={inputClasses.join(' ')} 
+                        className={inputField} 
                         {...props.elementConfig}
                         name={props.name}
                         value={props.value}
@@ -33,7 +29,7 @@ const input = (props) => {
 
         case('password'):
         inputElement = <input 
-                        className={inputClasses.join(' ')} 
+                        className={inputField} 
                         {...props.elementConfig}
                         name={props.name}
                         value={props.value}
@@ -43,7 +39,7 @@ const input = (props) => {
         
         case('textarea'):
             inputElement = <textarea 
-                            className={inputClasses.join(' ')} 
+                            className={inputField} 
                             {...props.elementConfig}
                             name={props.name}
                             value={props.value} 
@@ -53,7 +49,7 @@ const input = (props) => {
 
         case('select'):
         inputElement = <select
-                            className={inputClasses.join(' ')} 
+                            className={inputField} 
                             name={props.name}
                             value={props.value}
                             onChange={props.changed}>
@@ -71,7 +67,7 @@ const input = (props) => {
 
         default:
             inputElement = <input 
-                            className={inputClasses.join(' ')} 
+                            className={inputField} 
                             {...props.elementConfig}
                             name={props.name}
                             value={props.value}
@@ -80,7 +76,7 @@ const input = (props) => {
     }
 
     return (
-        <div className={classes.Input}>
+        <div className={'input'}>
             {/* <label className={classes.Label}>{props.label}</label> */}
             {inputElement}
         </div>

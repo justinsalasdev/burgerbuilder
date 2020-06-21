@@ -1,23 +1,15 @@
 import React from 'react';
-import classes from './SideDrawer.module.css';
+import './sidedrawer.scss';
 
-import Logo from '../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../Backdrop/Backdrop';
 import Wrapper from '../../containers/Wrapper/Wrapper';
 
 const sideDrawer = (props ) => {
-    let attachedClasses = [classes.SideDrawer, classes.Close ];
-
-    if(props.open){
-        attachedClasses = [classes.SideDrawer, classes.Open ];
-    }
-
     return(
         <Wrapper>
             <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={attachedClasses.join(' ')}>
-                <Logo side/>
+            <div className={props.open? 'sidedrawer sidedrawer--open' : 'sidedrawer sidedrawer--close'}>
                 <nav>
                     <NavigationItems side isAuthenticated={props.isAuthenticated} sideDrawerClose={props.closed}/> 
                 </nav>

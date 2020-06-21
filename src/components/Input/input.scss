@@ -1,0 +1,26 @@
+.input{
+    width: 100%;
+    padding: 1rem;
+
+    &__field{
+        display: block;
+        width: 100%;
+        border: .1rem solid #ccc;
+        background-color: white;
+        font: inherit;
+        padding: .6rem 1rem;
+
+        &:focus{
+            outline: .2rem solid burlywood;
+        }
+
+        &--invalid{
+            background-color:rgb(245, 132, 132) ;
+            &:focus{
+                outline: .2rem solid rgb(247, 89, 89);
+            }
+        }
+    }
+}
+
+

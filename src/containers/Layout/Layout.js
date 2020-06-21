@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import Wrapper from '../Wrapper/Wrapper';
-import classes from './Layout.module.css';
+import './layout.scss';
 import Toolbar from '../../components/Toolbar/Toolbar'; 
 import SideDrawer from '../../components/SideDrawer/SideDrawer';
 import {useSelector} from 'react-redux';
@@ -18,7 +17,7 @@ const Layout = props => {
     }
 
     return(
-        <Wrapper>
+        <>
             <Toolbar 
                 drawerToggleClicked={toggleSideDrawer}
                 isAuthenticated={isAuthenticated}/>
@@ -26,10 +25,10 @@ const Layout = props => {
                 isAuthenticated={isAuthenticated}
                 open={sideDrawerShown} 
                 closed={closeSideDrawer}/>
-            <main className={classes.main}>
+            <main className={'main'}>
             {props.children}
             </main>
-        </Wrapper>
+        </>
 
     )
 

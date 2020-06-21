@@ -1,6 +1,5 @@
 import React from 'react';
-import Wrapper from '../../containers/Wrapper/Wrapper';
-import classes from './OrderSummary.module.css';
+import './ordersummary.scss'
 import Button from '../Button/Button';
 
 
@@ -26,18 +25,18 @@ const OrderSummary = props => {
         }
 
         return(
-            <Wrapper>
-                <h3 className={classes.modalHeading}>Your Order</h3>
+            <div className={'ordersummary'}>
+                <h3 className={'ordersummary__heading'}>Your Order</h3>
                 <p>A delicious burger with the following ingredients :</p>
-                <ul className={classes.orderList}>
+                <ul className={'ordersummary__items'}>
                     {ingredientSummary}
                 </ul>
-                <p className={classes.orderP}><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
-                {props.isAuthenticated?null : <p className={classes.instruction}>Please login in to continue</p>}
+                <p className={'ordersummary__info'}><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
+                {props.isAuthenticated?null : <p className={"ordersummary__info"}>Please login in to continue</p>}
                 <Button btnType="Danger" clicked={props.cancelOrder}>Cancel</Button>
                 {continueButton(props.isAuthenticated,props.continueOrder,props.loginHandler)}
                 {/* <Button btnType="Success" clicked={props.continueOrder}>Continue</Button> */}
-            </Wrapper>
+            </div>
         )
 }
 
