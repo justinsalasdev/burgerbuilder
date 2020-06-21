@@ -14,31 +14,33 @@
     }
 
     &>a{
-        color: #8F5C2C;
+        color: var(--primary-dark);
         text-decoration: none;
         width: 100%;
         display: block;
 
-        @media (min-width: 30.2em){
-            color: white;
-            height: 100%;
-            padding: 1.6rem 1rem;
-            border-bottom: .4rem solid transparent;
-            display: block;
-        }
-
-        &:active,
         &:hover,
         &.active{
-            color: #40A4C8;
+            color: var(--primary-light);
+        }
 
-            @media (min-width: 30.2em){
-                background-color: #8f5c2c;
-                border-bottom: .4rem solid #40A4c8;
+
+        @media (min-width: 30.2em){
+            color: whitesmoke;
+            height: 100%;
+            padding: 1.6rem 1rem;
+            display: block;
+                
+            &:hover{
+                color: var(--secondary-light);
+            }
+            
+            &.active{
+                color: var(--primary-dark);
+                background-color: var(--secondary-dark);
             }
         }
     }
-
 
 }
 

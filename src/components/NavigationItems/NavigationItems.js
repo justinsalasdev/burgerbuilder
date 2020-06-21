@@ -1,18 +1,12 @@
 import React from 'react';
-import classes from './NavigationItems.module.css';
+import './navigationitems.scss'
 import NavigationItem from '../NavigationItem/NavigationItem';
 
 
 const navigationItems = (props) =>{
 
-    let navClass = [];
-    if(props.side){
-        navClass = [classes.NavigationItems, classes.NavigationItems__side].join(' ');
-    }else{
-        navClass = [classes.NavigationItems]
-    }
-
-
+    let navClass = props.side? 'navigation-items navigation-items--side': 'navigation-items';
+    
     return(
         <ul className={navClass}  onClick={props.sideDrawerClose}>
             

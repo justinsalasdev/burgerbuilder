@@ -26,7 +26,6 @@ const App = props => {
     if(isAuthenticated){
       return (
           <>
-            {/* <Route path="/checkout" render={() => <Checkout/>}/> */}
             <Route path="/checkout" component={Checkout}/>
             <Route path="/orders" component={Orders}/>
             <Route path="/logout" component={Logout}/>
