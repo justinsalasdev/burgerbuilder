@@ -34,6 +34,13 @@
   box-sizing: inherit;
 }
 
+:root{
+  --primary-dark: #581c0c;
+  --primary-light: #ca5116;
+  --secondary-dark: #f9b384;
+  --secondary-light: #f1e3cb;
+}
+
 html{
   height: 100%;
   
