@@ -1,51 +1,51 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cce46f674a783c85f63441d2862928ec",
+    "revision": "ff6bfac0edc2289581b0bc1d1511f937",
     "url": "/burgerbuilder/index.html"
   },
   {
-    "revision": "94bea5f108d283420cef",
+    "revision": "5f6b36310d97e0651323",
     "url": "/burgerbuilder/static/css/3.9a39fcc6.chunk.css"
   },
   {
-    "revision": "6a898ae235067c35a945",
+    "revision": "72438085a5be2ed79152",
     "url": "/burgerbuilder/static/css/4.ace458c8.chunk.css"
   },
   {
-    "revision": "fb707f0838d60b3ba43d",
+    "revision": "6e3a47ce5512032af83e",
     "url": "/burgerbuilder/static/css/5.4880be62.chunk.css"
   },
   {
-    "revision": "fbf3785beb240c1e0ef3",
-    "url": "/burgerbuilder/static/css/main.1f086733.chunk.css"
+    "revision": "bab627a9464f5005dce5",
+    "url": "/burgerbuilder/static/css/main.81178a23.chunk.css"
   },
   {
-    "revision": "1738a544c20b48b34985",
-    "url": "/burgerbuilder/static/js/2.e59540b6.chunk.js"
+    "revision": "cc9c94e227e0e00ab56a",
+    "url": "/burgerbuilder/static/js/2.6675a1e1.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/burgerbuilder/static/js/2.e59540b6.chunk.js.LICENSE.txt"
+    "url": "/burgerbuilder/static/js/2.6675a1e1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "94bea5f108d283420cef",
-    "url": "/burgerbuilder/static/js/3.c7a0f0f4.chunk.js"
+    "revision": "5f6b36310d97e0651323",
+    "url": "/burgerbuilder/static/js/3.8ada156a.chunk.js"
   },
   {
-    "revision": "6a898ae235067c35a945",
-    "url": "/burgerbuilder/static/js/4.a93ff14b.chunk.js"
+    "revision": "72438085a5be2ed79152",
+    "url": "/burgerbuilder/static/js/4.432eb7b7.chunk.js"
   },
   {
-    "revision": "fb707f0838d60b3ba43d",
-    "url": "/burgerbuilder/static/js/5.32cf7184.chunk.js"
+    "revision": "6e3a47ce5512032af83e",
+    "url": "/burgerbuilder/static/js/5.35993e4d.chunk.js"
   },
   {
-    "revision": "fbf3785beb240c1e0ef3",
-    "url": "/burgerbuilder/static/js/main.8b661f5a.chunk.js"
+    "revision": "bab627a9464f5005dce5",
+    "url": "/burgerbuilder/static/js/main.f8df83df.chunk.js"
   },
   {
-    "revision": "07d06f05755ee5240f0f",
-    "url": "/burgerbuilder/static/js/runtime-main.0944922c.js"
+    "revision": "e7e49f385df2353ad7d2",
+    "url": "/burgerbuilder/static/js/runtime-main.484a8485.js"
   },
   {
     "revision": "0413ca85383d15e6b18c1e7c0c3be5c1",
@@ -88,7 +88,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/burgerbuilder/static/media/balsamiq-sans-v1-latin-regular.deaa2661.eot"
   },
   {
-    "revision": "b8503d262bffbfb7c67fd6762963e7d1",
-    "url": "/burgerbuilder/static/media/burger-logo.b8503d26.png"
+    "revision": "b7f8e242f17932549500b747774be396",
+    "url": "/burgerbuilder/static/media/burger-logo.b7f8e242.svg"
   }
 ]);
