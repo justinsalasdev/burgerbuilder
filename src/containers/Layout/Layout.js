@@ -26,7 +26,7 @@ const Layout = props => {
                 open={sideDrawerShown} 
                 closed={closeSideDrawer}/>
             <main className={'main'}>
-            {props.children}
+                {props.children}
             </main>
         </>
 

@@ -10,7 +10,6 @@ import * as actions from '../../store/actions/exports';
 const Checkout = props => {
         
     
-
     const dispatch = useDispatch();
     const onCheckout = () => dispatch(actions.checkoutBurger())
     const ings = useSelector(state => state.buildBurger.ingredients)

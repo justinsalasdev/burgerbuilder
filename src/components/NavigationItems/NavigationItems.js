@@ -1,10 +1,11 @@
 import React from 'react';
 import './navigationitems.scss'
 import NavigationItem from '../NavigationItem/NavigationItem';
+import {useSelector} from 'react-redux';
 
 
-const navigationItems = (props) =>{
-
+const NavigationItems = (props) =>{
+    const isAuthenticated = useSelector(state => state.authenticate.token !== null)
     let navClass = props.side? 'navigation-items navigation-items--side': 'navigation-items';
     
     return(
@@ -14,12 +15,12 @@ const navigationItems = (props) =>{
                 Burger Builder
             </NavigationItem>
 
-            {props.isAuthenticated?<NavigationItem link="/orders" >
+            {isAuthenticated?<NavigationItem link="/orders" >
                 Orders
             </NavigationItem> : null}
 
-            <NavigationItem link={props.isAuthenticated ? '/logout' : '/auth'} >
-                {props.isAuthenticated ? 'Logout': 'Login'}
+            <NavigationItem link={isAuthenticated ? '/logout' : '/auth'} >
+                {isAuthenticated ? 'Logout': 'Login'}
             </NavigationItem>
         </ul>
     )
@@ -27,4 +28,4 @@ const navigationItems = (props) =>{
 
 
 
-export default navigationItems;
+export default NavigationItems;
