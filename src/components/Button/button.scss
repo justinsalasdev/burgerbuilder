@@ -1,4 +1,5 @@
 .Button {
+    border-bottom: 1px solid red;
     text-shadow: .2rem .2rem .4rem lightgray;
     background-color: transparent;
     border: none;
@@ -20,11 +21,11 @@
 }
 
 .Success {
-    color: #5C9210;
+    color: green;
 }
 
 .Danger {
-    color: #944317;
+    color: crimson;
 }
 
 .Button:disabled{

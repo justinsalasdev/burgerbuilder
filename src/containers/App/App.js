@@ -41,7 +41,7 @@ const App = props => {
           <Route path="/login" component={Login} />
           {/* <Route path="/auth" component={Auth} /> */}
           <Route path="/" exact component={BurgerBuilder}/>
-          <Redirect to = "/"/>
+          <Redirect to = "/login"/>
         </>
       )
     }
