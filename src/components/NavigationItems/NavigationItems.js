@@ -1,6 +1,7 @@
 import React from 'react';
 import './navigationitems.scss'
-import NavigationItem from '../NavigationItem/NavigationItem';
+import {NavLink} from 'react-router-dom';
+// import NavigationItem from '../NavigationItem/NavigationItem';
 import {useSelector} from 'react-redux';
 
 
@@ -11,18 +12,36 @@ const NavigationItems = (props) =>{
     return(
         <ul className={navClass}  onClick={props.sideDrawerClose}>
             
-            <NavigationItem link='/'>
-                Burger Builder
-            </NavigationItem>
+            <li className={'navigation-item'}>
+                <NavLink 
+                    to='/'
+                    exact
+                    activeClassName={'active'}
+                >Burger Builder</NavLink>
+            </li>
 
-            {isAuthenticated?<NavigationItem link="/orders" >
-                Orders
-            </NavigationItem> : null}
+              
+            {isAuthenticated?<li className={'navigation-item'}>
+                <NavLink 
+                    to='/orders'
+                    exact
+                    activeClassName={'active'}
+                >Orders</NavLink>
+            </li>: null}
 
-            <NavigationItem link={isAuthenticated ? '/logout' : '/auth'} >
-                {isAuthenticated ? 'Logout': 'Login'}
-            </NavigationItem>
+            
+            <li className={'navigation-item'}>
+                <NavLink 
+                    to={isAuthenticated?'/logout' : '/auth'}
+                    exact
+                    activeClassName={'active'}
+                >{isAuthenticated? 'Logout': 'Login'}</NavLink>
+            </li>
+
         </ul>
+
+
+
     )
 }
 
