@@ -2,12 +2,17 @@
 //breakpoints
 $nav-breakpoint: 30.2em;
 
-//colors
+//theme
 $primary-dark: #581c0c;
 $primary-light: #ca5116;
 $secondary-dark: #f9b384;
 $secondary-light: #f1e3cb;
 
-
+//button colors
 $button-success: green;
-$button-failed: crimson;
+$button-danger: crimson;
+
+
+//button shadow
+$button-shadow-inactive: lightgray;
+$button-shadow-active: darken($button-shadow-inactive,50%)

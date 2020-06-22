@@ -1,20 +1,22 @@
-   .Spinner {
+   .spinner {
     display: block;
     position: relative;
     margin: auto;
-    width: 8rem;
-    height: 8rem;
+    width: 10rem;
+    height: 10rem;
   }
-  .Spinner div {
+  .spinner div {
     position: absolute;
     border: .4rem solid burlywood;
     opacity: 1;
     border-radius: 50%;
     animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
   }
-  .Spinner div:nth-child(2) {
+  .spinner div:nth-child(2) {
     animation-delay: -0.5s;
   }
+
+  
   @keyframes lds-ripple {
     0% {
       top: 3.6rem;

@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import Button from '../Button/Button';
-import Spinner from '../Spinner/Spinner';
+import Button from '../../recycle/Button/Button';
+import Spinner from '../../recycle/Spinner/Spinner';
 import Input from '../Input/Input';
 import classes from './ContactData.module.css';
 import axios from '../../axios/orders';

@@ -1,0 +1,37 @@
+@import '../../assets/styles/variables.scss';
+
+.button {
+    border: none;
+    width: 8rem;
+    box-shadow: .4rem .4rem .8rem $button-shadow-inactive;
+    color: white;
+    outline: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    font: inherit;
+    padding: 1rem;
+    font-weight: bold;
+
+    &:active{
+        box-shadow: .2rem .2rem .4rem $button-shadow-active;
+    }
+
+    &:first-of-type{
+        margin-left: 0;
+    }
+
+    &:disabled{
+        color: gray;
+        background-color: rgb(187, 180, 180);
+    }
+
+    &--success{
+        @extend .button;
+        background-color: $button-success;
+    }
+
+    &--failed{
+        @extend .button;
+        background-color: $button-danger;
+    }
+}

@@ -5,7 +5,7 @@ import axios from '../../axios/orders';
 import BuildControls from '../../containers/BuildControls/BuildControls';
 import Modal from '../../containers/Modal/Modal';
 import OrderSummary from '../../containers/OrderSummary/OrderSummary';
-import Spinner from '../../containers/Spinner/Spinner';
+import Spinner from '../../recycle/Spinner/Spinner';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';

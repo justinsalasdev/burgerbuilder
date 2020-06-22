@@ -1,6 +1,6 @@
 import React from 'react';
 import './ordersummary.scss'
-import Button from '../Button/Button';
+import '../../recycle/Button/button.scss'
 
 
 const OrderSummary = props => {
@@ -18,9 +18,9 @@ const OrderSummary = props => {
 
         const continueButton = function(isAuthenticated, continueHandler, loginHandler){
             if(isAuthenticated){
-                return <Button btnType="Success" clicked={continueHandler}>Continue</Button>
+                return <button className='button--success ordersummary__button' onClick={continueHandler}>Continue</button>
             }else{
-                return <Button btnType="Success" clicked={loginHandler}>Login</Button>
+                return <button className='button--success ordersummary__button' onClick={loginHandler}>Login</button>
             }
         }
 
@@ -33,7 +33,7 @@ const OrderSummary = props => {
                 </ul>
                 <p className={'ordersummary__info'}><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
                 {props.isAuthenticated?null : <p className={"ordersummary__info"}>Please login in to continue</p>}
-                <Button btnType="Danger" clicked={props.cancelOrder}>Cancel</Button>
+                <button type='button' className='button--failed ordersummary__button' onClick={props.cancelOrder}>Cancel</button>
                 {continueButton(props.isAuthenticated,props.continueOrder,props.loginHandler)}
                 {/* <Button btnType="Success" clicked={props.continueOrder}>Continue</Button> */}
             </div>

@@ -4,7 +4,7 @@ import axios from '../../axios/orders';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../../recycle/Spinner/Spinner';
 
 
 const Orders = props => {

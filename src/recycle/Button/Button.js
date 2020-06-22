@@ -4,7 +4,7 @@ import './button.scss'
 const Button = (props) => {
     return(
         <button
-            className={`Button ${props.btnType}`}
+            className={`button ${props.btnType}`}
             onClick={props.clicked}
             type={props.type}
             disabled={props.disabled}

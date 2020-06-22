@@ -1,6 +1,6 @@
 import React from 'react';
 import Burger from '../Burger/Burger'; 
-import Button from '../Button/Button';
+import Button from '../../recycle/Button/Button';
 import './checkout-summary.scss'
 
 const checkoutSummary = (props) => {

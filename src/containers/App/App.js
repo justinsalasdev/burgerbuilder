@@ -2,11 +2,11 @@ import React, {useEffect, Suspense, useCallback} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Logout from '../Logout/Logout';
-import Login from '../Login/Login';
+import Login from '../../experimental/Login/Login';
 import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../../recycle/Spinner/Spinner'
 
 const Checkout = React.lazy(() => {return import ('../Checkout/Checkout')})
 const Orders = React.lazy(() => {return import ('../Orders/Orders')})
