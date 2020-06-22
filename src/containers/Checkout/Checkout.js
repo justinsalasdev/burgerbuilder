@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
+import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
 import {Route, Redirect} from 'react-router-dom';
 import ContactData from '../ContactData/ContactData';
 import {useDispatch,useSelector} from 'react-redux';

@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import Button from '../../components/Button/Button';
-import Spinner from '../../components/Spinner/Spinner';
-import Input from '../../components/Input/Input';
+import Button from '../Button/Button';
+import Spinner from '../Spinner/Spinner';
+import Input from '../Input/Input';
 import classes from './ContactData.module.css';
 import axios from '../../axios/orders';
 import {connect} from 'react-redux';

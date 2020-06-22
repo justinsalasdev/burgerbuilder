@@ -1,6 +1,6 @@
 import React from 'react';
 import './modal.scss'
-import Wrapper from '../../containers/Wrapper/Wrapper';
+import Wrapper from '../Wrapper/Wrapper';
 import Backdrop from '../Backdrop/Backdrop';
 
 

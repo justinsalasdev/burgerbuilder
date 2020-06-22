@@ -1,10 +1,10 @@
 import React, {useEffect, useCallback} from 'react';
-import Order from '../../components/Order/Order';
+import Order from '../Order/Order';
 import axios from '../../axios/orders';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 
 
 const Orders = props => {

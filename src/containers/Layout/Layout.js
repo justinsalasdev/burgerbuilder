@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './layout.scss';
-import Toolbar from '../../components/Toolbar/Toolbar'; 
-import SideDrawer from '../../components/SideDrawer/SideDrawer';
+import Toolbar from '../Toolbar/Toolbar'; 
+import SideDrawer from '../SideDrawer/SideDrawer';
 import {useSelector} from 'react-redux';
 
 const Layout = props => {

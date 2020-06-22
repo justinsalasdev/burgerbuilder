@@ -6,7 +6,7 @@ import Login from '../Login/Login';
 import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
-import Spinner from '../../components/Spinner/Spinner'
+import Spinner from '../Spinner/Spinner'
 
 const Checkout = React.lazy(() => {return import ('../Checkout/Checkout')})
 const Orders = React.lazy(() => {return import ('../Orders/Orders')})

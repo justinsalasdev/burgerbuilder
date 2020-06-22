@@ -1,11 +1,11 @@
 import React, { Component} from 'react';
-import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 import classes from './Auth.module.css';
-import * as actions from '../../store/actions/exports';
+import * as actions from '../../store/actions/exports'
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 
 
 class Auth extends Component{

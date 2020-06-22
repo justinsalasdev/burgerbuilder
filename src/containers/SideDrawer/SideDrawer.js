@@ -3,7 +3,7 @@ import './sidedrawer.scss';
 
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../Backdrop/Backdrop';
-import Wrapper from '../../containers/Wrapper/Wrapper';
+import Wrapper from '../Wrapper/Wrapper';
 
 const sideDrawer = (props ) => {
     return(
