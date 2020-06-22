@@ -1,12 +1,14 @@
+@import '../../assets/styles/variables.scss';
+
 .logo{
     background-image: url('../../assets/icons/burger-logo.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 90%;
+    background-size: 100%;
     width: 5rem;    
     height: 100%;
    
-    @media screen and (max-width: 30.2em) {
+    @media screen and (max-width: $nav-breakpoint) {
         display: none;
     }
 }

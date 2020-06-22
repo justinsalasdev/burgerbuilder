@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .drawertoggle {
     width: 4rem;
     height: 100%;
@@ -9,7 +11,7 @@
     box-sizing: border-box;
     cursor: pointer;
 
-    @media (min-width: 30.2em) {
+    @media (min-width: $nav-breakpoint) {
         display: none;
     }
 

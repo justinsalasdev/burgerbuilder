@@ -8,6 +8,7 @@ import {useSelector} from 'react-redux';
 const NavigationItems = (props) =>{
     const isAuthenticated = useSelector(state => state.authenticate.token !== null)
     let navClass = props.side? 'navigation-items navigation-items--side': 'navigation-items';
+
     
     return(
         <ul className={navClass}  onClick={props.sideDrawerClose}>
@@ -32,7 +33,7 @@ const NavigationItems = (props) =>{
             
             <li className={'navigation-item'}>
                 <NavLink 
-                    to={isAuthenticated?'/logout' : '/auth'}
+                    to={isAuthenticated?'/logout' : '/login'}
                     exact
                     activeClassName={'active'}
                 >{isAuthenticated? 'Logout': 'Login'}</NavLink>

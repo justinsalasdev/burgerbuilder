@@ -1,10 +1,12 @@
+@import '../../assets/styles/variables.scss';
+
 .toolbar{
     height: 5.6rem;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: var(--primary-dark);
+    background-color: $primary-dark;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,7 +16,7 @@
     &__nav{
         height: 100%;
         
-        @media screen and (max-width: 30.2em) {
+        @media screen and (max-width: $nav-breakpoint) {
             display: none;
         }
     }

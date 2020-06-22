@@ -2,6 +2,7 @@ import React, {useEffect, Suspense, useCallback} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Logout from '../Logout/Logout';
+import Login from '../Login/Login';
 import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
@@ -26,8 +27,8 @@ const App = props => {
     if(isAuthenticated){
       return (
           <>
-            <Route path="/checkout" component={Checkout}/>
-            <Route path="/orders" component={Orders}/>
+            <Suspense fallback={<Spinner/>}><Route path="/checkout" component={Checkout}/></Suspense>
+            <Suspense fallback={<Spinner/>}><Route path="/orders" component={Orders}/></Suspense>
             <Route path="/logout" component={Logout}/>
             <Route path="/" exact component={BurgerBuilder}/>
             <Redirect to ="/" />
@@ -36,7 +37,9 @@ const App = props => {
     } else {
       return (
         <>
-          <Route path="/auth" component={Auth} />
+          <Suspense fallback={<Spinner/>}><Route path="/auth" component={Auth} /></Suspense>
+          <Route path="/login" component={Login} />
+          {/* <Route path="/auth" component={Auth} /> */}
           <Route path="/" exact component={BurgerBuilder}/>
           <Redirect to = "/"/>
         </>
@@ -47,9 +50,7 @@ const App = props => {
   return(
     <Layout>
       <Switch>
-        <Suspense fallback={<Spinner/>}>
           {routes(isAuthenticated)}
-        </Suspense>
       </Switch>
     </Layout>
   )
