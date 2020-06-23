@@ -1,8 +1,8 @@
 import React from 'react';
-import classes from './Burger.module.css';
-import BurgerIngredient from '../BurgerIngredients/BurgerIngredients';
+import './burger.scss';
+import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 
-const burgerClasses = [classes.Burger, classes.burgerScroll];
+
 const burger = (props) =>{
     let transformedIngredients = Object.keys(props.ingredients)
     .map(igKey => {
@@ -15,12 +15,12 @@ const burger = (props) =>{
     },[]);
 
     if (transformedIngredients.length === 0){
-        transformedIngredients = <p className={classes.burgerP}>Feel free to add ingredients</p>
+        transformedIngredients = <p className='burger__instruction'>FEEL FREE TO ADD INGREDIENTS</p>
     }
 
     return(
         
-        <div className={burgerClasses.join(' ')}>
+        <div className='burger burger__scroll'>
             <BurgerIngredient type="bread-top"/>
             {transformedIngredients}
             <BurgerIngredient type="bread-bottom"/>

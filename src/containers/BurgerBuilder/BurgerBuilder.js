@@ -1,5 +1,4 @@
 import React, {useEffect,useCallback} from 'react';
-import Wrapper from '../Wrapper/Wrapper';
 import Burger from '../../containers/Burger/Burger';
 import axios from '../../axios/orders';
 import BuildControls from '../../containers/BuildControls/BuildControls';
@@ -52,7 +51,7 @@ const BurgerBuilder = props => {
     let burger = error ? <p>Ingredients can't be loaded :(</p> : <Spinner/>
     if(ings){
         burger = (
-            <Wrapper>
+            <>
                 <Burger ingredients={ings}/>
                 <BuildControls
                     ingredientAdded={onIngredientAdded}
@@ -61,7 +60,8 @@ const BurgerBuilder = props => {
                     price={price}
                     ordered={handlePurchase}
                 />
-            </Wrapper>
+                
+            </>
         )
 
         orderSummary = (
@@ -77,14 +77,14 @@ const BurgerBuilder = props => {
     }
 
     return (
-        <Wrapper>
+        <>
             <Modal show={ordered} modalClosed={handleCancelPurchase}>
                 {orderSummary}
             </Modal>
 
             {burger}
             
-        </Wrapper>
+        </>
     );
 
 

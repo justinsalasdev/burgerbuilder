@@ -1,13 +1,13 @@
 import React from 'react';
-import classes from './BuildControl.module.css';
+import '../../recycle/Button/button.scss'
+import './build-control.scss';
 
 const control = (props) => {
     return(
-        <div className = {classes.BuildControl}>
-            <div className={classes.Label}>{props.label}</div>
-
+        <div className ='build-control'>
+            <div className='build-control__label'>{props.label}</div>
             <button 
-                className={classes.Less} 
+                className='button--less build-control__button' 
                 onClick={props.removed}
                 disabled={props.disabled}
             >
@@ -15,7 +15,7 @@ const control = (props) => {
             </button>
 
             <button 
-                className={classes.More} 
+                className='button--more build-control__button'
                 onClick={props.added}
             >
             More

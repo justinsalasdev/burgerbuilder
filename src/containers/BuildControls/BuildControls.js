@@ -1,5 +1,6 @@
 import React from 'react';
-import classes from './BuildControls.module.css';
+import '../../recycle/Button/button.scss';
+import './build-controls.scss';
 import BuildControl from '../BuildControl/BuildControl';
 
 const controls = [
@@ -8,7 +9,6 @@ const controls = [
     {label: 'Cheese', type: 'cheese'},
     {label: 'Meat', type: 'meat'}
 ];
-
 
 const buildControls = (props) => {
 
@@ -19,13 +19,9 @@ const buildControls = (props) => {
         return (overallStatus || currentButtonStatus)
     },false))
 
-
-
-    
-
     return (
-        <div className={classes.BuildControls}>
-            <p>Current price: <strong>${props.price.toFixed(2)}</strong></p>
+        <div className='build-controls'>
+            <p className='build-controls__price'>Current price: <span>${props.price.toFixed(2)}</span></p>
             {controls.map(control => {
                 return (
                 <BuildControl 
@@ -40,9 +36,9 @@ const buildControls = (props) => {
             
             
             <button 
-                className={classes.OrderButton} 
+                className='button--success build-controls__order'
                 disabled={orderStatus} 
-                onClick={props.ordered}>ORDER NOW</button>
+                onClick={props.ordered}>Order now!</button>
 
         </div>
     )

@@ -1,13 +1,12 @@
 @import '../../assets/styles/variables.scss';
 
 .drawertoggle {
-    width: 4rem;
-    height: 100%;
+    width: 5rem;
+    height: 5rem;
     display: flex;
     flex-flow: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    padding: 1rem 0;
     box-sizing: border-box;
     cursor: pointer;
 
@@ -17,8 +16,9 @@
 
     &__bar{
         border-radius: 2rem;
+        margin-bottom: .5rem;
         width: 90%;
         height: .5rem;
-        background-color: white;
+        background-color: whitesmoke;
     }
 }

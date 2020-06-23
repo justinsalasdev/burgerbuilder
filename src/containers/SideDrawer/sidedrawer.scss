@@ -1,14 +1,14 @@
 @import '../../assets/styles/variables.scss';
 
 .sidedrawer{
-    position: fixed;
+    position: absolute;
     width: 28rem;
     max-width: 70%;
     height: 100%;
     left: 0;
     top: 0;
-    z-index: 200;
-    background-color: #fff;
+    z-index: $side-drawer-index;
+    background-color: whitesmoke;
     padding: 3.2rem 1.6rem;
     transition: transform .3s cubic-bezier(.42,1,.13,.97);
 

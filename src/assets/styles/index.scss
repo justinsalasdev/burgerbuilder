@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 /* balsamiq-sans-regular - latin */
 @font-face {
   font-family: 'Balsamiq Sans';
@@ -58,6 +60,7 @@ html{
 
 
 body {
+  display: grid;
   font-size: 1.8rem;
   min-height: 100%;
   box-sizing: border-box;
@@ -66,7 +69,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
+
 }
+
+#root{
+  display: grid;
+  background-image: linear-gradient(45deg, #184d47, #96bb7c)
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

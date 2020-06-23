@@ -1,27 +1,54 @@
+@import '../../assets/styles/variables.scss';
+
+//adjustment for webkit autofilling
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  border-bottom: 3px double rgba(whitesmoke, .5);
+  -webkit-text-fill-color: whitesmoke;
+  box-shadow: none;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .form-input{
     padding: 1rem;
     text-align: left;
     
 
     &__label{
-        font-size: 1.5rem;
+        font-size: 1.7rem;
         display: block;
-        margin-bottom: .5rem;   
+        color: whitesmoke;
     }
 
     &__field{
+        color: whitesmoke;
+        border: none;
+        border-bottom: 3px double rgba(whitesmoke, .5);
+        background-color: transparent;
         outline: none;
         width: 100%;
-        padding: 1rem;
+        padding: .5rem;
         padding-left: .5rem;
+        font-family: inherit;
+        font-size: 1.7rem;
+        margin-bottom: 2rem;
 
-        &:focus{
-            outline: 1px solid green;
+        &:focus, &:active {
+            border-bottom: 3px double white;
         }
     }
 
     &__toolkit{
         font-size: 1.5rem;
-        color:red;
+        color: lighten($danger, 25%)
     }
 }

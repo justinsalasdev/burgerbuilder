@@ -7,11 +7,11 @@ import {useSelector} from 'react-redux';
 
 const NavigationItems = (props) =>{
     const isAuthenticated = useSelector(state => state.authenticate.token !== null)
-    let navClass = props.side? 'navigation-items navigation-items--side': 'navigation-items';
+    // let navClass = props.side? 'navigation-items navigation-items--side': 'navigation-items';
 
     
     return(
-        <ul className={navClass}  onClick={props.sideDrawerClose}>
+        <ul className='navigation-items'  onClick={props.sideDrawerClose}>
             
             <li className={'navigation-item'}>
                 <NavLink 

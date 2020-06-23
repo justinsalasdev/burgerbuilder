@@ -1,12 +1,14 @@
+@import '../../assets/styles/variables.scss';
+
 .modal {
-    position: fixed;
-    z-index: 500;
+    position: absolute;
+    z-index: $modal-index;
     background-color: whitesmoke;
+    box-shadow: $shadow-inactive;
     width: 70%;
     padding: 1.6rem;
     left: 15%;
     top: 30%;
-    box-sizing: border-box;
 
     transform: translateY(-100vh);
     opacity: 0;

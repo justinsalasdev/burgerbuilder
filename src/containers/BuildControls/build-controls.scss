@@ -1,0 +1,25 @@
+@import '../../assets/styles/variables.scss';
+
+.build-controls{
+    width: 35rem;
+    // background: linear-gradient(20deg, rgba($primary-dark,0.9), rgba($primary-light,0.9)),
+    //     url('../../assets/images/wood2.jpg') center/cover no-repeat;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 1rem 0;
+
+    &__price {
+        color: whitesmoke;
+        & > span {
+            font-weight : 700;
+        }
+    }
+
+    &__order{
+        margin: 1rem;
+    }
+
+
+}
+

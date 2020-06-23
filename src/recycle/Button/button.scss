@@ -1,19 +1,29 @@
 @import '../../assets/styles/variables.scss';
+@import '../../assets/styles/animations.scss';
+
+@mixin modify-button($color){
+    @extend .button;
+    background-color: $color;
+    color: darken($color, 40%);
+    &:focus{
+        outline: darken($color, 50%)
+    }
+}
 
 .button {
     border: none;
-    width: 8rem;
-    box-shadow: .4rem .4rem .8rem $button-shadow-inactive;
-    color: white;
+    min-width: 8rem;
+    box-shadow: .2rem .2rem .4rem $shadow-inactive;
     outline: none;
     border-radius: .5rem;
     cursor: pointer;
-    font: inherit;
-    padding: 1rem;
-    font-weight: bold;
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: .8rem 1rem;
 
     &:active{
-        box-shadow: .2rem .2rem .4rem $button-shadow-active;
+        box-shadow: .1rem .1rem .2rem $shadow-active;
+        transform: translateY(.1rem);
     }
 
     &:first-of-type{
@@ -21,17 +31,30 @@
     }
 
     &:disabled{
-        color: gray;
-        background-color: rgb(187, 180, 180);
+        color: darken($disabled,40%);
+        background-color: $disabled;
     }
 
+    &:not(:disabled) {
+        animation: enable-button 0.3s linear;
+     }
+
+
     &--success{
-        @extend .button;
-        background-color: $button-success;
+        @include modify-button($success);
     }
 
     &--failed{
-        @extend .button;
-        background-color: $button-danger;
+        @include modify-button($danger);
     }
+
+    &--more{
+        @include modify-button($more);
+    }
+
+    &--less{
+        @include modify-button($less);
+    }
+
 }
+

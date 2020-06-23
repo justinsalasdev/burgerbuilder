@@ -1,18 +1,26 @@
 
 //breakpoints
 $nav-breakpoint: 30.2em;
+$app-breakpoint: 55em;
 
-//theme
+//colors
 $primary-dark: #581c0c;
 $primary-light: #ca5116;
 $secondary-dark: #f9b384;
 $secondary-light: #f1e3cb;
 
-//button colors
-$button-success: green;
-$button-danger: crimson;
+$success: #79d70f;
+$danger: #d92027;
+$more: #ffcd3c;
+$less: $secondary-dark;
+$disabled: #d4cdcd;
 
 
 //button shadow
-$button-shadow-inactive: lightgray;
-$button-shadow-active: darken($button-shadow-inactive,50%)
+$shadow-inactive: rgba(#211717,0.2);
+$shadow-active: rgba(#211717,0.4);
+
+
+//z-index
+$modal-index: 500;
+$side-drawer-index: 200;

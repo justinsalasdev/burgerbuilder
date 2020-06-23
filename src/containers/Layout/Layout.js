@@ -17,7 +17,7 @@ const Layout = props => {
     }
 
     return(
-        <>
+        <div className="app">
             <Toolbar 
                 drawerToggleClicked={toggleSideDrawer}
                 isAuthenticated={isAuthenticated}/>
@@ -25,10 +25,10 @@ const Layout = props => {
                 isAuthenticated={isAuthenticated}
                 open={sideDrawerShown} 
                 closed={closeSideDrawer}/>
-            <main className={'main'}>
+            <main className='main'>
                 {props.children}
             </main>
-        </>
+        </div>
 
     )
 

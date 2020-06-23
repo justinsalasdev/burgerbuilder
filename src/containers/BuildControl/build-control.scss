@@ -1,0 +1,24 @@
+.build-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    
+
+    &__label {
+        color: whitesmoke;
+        padding: 1rem;
+        font-weight: bold;
+        width: 8rem;
+    }
+
+    &__button {
+        &:first-of-type{
+            margin-right: 1rem;
+        }
+    }
+}
+
+
+
+
