@@ -42,7 +42,11 @@ select:-webkit-autofill:focus {
         font-size: 1.7rem;
         margin-bottom: 2rem;
 
-        &:focus, &:active {
+        &--invalid{
+            border-bottom: 3px double lighten($danger, 15%);
+        }
+
+        &:focus{
             border-bottom: 3px double white;
         }
     }

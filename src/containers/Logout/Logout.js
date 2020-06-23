@@ -7,8 +7,6 @@ const Logout = props => {
     const dispatch = useDispatch();
     const onLogout = useCallback(() => dispatch(actions.logout()),[dispatch])
 
-    
-
     useEffect(() => {
         onLogout()
     },[onLogout])

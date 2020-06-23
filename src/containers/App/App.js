@@ -1,8 +1,8 @@
-import React, {useEffect, Suspense, useCallback} from 'react';
+import React, {Suspense} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Logout from '../Logout/Logout';
-import Login from '../../experimental/Login/Login';
+// import Login from '../../experimental/Login/Login';
 import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
@@ -10,18 +10,16 @@ import Spinner from '../../recycle/Spinner/Spinner'
 
 const Checkout = React.lazy(() => {return import ('../Checkout/Checkout')})
 const Orders = React.lazy(() => {return import ('../Orders/Orders')})
-const Auth = React.lazy(() => {return import ('../Auth/Auth')})
+const Login = React.lazy(() => {return import ('../Login/Login')})
 
 
 const App = props => {
-
   const dispatch = useDispatch();
-  const onPageLoadSignUp = useCallback(() => dispatch(actions.checkAuth()),[dispatch])
-  const isAuthenticated = useSelector(state => state.authenticate.token !== null)
+  const token = useSelector(state => state.authenticate.token)
+  dispatch(actions.checkAuth(token))
 
-  useEffect(() => {
-    onPageLoadSignUp();
-  },[onPageLoadSignUp])
+  const isAuthenticated = token !== null;
+
 
   const routes = function (isAuthenticated){
     if(isAuthenticated){
@@ -37,11 +35,10 @@ const App = props => {
     } else {
       return (
         <>
-          <Suspense fallback={<Spinner/>}><Route path="/auth" component={Auth} /></Suspense>
-          <Route path="/login" component={Login} />
+          <Suspense fallback={<Spinner/>}><Route path="/login" component={Login} /></Suspense>
           {/* <Route path="/auth" component={Auth} /> */}
           <Route path="/" exact component={BurgerBuilder}/>
-          <Redirect to = "/login"/>
+          <Redirect to = "/"/>
         </>
       )
     }

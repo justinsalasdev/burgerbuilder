@@ -76,7 +76,7 @@ body {
 
 #root{
   display: grid;
-  background-image: linear-gradient(45deg, #184d47, #96bb7c)
+  background-image: linear-gradient(45deg, $root-dark, $root-light)
 }
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect,useCallback} from 'react';
+import React, {useEffect} from 'react';
 import Burger from '../../containers/Burger/Burger';
 import axios from '../../axios/orders';
 import BuildControls from '../../containers/BuildControls/BuildControls';
@@ -13,7 +13,7 @@ const BurgerBuilder = props => {
 
     const dispatch = useDispatch();
     // eslint-disable-next-line
-    const onInitIngredients = useCallback(() => dispatch(actions.initIngredients()),[])
+    
     const onIngredientAdded = (ingName) => dispatch(actions.addIngredient(ingName))
     const onIngredientRemoved = (ingName) => dispatch(actions.removeIngredient(ingName))
     const onInitOrder = () => dispatch(actions.initOrder())
@@ -27,8 +27,8 @@ const BurgerBuilder = props => {
     const isAuthenticated = useSelector(state => state.authenticate.token !== null)
 
     useEffect(() => {
-        onInitIngredients()
-    },[onInitIngredients])
+        dispatch(actions.initIngredients())
+    },[dispatch])
 
     const handlePurchase = () => {onInitOrder()}
     const handleCancelPurchase = () => {onCanceledOrder()}
@@ -37,7 +37,7 @@ const BurgerBuilder = props => {
         props.history.replace('/checkout')
     }
 
-    const handlePurchaseLogin = () => {props.history.replace('/auth')}
+    const handlePurchaseLogin = () => {props.history.replace('/login')}
 
     const disabledInfo = {
         ...ings

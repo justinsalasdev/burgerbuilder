@@ -7,6 +7,7 @@
     align-items: center;
     text-align: center;
     height: 100%;
+
     
     @media screen and (max-width: $nav-breakpoint){
         flex-direction: column;
@@ -18,7 +19,9 @@
 }
 
 .navigation-item{
-    margin: 0 1rem;
+    // margin: 0 1rem;
+    
+    
 
     &>a{
         display: block;
@@ -26,7 +29,13 @@
         padding: 1rem;
         font-weight: 700;
         text-decoration: none;
-        color: white;
+        color: lighten($more,10%);
+
+
+        &:hover{
+            transform: translateY(-.2rem);
+        }
+
     
         &.active{
             background-color: rgba($secondary-dark, 0.9);
