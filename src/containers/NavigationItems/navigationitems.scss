@@ -32,9 +32,13 @@
         color: lighten($more,10%);
 
 
-        &:hover{
-            transform: translateY(-.2rem);
+        &:not(.active):hover{
+            border: 1px solid rgba($secondary-dark, 0.8)
         }
+
+        // &:hover{
+        //     transform: translateY(-.2rem);
+        // }
 
     
         &.active{
