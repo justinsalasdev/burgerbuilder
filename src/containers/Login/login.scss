@@ -2,7 +2,6 @@
 
 .login{
     position: relative;
-    margin: 2rem auto;
     width: 60%;
     max-width: 50rem;
     text-align: center;
@@ -17,6 +16,10 @@
     &__error{
         margin-bottom: 1rem;
         color: lighten($danger,30%)
+    }
+
+    &__submit{
+        margin-bottom: 2rem;
     }
 
     @media screen and (max-width: $form-input-breakpoint){

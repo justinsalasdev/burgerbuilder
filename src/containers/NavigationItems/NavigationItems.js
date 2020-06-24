@@ -1,5 +1,6 @@
 import React  from 'react';
 import './navigationitems.scss'
+import '../../recycle/Link/link.scss'
 import {NavLink} from 'react-router-dom';
 // import NavigationItem from '../NavigationItem/NavigationItem';
 import {useSelector} from 'react-redux';
@@ -16,6 +17,7 @@ const NavigationItems = (props) =>{
                 <NavLink 
                     to='/'
                     exact
+                    className='link--nav'
                     activeClassName={'active'}
                 >Burger Builder</NavLink>
             </li>
@@ -25,6 +27,7 @@ const NavigationItems = (props) =>{
                 <NavLink 
                     to='/orders'
                     exact
+                    className='link--nav'
                     activeClassName={'active'}
                 >Orders</NavLink>
             </li>: null}
@@ -33,6 +36,7 @@ const NavigationItems = (props) =>{
                 <NavLink 
                     to={isAuthenticated?'/logout' : '/login'}
                     exact
+                    className='link--nav'
                     activeClassName={'active'}
                 >{isAuthenticated? 'Logout': 'Login'}</NavLink>
             </li>

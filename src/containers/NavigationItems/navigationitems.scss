@@ -18,39 +18,35 @@
 
 }
 
-.navigation-item{
-    // margin: 0 1rem;
+// .navigation-item{
+//     // margin: 0 1rem;
     
     
 
-    &>a{
-        display: block;
-        min-width: 15rem;
-        padding: 1rem;
-        font-weight: 700;
-        text-decoration: none;
-        color: lighten($more,10%);
+//     &>a{
+//         display: block;
+//         min-width: 15rem;
+//         padding: 1rem;
+//         font-weight: 700;
+//         text-decoration: none;
+//         color: lighten($more,10%);
 
 
-        &:not(.active):hover{
-            border: 1px solid rgba($secondary-dark, 0.8)
-        }
-
-        // &:hover{
-        //     transform: translateY(-.2rem);
-        // }
+//         &:not(.active):hover{
+//             border: 1px solid rgba($secondary-dark, 0.8)
+//         }
 
     
-        &.active{
-            background-color: rgba($secondary-dark, 0.9);
-            color: $primary-dark;
-        }
+//         &.active{
+//             background-color: rgba($secondary-dark, 0.9);
+//             color: $primary-dark;
+//         }
 
-        @media screen and (max-width: $nav-breakpoint){
-            color: $primary-dark;
-        }
-    }
+//         @media screen and (max-width: $nav-breakpoint){
+//             color: $primary-dark;
+//         }
+//     }
 
-}
+// }
 
 

@@ -1,0 +1,41 @@
+
+@import '../../assets/styles/variables.scss';
+
+.link{
+    display: block;
+    min-width: 15rem;
+    padding: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: lighten($more,10%);
+
+    &:not(.active){
+        text-shadow: .4rem .4rem .8rem $shadow-active;
+    }
+
+    &:not(.active):active{
+        transform: translateY(.15rem);
+    }
+
+    &--nav{
+        @extend .link;
+        &:not(.active):hover{
+            border: 1px solid rgba($secondary-dark, 0.8);
+        }
+
+        &.active{
+            background-color: rgba($secondary-dark, 0.9);
+            color: $primary-dark;
+        }
+    
+        @media screen and (max-width: $nav-breakpoint){
+            color: $primary-dark;
+        }
+    }
+
+    &--to{
+        @extend .link;
+        color: darken($more,5%);
+        text-shadow: .4rem .4rem .8rem $shadow-inactive;
+    }
+}

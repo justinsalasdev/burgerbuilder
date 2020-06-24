@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports';
 import './login.scss';
@@ -79,6 +80,7 @@ const Login = props => {
           </div>
          
         <button disabled={!formErrors <= 0} type="submit" className="button--success login__submit">Submit</button>
+        <Link className='link--to' to="/signup">Create account</Link>
       </form>}
 
     </div>
