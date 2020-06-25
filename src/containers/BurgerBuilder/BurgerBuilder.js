@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Burger from '../../containers/Burger/Burger';
 import axios from '../../axios/orders';
 import BuildControls from '../../containers/BuildControls/BuildControls';
-import Modal from '../../containers/Modal/Modal';
+import Modal from '../../recycle/Modal/Modal';
 import OrderSummary from '../../containers/OrderSummary/OrderSummary';
 import Spinner from '../../recycle/Spinner/Spinner';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';

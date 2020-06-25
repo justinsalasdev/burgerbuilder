@@ -1,6 +1,6 @@
 import React from 'react';
 import './modal.scss'
-import Backdrop from '../Backdrop/Backdrop';
+import Backdrop from '../../containers/Backdrop/Backdrop';
 
 
 const Modal = props => {

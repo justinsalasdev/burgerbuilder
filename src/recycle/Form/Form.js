@@ -8,7 +8,6 @@ import '../../recycle/FormInput/form-input.scss';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import Spinner from '../../recycle/Spinner/Spinner';
-import FormInput from '../../recycle/FormInput/FormInput';
 
 const Login = props => {
   const dispatch = useDispatch();
@@ -38,7 +37,15 @@ const Login = props => {
     }
   });
 
-  const getFormToolkit = (loading,error) => {
+  const inputError = name =>{
+    if(formik.touched[name] && formik.errors[name]){
+      return {errorMessage: <span className='form-input__toolkit'>{formik.errors[name]}</span>, errorClass: ' form-input__field--invalid'}
+    } else {
+      return {errorMessage: null, errorClass:''}
+    }
+  }
+
+  const formToolkit = (loading,error) => {
     if(loading){
       return <p className='login__loading'>Logging you in...</p>
     } else if(error){
@@ -47,20 +54,31 @@ const Login = props => {
       return null;
     }
   }
-
-
-  const formToolkit = getFormToolkit(loading,error);
+     
   const formErrors = Object.keys(formik.errors).length;
 
   return (
     <div className='login'>
-      {formToolkit}
+
+      {formToolkit(loading,error)}
 
       {loading? <Spinner/>: <form className='login__form' onSubmit={formik.handleSubmit}>
+        
+          <div className='form-input'>
+            <label className='form-input__label' htmlFor="email">Email Address {inputError('email').errorMessage}</label>
+            <input 
+              className={`form-input__field${inputError('email').errorClass}`} 
+              name="email" {...formik.getFieldProps ('email')} 
+            />
+          </div>
 
-          <FormInput formik={formik} identity='email'>Email Address</FormInput>
-          <FormInput formik={formik} identity='password'>Password</FormInput>
-
+          <div className='form-input'>
+            <label className='form-input__label' htmlFor="email">Password {inputError('password').errorMessage}</label>
+            <input 
+              className={`form-input__field${inputError('password').errorClass}`} 
+              name="password" type="password" {...formik.getFieldProps ('password')} 
+            />
+          </div>
          
         <button disabled={!formErrors <= 0} type="submit" className="button--success login__submit">Submit</button>
         <Link className='link--to' to="/signup">Create account</Link>
