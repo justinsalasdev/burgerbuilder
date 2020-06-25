@@ -7,6 +7,7 @@ import React from 'react';
 const FormInput = props => {
 
     const{identity,
+        type,
         formik,
         children,
     } = props;
@@ -23,7 +24,7 @@ const FormInput = props => {
         <div className='form-input'>
             <label className='form-input__label' htmlFor={identity}>{children} {getInputError(identity).errorMessage}</label>
             <input 
-                type={identity}
+                type={type}
                 className={`form-input__field${getInputError(identity).errorClass}`} 
                 name={identity} {...formik.getFieldProps(identity)} 
             />
