@@ -13,7 +13,6 @@ export default httpClient => {
         })
 
         useEffect(() => {
-            //....
             return () => {
                 httpClient.interceptors.request.eject(reqInterceptor);
                 httpClient.interceptors.response.eject(resInterceptor);

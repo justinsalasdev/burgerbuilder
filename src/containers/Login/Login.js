@@ -1,43 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports';
 import './login.scss';
 import '../../recycle/Button/button.scss'
 import '../../recycle/FormInput/form-input.scss';
-import {useFormik} from 'formik';
-import * as Yup from 'yup';
 import Spinner from '../../recycle/Spinner/Spinner';
 import FormInput from '../../recycle/FormInput/FormInput';
+import useFormikSetter from '../../hooks/useFormikSetter';
 
 const Login = props => {
   const dispatch = useDispatch();
+  const submitHandler = useCallback((formikData) => dispatch(actions.login(formikData)),[dispatch]);
   const loading = useSelector(state => state.authenticate.loading);
   const error = useSelector(state => state.authenticate.error);
-  // const isAuthenticated = useSelector(state => state.authenticate.token !== null);
-  // Notice that we have to initialize ALL of fields with values. These
-  // could come from props, but since we don't want to prefill this form,
-  // we just use an empty string. If you don't do this, React will yell
-  // at you.
-  const formik = useFormik ({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: Yup.object ({
-      email: Yup.string ()
-        .email ('is invalid')
-        .required ('is required'),
-      password: Yup.string ()
-        .required ('is required')
-        .min (6, 'must be 6 characters atleast')
-    }),
 
-    onSubmit: loginData => {
-      dispatch(actions.login(loginData))
-    }
-  });
-
+  const formik = useFormikSetter(submitHandler)
+  
   const getFormToolkit = (loading,error) => {
     if(loading){
       return <p className='login__loading'>Logging you in...</p>
