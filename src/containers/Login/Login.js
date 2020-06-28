@@ -27,7 +27,6 @@ const Login = props => {
     }
   }
 
-
   const formToolkit = getFormToolkit(loading,error);
   const formErrors = Object.keys(formik.errors).length;
 
@@ -40,7 +39,6 @@ const Login = props => {
           <FormInput formik={formik} identity='email' type="email">Email Address</FormInput>
           <FormInput formik={formik} identity='password' type="password">Password</FormInput>
 
-         
         <button disabled={!formErrors <= 0} type="submit" className="button--success login__submit">Submit</button>
         <Link className='link--to' to="/signup">Create account</Link>
       </form>}
