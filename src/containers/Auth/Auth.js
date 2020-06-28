@@ -1,21 +1,40 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports';
-import './login.scss';
+import './auth.scss';
 import '../../recycle/Button/button.scss'
 import '../../recycle/FormInput/form-input.scss';
 import Spinner from '../../recycle/Spinner/Spinner';
 import FormInput from '../../recycle/FormInput/FormInput';
-import useFormikSetter from '../../hooks/useFormikSetter';
+
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
 const Login = props => {
+  const {isLogin} = props;
   const dispatch = useDispatch();
-  const submitHandler = useCallback((formikData) => dispatch(actions.login(formikData)),[dispatch]);
   const loading = useSelector(state => state.authenticate.loading);
   const error = useSelector(state => state.authenticate.error);
 
-  const formik = useFormikSetter(submitHandler)
+  const formik = useFormik ({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object ({
+      email: Yup.string ()
+        .email ('is invalid')
+        .required ('is required'),
+      password: Yup.string ()
+        .required ('is required')
+        .min (6, 'must be 6 characters atleast')
+    }),
+
+    onSubmit: authData => {
+      dispatch(actions.login(authData))
+    }
+  });
   
   const getFormToolkit = (loading,error) => {
     if(loading){
