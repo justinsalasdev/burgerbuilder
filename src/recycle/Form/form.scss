@@ -1,6 +1,6 @@
 @import '../../assets/styles/variables.scss';
 
-.login{
+.form{
     position: relative;
     width: 60%;
     max-width: 50rem;
@@ -11,7 +11,6 @@
 
     &__toolkit{
         margin-bottom: 3rem;
-        // color: $secondary-dark;
         font-size: 2rem;
     }
 

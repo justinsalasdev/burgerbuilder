@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import axios from '../../axios/orders';
+import database from '../../axios/database';
 
 
 
@@ -34,7 +34,7 @@ export const removeIngredient = (ingredient) => {
 
 export const initIngredients = () => {
     return dispatch  => (
-       axios.get('/ingredients.json')
+       database.get('/ingredients.json')
         .then(response => {
             dispatch(setIngredients(response.data))
         })

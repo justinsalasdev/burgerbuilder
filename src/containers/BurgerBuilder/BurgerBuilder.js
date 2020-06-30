@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Burger from '../../containers/Burger/Burger';
-import axios from '../../axios/orders';
+import database from '../../axios/database';
 import BuildControls from '../../containers/BuildControls/BuildControls';
 import Modal from '../../recycle/Modal/Modal';
 import OrderSummary from '../../containers/OrderSummary/OrderSummary';
@@ -28,7 +28,8 @@ const BurgerBuilder = props => {
 
     useEffect(() => {
         dispatch(actions.initIngredients())
-    },[dispatch])
+    // eslint-disable-next-line
+    },[])
 
     const handlePurchase = () => {onInitOrder()}
     const handleCancelPurchase = () => {onCanceledOrder()}
@@ -94,4 +95,4 @@ const BurgerBuilder = props => {
 
 
 
-export default withErrorHandler(BurgerBuilder,axios);
+export default withErrorHandler(BurgerBuilder,database);

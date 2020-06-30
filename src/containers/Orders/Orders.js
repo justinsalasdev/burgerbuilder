@@ -1,6 +1,6 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect} from 'react';
 import Order from '../Order/Order';
-import axios from '../../axios/orders';
+import database from '../../axios/database';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
@@ -14,13 +14,13 @@ const Orders = props => {
     const token = useSelector(state => state.login.token)
     const userId = useSelector(state => state.login.userId)
 
-    const dispatch = useDispatch()
-    const onFetchOrders = useCallback((token,userId) => dispatch(actions.fetchOrders(token,userId)),[dispatch])
-
+    const dispatch = useDispatch();
+ 
 
     useEffect(() => {
-        onFetchOrders(token,userId)
-    },[onFetchOrders,token,userId])
+        dispatch(actions.fetchOrders(token,userId))
+    // eslint-disable-next-line
+    },[token,userId])
 
     let ordersList = <Spinner/>;
             if (fetching){
@@ -42,4 +42,4 @@ const Orders = props => {
         )
 }
 
-export default withErrorHandler(Orders,axios);
+export default withErrorHandler(Orders,database);

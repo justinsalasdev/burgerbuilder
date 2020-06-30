@@ -11,6 +11,7 @@ import buildBurger from './store/reducers/buildBurger'
 import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
 import login from './store/reducers/login'
+import signup from './store/reducers/signup'
 import thunk from 'redux-thunk';
 
 //Basic redux setup
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   buildBurger: buildBurger,
   placeOrder: placeOrder,
   fetchOrders: fetchOrders,
-  login: login
+  login: login,
+  signup: signup
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(

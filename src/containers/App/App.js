@@ -7,11 +7,11 @@ import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
 import Spinner from '../../recycle/Spinner/Spinner'
-import Signup from '../Signup/Signup';
 
 const Checkout = React.lazy(() => import ('../Checkout/Checkout'))
 const Orders = React.lazy(() => import ('../Orders/Orders'))
 const Login = React.lazy(() => import ('../Login/Login'))
+const Signup = React.lazy(() => import ('../Signup/Signup'))
 
 
 const App = props => {

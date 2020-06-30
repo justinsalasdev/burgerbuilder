@@ -1,5 +1,6 @@
 import * as actions from './actions';
 import axios from 'axios';
+import database from '../../axios/database';
 
 const loginStart = () => {
     return {
@@ -19,7 +20,7 @@ const loginStore = (authData) => {
 const loginFail = (error) => {
     return {
         type: actions.LOGIN_FAIL,
-        error: error.response.data.error
+        error: error
     }
 }
 
@@ -31,6 +32,10 @@ const setLogoutTimer = (expiration) => {
         },expiration * 900)
     }
 }
+
+
+
+
 
 
 //exports
@@ -68,7 +73,7 @@ export const checkAuth = () => {
         }
     }
 
-export const login = (authData) =>{
+export const login = (loginData) =>{
     return dispatch => {
         dispatch(loginStart())
         
@@ -78,20 +83,30 @@ export const login = (authData) =>{
         //endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
  
       
-        axios.post(endPoint, {...authData,returnSecureToken: true})
+        axios.post(endPoint, {...loginData,returnSecureToken: true})
             .then(response => {
+                
                 const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
+
+
                 localStorage.setItem('token',response.data.idToken)
                 localStorage.setItem('expirationDate',expirationDate)
                 localStorage.setItem('userId',response.data.localId)
 
-                console.log(response.data);
 
                 dispatch(setLogoutTimer(response.data.expiresIn))
                 dispatch(loginStore(response.data))
+
+                const queryParams = `?orderBy="userId"&equalTo="${response.data.localId}"`
+                return database.get(`/users.json${queryParams}`)
+                
+            })
+            .then(response => {
+                console.log(response)
             })
             .catch(error => {
-                dispatch(loginFail(error))
+                console.log('error',error)
+                dispatch(loginFail(error.response.data.error))
             })
     }
 }

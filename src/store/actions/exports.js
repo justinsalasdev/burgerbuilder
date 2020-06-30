@@ -26,3 +26,10 @@ export {
     logout,
     checkAuth
 } from './login'
+
+
+
+export {
+    signup,
+    signupClear
+} from './signup'
