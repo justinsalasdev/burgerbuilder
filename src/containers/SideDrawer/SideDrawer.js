@@ -4,7 +4,7 @@ import './sidedrawer.scss';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../Backdrop/Backdrop';
 
-const sideDrawer = (props ) => {
+const SideDrawer = (props ) => {
     return(
         <>
             <Backdrop show={props.open} clicked={props.closed}/>
@@ -18,4 +18,4 @@ const sideDrawer = (props ) => {
 }
 
 
-export default sideDrawer;
+export default SideDrawer;

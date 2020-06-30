@@ -30,7 +30,7 @@ select:-webkit-autofill:focus {
     }
 
     &__field{
-        color: whitesmoke;
+        color: inherit;
         border: none;
         border-bottom: 3px double rgba(whitesmoke, .5);
         background-color: transparent;

@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import axios from '../../axios/auth'
+import axios_auth from '../../axios/auth'
 
 const authStart = () => {
     return {
@@ -8,10 +8,10 @@ const authStart = () => {
 }
 
 
-const authStore = (authData) => {
+const authStore = (response) => {
     return {
         type: actions.AUTH_STORE,
-        authData: authData
+        authData: response.data
     }
 }
 
@@ -19,16 +19,16 @@ const authStore = (authData) => {
 const authFail = (error) => {
     return {
         type: actions.AUTH_FAIL,
-        error: error
+        error: error.response.data.error
     }
 }
 
 
-const setLogoutTimer = (expirationTime) => {
+const setLogoutTimer = (response) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout())
-        },expirationTime * 900)
+        },response.data.expiresIn * 900)
     }
 }
 
@@ -54,11 +54,14 @@ export const checkAuth = () => {
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
 
             if (expirationDate <= new Date()){
+
                 dispatch(logout());
+
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(authStore({idToken: token, localId: userId}))
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
+
+                dispatch(authStore({idToken: token, localId: userId}))
                 dispatch(setLogoutTimer(expiry))
                 }
             }
@@ -83,18 +86,18 @@ export const authenticate = (authData,isLogin) =>{
 
         const endPoint = getEndPoint(isLogin);
       
-        axios.post(endPoint, {...authData,returnSecureToken: true})
+        axios_auth.post(endPoint, {...authData,returnSecureToken: true})
             .then(response => {
                 const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
                 localStorage.setItem('token',response.data.idToken)
                 localStorage.setItem('expirationDate',expirationDate)
                 localStorage.setItem('userId',response.data.localId)
 
-                dispatch(setLogoutTimer(response.data.expiresIn))
-                dispatch(authStore(response.data))
+                dispatch(setLogoutTimer(response))
+                dispatch(authStore(response))
             })
             .catch(error => {
-                dispatch(authFail(error.response.data.error))
+                dispatch(authFail(error))
             })
     }
 }

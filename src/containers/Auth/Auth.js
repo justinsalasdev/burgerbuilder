@@ -29,7 +29,11 @@ const Auth = props => {
         .required ('is required'),
       password: Yup.string ()
         .required ('is required')
-        .min (6, 'must be 6 characters atleast')
+        .min (6, 'must be 6 characters atleast'),
+      name: Yup.string ()
+        .required ('is required'),
+      address: Yup.string ()
+        .required ('is required'),
     }),
 
     onSubmit: authData => {
@@ -49,21 +53,42 @@ const Auth = props => {
     }
   }
 
-  const formToolkit = getFormToolkit(loading,error);
+  const generateInput = isLogin => {
+    if(isLogin){
+      return (
+        <>
+          <FormInput formik={formik} identity='email' type="email">Email</FormInput>
+          <FormInput formik={formik} identity='password' type="password">Password</FormInput>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <FormInput formik={formik} identity='name' type="text">Nickname</FormInput>
+          <FormInput formik={formik} identity='address' type="text">Address</FormInput>
+          <FormInput formik={formik} identity='email' type="email">Email </FormInput>
+          <FormInput formik={formik} identity='password' type="password">Password</FormInput>
+        </>
+      )
+    }
+
+  }
+
+
+
   const formErrors = Object.keys(formik.errors).length;
 
   return (
     <div className='auth'>
-      {formToolkit}
-
+      {getFormToolkit(loading,error)}
       {loading? <Spinner/>: <form className='auth__form' onSubmit={formik.handleSubmit}>
 
-          <FormInput formik={formik} identity='email' type="email">Email Address</FormInput>
-          <FormInput formik={formik} identity='password' type="password">Password</FormInput>
+        {generateInput(isLogin)}
 
         <button disabled={!formErrors <= 0} type="submit" className="button--success auth__submit">Submit</button>
-        {isLogin?<Link className='link--to' to="/signup">Create account</Link> : null}
       </form>}
+
+      {isLogin?<Link className='link--to' to="/signup">Create account</Link> : null}
 
     </div>
   );

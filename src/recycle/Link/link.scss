@@ -8,6 +8,12 @@
     font-weight: 700;
     text-decoration: none;
     color: lighten($more,10%);
+    &:focus{
+        outline: none;
+        color: whitesmoke;
+        transform: translateY(-.1rem);
+    }
+
 
     &:not(.active){
         text-shadow: .4rem .4rem .8rem $shadow-active;

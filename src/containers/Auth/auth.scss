@@ -5,12 +5,13 @@
     width: 60%;
     max-width: 50rem;
     text-align: center;
+    color: $secondary-dark;
     // box-shadow: 0 .2rem .3rem #ccc;
     padding: 1rem;
 
     &__toolkit{
         margin-bottom: 3rem;
-        color: whitesmoke;
+        // color: $secondary-dark;
         font-size: 2rem;
     }
 
