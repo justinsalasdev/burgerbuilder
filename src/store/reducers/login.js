@@ -13,14 +13,14 @@ function deepClone(object){
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-        case actions.AUTH_START:{
+        case actions.LOGIN_START:{
             const _ = deepClone(state);
             _.loading = true;
             _.error = null;
             return _;
         }
 
-        case actions.AUTH_STORE:{
+        case actions.LOGIN_STORE:{
             const _ = deepClone(state);
             _.token = action.authData.idToken
             _.userId = action.authData.localId
@@ -29,14 +29,14 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
-        case actions.AUTH_FAIL:{
+        case actions.LOGIN_FAIL:{
             const _ = deepClone(state);
             _.error = action.error
             _.loading = false
             return _;
         }
 
-        case actions.AUTH_LOGOUT:{
+        case actions.LOGOUT:{
             const _ = deepClone(state);
             _.token = null
             _.userId = null

@@ -24,7 +24,7 @@ const BurgerBuilder = props => {
     const price = useSelector(state => state.buildBurger.totalPrice)
     const ordered = useSelector(state => state.placeOrder.ordered)
     const error = useSelector(state => state.buildBurger.error)
-    const isAuthenticated = useSelector(state => state.authenticate.token !== null)
+    const isAuthenticated = useSelector(state => state.login.token !== null)
 
     useEffect(() => {
         dispatch(actions.initIngredients())

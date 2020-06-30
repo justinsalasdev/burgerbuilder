@@ -173,8 +173,8 @@ const mapStateToProps = (state) => {
         price: state.buildBurger.totalPrice,
         loading: state.placeOrder.loading,
         purchased: state.placeOrder.purchased,
-        token: state.authenticate.token,
-        userId: state.authenticate.userId
+        token: state.login.token,
+        userId: state.login.userId
     }
 }
 

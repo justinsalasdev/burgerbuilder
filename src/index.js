@@ -10,7 +10,7 @@ import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import buildBurger from './store/reducers/buildBurger'
 import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
-import authenticate from './store/reducers/authenticate'
+import login from './store/reducers/login'
 import thunk from 'redux-thunk';
 
 //Basic redux setup
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   buildBurger: buildBurger,
   placeOrder: placeOrder,
   fetchOrders: fetchOrders,
-  authenticate: authenticate
+  login: login
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(

@@ -11,8 +11,8 @@ const Orders = props => {
         
     const orders = useSelector(state => state.fetchOrders.orders)
     const fetching = useSelector(state => state.fetchOrders.fetching)
-    const token = useSelector(state => state.authenticate.token)
-    const userId = useSelector(state => state.authenticate.userId)
+    const token = useSelector(state => state.login.token)
+    const userId = useSelector(state => state.login.userId)
 
     const dispatch = useDispatch()
     const onFetchOrders = useCallback((token,userId) => dispatch(actions.fetchOrders(token,userId)),[dispatch])

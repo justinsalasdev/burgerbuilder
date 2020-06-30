@@ -1,34 +1,34 @@
 import * as actions from './actions';
-import axios_auth from '../../axios/auth'
+import axios from 'axios';
 
-const authStart = () => {
+const loginStart = () => {
     return {
-        type: actions.AUTH_START
+        type: actions.LOGIN_START
     }
 }
 
 
-const authStore = (response) => {
+const loginStore = (authData) => {
     return {
-        type: actions.AUTH_STORE,
-        authData: response.data
+        type: actions.LOGIN_STORE,
+        authData: authData
     }
 }
 
 
-const authFail = (error) => {
+const loginFail = (error) => {
     return {
-        type: actions.AUTH_FAIL,
+        type: actions.LOGIN_FAIL,
         error: error.response.data.error
     }
 }
 
 
-const setLogoutTimer = (response) => {
+const setLogoutTimer = (expiration) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout())
-        },response.data.expiresIn * 900)
+        },expiration * 900)
     }
 }
 
@@ -39,7 +39,7 @@ export const logout = () => {
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId')
     return {
-        type: actions.AUTH_LOGOUT
+        type: actions.LOGOUT
     }
 };
 
@@ -61,43 +61,37 @@ export const checkAuth = () => {
                 const userId = localStorage.getItem('userId');
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
 
-                dispatch(authStore({idToken: token, localId: userId}))
+                dispatch(loginStore({idToken: token, localId: userId}))
                 dispatch(setLogoutTimer(expiry))
                 }
             }
         }
     }
 
-export const authenticate = (authData,isLogin) =>{
+export const login = (authData) =>{
     return dispatch => {
-        dispatch(authStart())
+        dispatch(loginStart())
         
         const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
+        const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
 
-        function getEndPoint(isLogin){
-            let endPoint = '';
-            if(isLogin){
-                endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
-            } else {
-                endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
-            }
-            return endPoint;
-        }
-
-        const endPoint = getEndPoint(isLogin);
+        //endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
+ 
       
-        axios_auth.post(endPoint, {...authData,returnSecureToken: true})
+        axios.post(endPoint, {...authData,returnSecureToken: true})
             .then(response => {
                 const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
                 localStorage.setItem('token',response.data.idToken)
                 localStorage.setItem('expirationDate',expirationDate)
                 localStorage.setItem('userId',response.data.localId)
 
-                dispatch(setLogoutTimer(response))
-                dispatch(authStore(response))
+                console.log(response.data);
+
+                dispatch(setLogoutTimer(response.data.expiresIn))
+                dispatch(loginStore(response.data))
             })
             .catch(error => {
-                dispatch(authFail(error))
+                dispatch(loginFail(error))
             })
     }
 }

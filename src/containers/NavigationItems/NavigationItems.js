@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 
 
 const NavigationItems = (props) =>{
-    const token = useSelector(state => state.authenticate.token);
+    const token = useSelector(state => state.login.token);
     const isAuthenticated = token !== null;
 
     return(

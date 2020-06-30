@@ -22,7 +22,7 @@ export {
 
 
 export {
-    authenticate,
+    login,
     logout,
     checkAuth
-} from './authenticate'
+} from './login'
