@@ -11,7 +11,6 @@ import Spinner from '../../recycle/Spinner/Spinner'
 const Checkout = React.lazy(() => import ('../Checkout/Checkout'))
 const Orders = React.lazy(() => import ('../Orders/Orders'))
 const Auth = React.lazy(() => import ('../Auth/Auth'))
-const Signup = React.lazy(() => import ('../Signup/Signup'))
 
 
 const App = props => {
@@ -37,7 +36,7 @@ const App = props => {
       return (
         <>
           <Suspense fallback={<Spinner/>}><Route path="/login" component={Auth} /></Suspense>
-          <Suspense fallback={<Spinner/>}><Route path="/signup" component={Signup} /></Suspense>
+          <Suspense fallback={<Spinner/>}><Route path="/signup" component={Auth} /></Suspense>
           {/* <Route path="/auth" component={Auth} /> */}
           <Route path="/" exact component={BurgerBuilder}/>
           <Redirect to = "/"/>

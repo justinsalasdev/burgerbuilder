@@ -1,5 +1,6 @@
 import React from 'react';
 import './burger.scss';
+import '../../recycle/Scrollbar/scrollbar.scss';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 
 
@@ -20,7 +21,7 @@ const burger = (props) =>{
 
     return(
         
-        <div className='burger burger__scroll'>
+        <div className='burger scrollbar'>
             <BurgerIngredient type="bread-top"/>
             {transformedIngredients}
             <BurgerIngredient type="bread-bottom"/>

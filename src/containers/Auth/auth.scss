@@ -1,6 +1,6 @@
 @import '../../assets/styles/variables.scss';
 
-.login{
+.auth{
     position: relative;
     width: 60%;
     max-width: 50rem;
@@ -8,9 +8,10 @@
     // box-shadow: 0 .2rem .3rem #ccc;
     padding: 1rem;
 
-    &__loading{
-        margin-bottom: 1rem;
+    &__toolkit{
+        margin-bottom: 3rem;
         color: whitesmoke;
+        font-size: 2rem;
     }
 
     &__error{

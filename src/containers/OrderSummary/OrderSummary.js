@@ -35,7 +35,6 @@ const OrderSummary = props => {
                 {props.isAuthenticated?null : <p className={"ordersummary__info"}>Please login in to continue</p>}
                 <button type='button' className='button--failed ordersummary__button' onClick={props.cancelOrder}>Cancel</button>
                 {continueButton(props.isAuthenticated,props.continueOrder,props.loginHandler)}
-                {/* <Button btnType="Success" clicked={props.continueOrder}>Continue</Button> */}
             </div>
         )
 }

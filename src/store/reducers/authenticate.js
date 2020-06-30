@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
-        case actions.AUTH_SUCCESS:{
+        case actions.AUTH_STORE:{
             const _ = deepClone(state);
             _.token = action.authData.idToken
             _.userId = action.authData.localId

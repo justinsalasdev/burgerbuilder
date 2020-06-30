@@ -49,6 +49,8 @@ const BurgerBuilder = props => {
 
     let orderSummary = null;
     let burger = error ? <p>Ingredients can't be loaded :(</p> : <Spinner/>
+
+
     if(ings){
         burger = (
             <>

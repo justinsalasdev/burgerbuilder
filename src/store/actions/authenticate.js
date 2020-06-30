@@ -8,9 +8,9 @@ const authStart = () => {
 }
 
 
-const storeLoginData = (authData) => {
+const authStore = (authData) => {
     return {
-        type: actions.AUTH_SUCCESS,
+        type: actions.AUTH_STORE,
         authData: authData
     }
 }
@@ -57,7 +57,7 @@ export const checkAuth = () => {
                 dispatch(logout());
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(storeLoginData({idToken: token, localId: userId}))
+                dispatch(authStore({idToken: token, localId: userId}))
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
                 dispatch(setLogoutTimer(expiry))
                 }
@@ -65,18 +65,24 @@ export const checkAuth = () => {
         }
     }
 
-export const login = authData =>{
+export const authenticate = (authData,isLogin) =>{
     return dispatch => {
         dispatch(authStart())
         
-
         const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
-        const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
-        // {
-        //     // signUp : `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
-        //     signIn : `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
-        // }
-    
+
+        function getEndPoint(isLogin){
+            let endPoint = '';
+            if(isLogin){
+                endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
+            } else {
+                endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
+            }
+            return endPoint;
+        }
+
+        const endPoint = getEndPoint(isLogin);
+      
         axios.post(endPoint, {...authData,returnSecureToken: true})
             .then(response => {
                 const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
@@ -85,7 +91,7 @@ export const login = authData =>{
                 localStorage.setItem('userId',response.data.localId)
 
                 dispatch(setLogoutTimer(response.data.expiresIn))
-                dispatch(storeLoginData(response.data))
+                dispatch(authStore(response.data))
             })
             .catch(error => {
                 dispatch(authFail(error.response.data.error))
