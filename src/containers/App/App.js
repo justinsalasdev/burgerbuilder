@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {useEffect, Suspense} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Logout from '../Logout/Logout';
@@ -7,6 +7,7 @@ import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
 import Spinner from '../../recycle/Spinner/Spinner'
+import database from '../../axios/database';
 
 const Checkout = React.lazy(() => import ('../Checkout/Checkout'))
 const Orders = React.lazy(() => import ('../Orders/Orders'))
@@ -15,8 +16,27 @@ const Signup = React.lazy(() => import ('../Signup/Signup'))
 
 
 const App = props => {
+
   const dispatch = useDispatch();
   const token = useSelector(state => state.login.token)
+  const userId = useSelector(state => state.login.userId)
+  
+  useEffect(() => {
+    console.log(userId)
+    if(userId){
+      const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
+      database.get(`/users.json${queryParams}`)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+  },[userId,token])
+
+
+
   dispatch(actions.checkAuth(token))
 
   const isAuthenticated = token !== null;

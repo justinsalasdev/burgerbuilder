@@ -1,13 +1,11 @@
 import * as actions from './actions';
 import axios from 'axios';
-import database from '../../axios/database';
 
 const loginStart = () => {
     return {
         type: actions.LOGIN_START
     }
 }
-
 
 const loginStore = (authData) => {
     return {
@@ -32,9 +30,6 @@ const setLogoutTimer = (expiration) => {
         },expiration * 900)
     }
 }
-
-
-
 
 
 
@@ -96,16 +91,9 @@ export const login = (loginData) =>{
 
                 dispatch(setLogoutTimer(response.data.expiresIn))
                 dispatch(loginStore(response.data))
-
-                const queryParams = `?orderBy="userId"&equalTo="${response.data.localId}"`
-                return database.get(`/users.json${queryParams}`)
                 
             })
-            .then(response => {
-                console.log(response)
-            })
             .catch(error => {
-                console.log('error',error)
                 dispatch(loginFail(error.response.data.error))
             })
     }
