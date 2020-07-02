@@ -13,7 +13,6 @@
 
     &__nav{
         height: 100%;
-        
         @media screen and (max-width: $nav-breakpoint) {
             display: none;
         }

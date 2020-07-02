@@ -22,6 +22,15 @@ const NavigationItems = (props) =>{
                 >Burger Builder</NavLink>
             </li>
 
+            {isAuthenticated?<li className={'navigation-item'}>
+                <NavLink 
+                    to='/profile'
+                    exact
+                    className='link--nav'
+                    activeClassName={'active'}
+                >Profile</NavLink>
+            </li>: null}
+
               
             {isAuthenticated?<li className={'navigation-item'}>
                 <NavLink 
