@@ -3,26 +3,25 @@ import Burger from '../../containers/Burger/Burger';
 import database from '../../axios/database';
 import BuildControls from '../../containers/BuildControls/BuildControls';
 import Alert from '../../recycle/Alert/Alert';
-import OrderSummary from '../../containers/OrderSummary/OrderSummary';
+// import OrderSummary from '../../containers/OrderSummary/OrderSummary';
 import Spinner from '../../recycle/Spinner/Spinner';
+import LoginPrompt from '../LoginPrompt/LoginPrompt';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector, useDispatch} from 'react-redux';
+import useAlert from '../../hooks/useAlert';
 import * as actions from '../../store/actions/exports';
+
 
 const BurgerBuilder = props => {
 
     const dispatch = useDispatch();
-    // eslint-disable-next-line
-    
-    const onIngredientAdded = (ingName) => dispatch(actions.addIngredient(ingName))
-    const onIngredientRemoved = (ingName) => dispatch(actions.removeIngredient(ingName))
-    const onInitOrder = () => dispatch(actions.initOrder())
-    const onCanceledOrder = () => dispatch(actions.canceledOrder())
+    const [alertShown,showAlert] = useAlert();
+    const addIngredient = (ingName) => dispatch(actions.addIngredient(ingName))
+    const removeIngredient = (ingName) => dispatch(actions.removeIngredient(ingName))
 
         
     const ings = useSelector(state => state.buildBurger.ingredients)
     const price = useSelector(state => state.buildBurger.totalPrice)
-    const ordered = useSelector(state => state.placeOrder.ordered)
     const error = useSelector(state => state.buildBurger.error)
     const isAuthenticated = useSelector(state => state.login.token !== null)
 
@@ -31,62 +30,47 @@ const BurgerBuilder = props => {
     // eslint-disable-next-line
     },[])
 
-    const handlePurchase = () => {onInitOrder()}
-    const handleCancelPurchase = () => {onCanceledOrder()}
-    const handleContinuePurchase = () => {
-        onCanceledOrder(); //sets order status to false
-        props.history.replace('/checkout')
+    const startOrder = () => {
+        if(isAuthenticated){
+            props.history.replace('/checkout')
+        }else{
+            showAlert(true);
+        }
     }
+    const cancelOrder = () => showAlert(false)
+    const goToLogin = () => {props.history.replace('/login');showAlert(false)}
 
-    const handlePurchaseLogin = () => {props.history.replace('/login')}
-
-    const disabledInfo = {
-        ...ings
-    }
-
+    const disabledInfo = {...ings}
     for (let key in disabledInfo){
         disabledInfo[key] = (disabledInfo[key] <= 0)
     }
 
-    let orderSummary = null;
-    let burger = error ? <p>Ingredients can't be loaded :(</p> : <Spinner/>
 
+    let burger = error ? <p>Ingredients can't be loaded :(</p> : <Spinner/>
 
     if(ings){
         burger = (
             <>
                 <Burger ingredients={ings}/>
                 <BuildControls
-                    ingredientAdded={onIngredientAdded}
-                    ingredientRemoved={onIngredientRemoved}
+                    addIngredient={addIngredient}
+                    removeIngredient={removeIngredient}
                     disabled={disabledInfo}
                     price={price}
-                    ordered={handlePurchase}
+                    startOrder={startOrder}
                 />
                 
             </>
-        )
-
-        orderSummary = (
-            <OrderSummary 
-                cancelOrder={handleCancelPurchase}
-                ingredients={ings}
-                continueOrder={handleContinuePurchase}
-                loginHandler={handlePurchaseLogin}
-                price={price}
-                isAuthenticated={isAuthenticated}
-            />
         )
     }
 
     return (
         <>
-            <Alert show={ordered} closeModal={handleCancelPurchase}>
-                {orderSummary}
-            </Alert>
+            {alertShown?<Alert closeAlert={cancelOrder}>
+                <LoginPrompt cancelOrder={cancelOrder} goToLogin={goToLogin}/>
+            </Alert>:null}
 
             {burger}
-            
         </>
     );
 

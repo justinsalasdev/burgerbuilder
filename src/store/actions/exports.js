@@ -7,8 +7,6 @@ export {
 } from './buildBurger';
 
 export {
-    initOrder,
-    canceledOrder,
     checkoutBurger,
     purchaseBurger
    

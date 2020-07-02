@@ -6,14 +6,17 @@ import Backdrop from '../Backdrop/Backdrop';
 
 const SideDrawer = (props ) => {
 
-    const {open,closed,isAuthenticated} = props;
+    const {
+        sideDrawerOpen,
+        closeSideDrawer,
+        isAuthenticated} = props;
 
     return(
         <>
-            <Backdrop show={open} clicked={closed}/>
-            <div className={open? 'sidedrawer--open' : 'sidedrawer--close'}>
+            {sideDrawerOpen?<Backdrop clicked={closeSideDrawer}/>:null}
+            <div className={sideDrawerOpen? 'sidedrawer--open' : 'sidedrawer--close'}>
                 <nav>
-                    <NavigationItems side isAuthenticated={isAuthenticated} sideDrawerClose={closed}/> 
+                    <NavigationItems side isAuthenticated={isAuthenticated} closeSideDrawer={closeSideDrawer}/> 
                 </nav>
             </div>
         </>

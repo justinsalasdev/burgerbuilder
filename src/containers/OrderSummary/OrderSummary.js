@@ -5,13 +5,23 @@ import '../../recycle/Button/button.scss'
 
 const OrderSummary = props => {
 
-    const ingredientSummary = Object.keys(props.ingredients)
+    const {
+        ingredients,
+        price,
+        cancelOrder,
+        isAuthenticated,
+        continueOrder,
+        loginHandler
+    } = props;
+
+
+    const ingredientSummary = Object.keys(ingredients)
         .map(igKey => {
             return (
             <li key={igKey}>
                 <span style={{textTransform:'capitalize'}}>
                     {igKey}
-                </span> : {props.ingredients[igKey]}
+                </span> : {ingredients[igKey]}
             </li>
             )
         })
@@ -31,10 +41,10 @@ const OrderSummary = props => {
                 <ul className={'ordersummary__items'}>
                     {ingredientSummary}
                 </ul>
-                <p className={'ordersummary__info'}><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
+                <p className={'ordersummary__info'}><strong>Total Price: ${price.toFixed(2)}</strong></p>
                 {props.isAuthenticated?null : <p className={"ordersummary__info"}>Please login in to continue</p>}
-                <button type='button' className='button--failed ordersummary__button' onClick={props.cancelOrder}>Cancel</button>
-                {continueButton(props.isAuthenticated,props.continueOrder,props.loginHandler)}
+                <button type='button' className='button--failed ordersummary__button' onClick={cancelOrder}>Cancel</button>
+                {continueButton(isAuthenticated, continueOrder, loginHandler)}
             </div>
         )
 }

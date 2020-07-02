@@ -5,22 +5,18 @@ import Backdrop from '../../containers/Backdrop/Backdrop';
 
 const Alert = props => {
 
-    const {show,closeModal} = props;
+    const {closeAlert} = props;
+    console.log(props)
 
     return(
         <>
-            <Backdrop show={show} clicked={closeModal}/>
-            <div className={show? 'alert--show': 'alert'}>
+            <Backdrop clicked={closeAlert}/>
+            <div className='alert'>
                 {props.children}
             </div>
         </>
     )
 }
 
-function memoCondition(prevProps,nextProps){
-    const result = (nextProps.show === prevProps.show ) && (nextProps.children === prevProps.children)
-    return result
-    
-}
 
-export default React.memo(Alert,memoCondition);
+export default Alert;

@@ -3,20 +3,22 @@ import '../../recycle/Button/button.scss'
 import './build-control.scss';
 
 const control = (props) => {
+
+    const {label,removeIngredient,disabled,addIngredient} = props;
     return(
         <div className ='build-control'>
-            <div className='build-control__label'>{props.label}</div>
+            <div className='build-control__label'>{label}</div>
             <button 
                 className='button--less build-control__button' 
-                onClick={props.removed}
-                disabled={props.disabled}
+                onClick={removeIngredient}
+                disabled={disabled}
             >
             Less
             </button>
 
             <button 
                 className='button--more build-control__button'
-                onClick={props.added}
+                onClick={addIngredient}
             >
             More
             </button>

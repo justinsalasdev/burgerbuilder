@@ -1,7 +1,8 @@
 import {useState} from 'react';
 
 const useAlert = () => {
-    const [modalShown,showModal] = useState(false);
-    return [modalShown,showModal]
+    const [alertShown,showAlert] = useState(false);
+    return [alertShown,showAlert]
 }
-export default userAlert;
+
+export default useAlert;

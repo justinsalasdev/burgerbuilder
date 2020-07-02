@@ -8,14 +8,5 @@
     margin: auto;
     padding: 1.6rem;
 
-    transform: translateY(-100vh);
-    opacity: 0;
-    transition: opacity 0.1s cubic-bezier(1,0,1,0);
-
-    &--show{
-        @extend .alert;
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 

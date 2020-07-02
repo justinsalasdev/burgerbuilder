@@ -5,28 +5,24 @@ import SideDrawer from '../SideDrawer/SideDrawer';
 import {useSelector} from 'react-redux';
 
 const Layout = props => {
+    const {children} = props;
     const isAuthenticated = useSelector(state => state.login.token !== null)
-    const [sideDrawerShown, showSideDrawer] = useState(false)
+    const [sideDrawerOpen, showSideDrawer] = useState(false)
 
     const closeSideDrawer = () => {
         showSideDrawer(false)
     }
 
     const toggleSideDrawer = () => {
-        showSideDrawer(!sideDrawerShown)
+        showSideDrawer(!sideDrawerOpen)
     }
 
     return(
         <div className="app">
-            <Toolbar 
-                drawerToggleClicked={toggleSideDrawer}
-                isAuthenticated={isAuthenticated}/>
-            <SideDrawer 
-                isAuthenticated={isAuthenticated}
-                open={sideDrawerShown} 
-                closed={closeSideDrawer}/>
+            <Toolbar toggleSideDrawer={toggleSideDrawer} isAuthenticated={isAuthenticated}/>
+            <SideDrawer isAuthenticated={isAuthenticated} sideDrawerOpen={sideDrawerOpen} closeSideDrawer={closeSideDrawer}/>
             <main className='main'>
-                {props.children}
+                {children}
             </main>
         </div>
 

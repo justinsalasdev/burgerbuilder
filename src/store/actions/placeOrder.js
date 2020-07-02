@@ -26,20 +26,6 @@ const purchaseBurgerFail = (error) => {
 }
 
 //EXPORTS
-
-export const initOrder = () => {
-    return {
-        type: actions.INIT_ORDER
-    }
-}
-
-
-export const canceledOrder = () => {
-    return {
-        type: actions.CANCELED_ORDER
-    }
-}
-
 export const checkoutBurger = () => {
     return {
         type: actions.CHECKOUT_BURGER
