@@ -1,25 +1,19 @@
 @import '../../assets/styles/variables.scss';
 
-.modal {
+.alert {
     position: absolute;
-    z-index: $modal-index;
+    z-index: $alert-index;
     background-color: whitesmoke;
     box-shadow: $shadow-inactive;
-    width: 70%;
+    margin: auto;
     padding: 1.6rem;
-    left: 15%;
-    top: 30%;
 
     transform: translateY(-100vh);
     opacity: 0;
     transition: opacity 0.1s cubic-bezier(1,0,1,0);
 
-    @media (min-width: 60em) {
-            width: 50rem;
-            left: calc(50% - 25rem);
-    }
-
     &--show{
+        @extend .alert;
         transform: translateY(0);
         opacity: 1;
     }

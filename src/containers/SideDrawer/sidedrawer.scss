@@ -13,10 +13,12 @@
     transition: transform .3s cubic-bezier(.42,1,.13,.97);
 
     &--open{
+        @extend .sidedrawer;
         transform: translateX(0);
     }
 
     &--close{
+        @extend .sidedrawer;
         transform: translateX(-100%);
     }
 

@@ -1,15 +1,16 @@
 import React from 'react';
-import './modal.scss'
+import './alert.scss';
 import Backdrop from '../../containers/Backdrop/Backdrop';
 
 
-const Modal = props => {
+const Alert = props => {
+
+    const {show,closeModal} = props;
+
     return(
         <>
-            <Backdrop show={props.show} clicked={props.modalClosed}/>
-            <div 
-                className={props.show? 'modal modal--show': 'modal'}
-            >
+            <Backdrop show={show} clicked={closeModal}/>
+            <div className={show? 'alert--show': 'alert'}>
                 {props.children}
             </div>
         </>
@@ -22,4 +23,4 @@ function memoCondition(prevProps,nextProps){
     
 }
 
-export default React.memo(Modal,memoCondition);
+export default React.memo(Alert,memoCondition);

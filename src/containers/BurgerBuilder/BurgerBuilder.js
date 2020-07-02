@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Burger from '../../containers/Burger/Burger';
 import database from '../../axios/database';
 import BuildControls from '../../containers/BuildControls/BuildControls';
-import Modal from '../../recycle/Modal/Modal';
+import Alert from '../../recycle/Alert/Alert';
 import OrderSummary from '../../containers/OrderSummary/OrderSummary';
 import Spinner from '../../recycle/Spinner/Spinner';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
@@ -81,9 +81,9 @@ const BurgerBuilder = props => {
 
     return (
         <>
-            <Modal show={ordered} modalClosed={handleCancelPurchase}>
+            <Alert show={ordered} closeModal={handleCancelPurchase}>
                 {orderSummary}
-            </Modal>
+            </Alert>
 
             {burger}
             

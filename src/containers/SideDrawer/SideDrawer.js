@@ -5,12 +5,15 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../Backdrop/Backdrop';
 
 const SideDrawer = (props ) => {
+
+    const {open,closed,isAuthenticated} = props;
+
     return(
         <>
-            <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={props.open? 'sidedrawer sidedrawer--open' : 'sidedrawer sidedrawer--close'}>
+            <Backdrop show={open} clicked={closed}/>
+            <div className={open? 'sidedrawer--open' : 'sidedrawer--close'}>
                 <nav>
-                    <NavigationItems side isAuthenticated={props.isAuthenticated} sideDrawerClose={props.closed}/> 
+                    <NavigationItems side isAuthenticated={isAuthenticated} sideDrawerClose={closed}/> 
                 </nav>
             </div>
         </>

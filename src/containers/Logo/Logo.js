@@ -1,10 +1,10 @@
 import React from 'react';
 import './logo.scss';
 
-const logo = (props) => {
+const Logo = (props) => {
     return (
-        <div className={'logo'}></div>
+        <div className='logo'></div>
     )
 }
 
-export default logo;
+export default Logo;
