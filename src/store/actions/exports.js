@@ -28,6 +28,5 @@ export {
 
 
 export {
-    signup,
-    signupClear
+    signup
 } from './signup'

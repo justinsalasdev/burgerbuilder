@@ -15,7 +15,7 @@ import * as actions from '../../store/actions/exports';
 const BurgerBuilder = props => {
 
     const dispatch = useDispatch();
-    const [alertShown,showAlert] = useAlert();
+    const [alertShown,showAlert] = useAlert(false);
     const addIngredient = (ingName) => dispatch(actions.addIngredient(ingName))
     const removeIngredient = (ingName) => dispatch(actions.removeIngredient(ingName))
 

@@ -6,7 +6,6 @@ import Backdrop from '../../containers/Backdrop/Backdrop';
 const Alert = props => {
 
     const {closeAlert} = props;
-    console.log(props)
 
     return(
         <>

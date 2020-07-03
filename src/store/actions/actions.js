@@ -18,7 +18,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 
-export const SIGNUP_CLEAR = 'SIGNUP_CLEAR';
 export const SIGNUP_START = 'SIGNUP_START';
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';

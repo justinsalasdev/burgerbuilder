@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-const useAlert = () => {
-    const [alertShown,showAlert] = useState(false);
+const useAlert = (initialState) => {
+    const [alertShown,showAlert] = useState(initialState);
     return [alertShown,showAlert]
 }
 

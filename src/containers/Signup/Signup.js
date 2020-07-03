@@ -6,16 +6,25 @@ import '../../recycle/Form/form.scss'
 import '../../recycle/FormInput/form-input.scss';
 import Spinner from '../../recycle/Spinner/Spinner';
 import FormInput from '../../recycle/FormInput/FormInput';
-
+import Alert from '../../recycle/Alert/Alert';
+import useAlert from '../../hooks/useAlert';
+import SignupPrompt from '../SignupPrompt/SignupPrompt';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
 const Signup = props => {
 
+  const {history} = props;
+
   const dispatch = useDispatch();
-  const isSignupComplete = useSelector(state => state.signup.isSignupComplete)
+  const [alertShown,showAlert] = useAlert(true);
   const loading = useSelector(state => state.signup.loading);
   const error = useSelector(state => state.signup.error);
+
+  const goToCheckout = () => {
+    history.replace('/checkout');
+    showAlert(false);
+  }
 
   const formik = useFormik ({
     initialValues: {
@@ -33,8 +42,8 @@ const Signup = props => {
             .min (6, 'must be 6 characters atleast')
     }),
 
-    onSubmit: signupData => {
-      dispatch(actions.signup(signupData))
+    onSubmit: (signupData) => {
+      dispatch(actions.signup(signupData,showAlert))
     }
   });
   
@@ -47,27 +56,22 @@ const Signup = props => {
 
   const formErrors = Object.keys(formik.errors).length;
 
-  let signupContent = (
-    <>
-      {getFormToolkit(loading,error)}
-      {loading? <Spinner/>: <form className='form__form' onSubmit={formik.handleSubmit}>
-
-        <FormInput formik={formik} identity='email' type="email">Email</FormInput>
-        <FormInput formik={formik} identity='password' type="password">Password</FormInput>
-
-        <button disabled={!formErrors <= 0} type="submit" className="button--success form__submit">Submit</button>
-      </form>}
-    </>
-  )
-
-  if(isSignupComplete){
-    signupContent = <p>Account successfully created! You may now login</p>
-  }
 
   return (
-    <div className='form'>
-      {signupContent}
-    </div>
+    <>
+      <div className='form'>
+        {getFormToolkit(loading,error)}
+        {loading? <Spinner/>: <form className='form__form' onSubmit={formik.handleSubmit}>
+          <FormInput formik={formik} identity='email' type="email">Email</FormInput>
+          <FormInput formik={formik} identity='password' type="password">Password</FormInput>
+          <button disabled={!formErrors <= 0} type="submit" className="button--success form__submit">Create</button>
+        </form>}
+      </div>
+
+      {alertShown?<Alert closeAlert={goToCheckout} >
+      <SignupPrompt goToCheckout={goToCheckout}/>
+      </Alert>:null}
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports';
@@ -13,11 +13,7 @@ import * as Yup from 'yup';
 
 const Login = props => {
 
-  
-  useEffect(() => {
-    dispatch(actions.signupClear())
-  // eslint-disable-next-line
-  },[])
+
 
   const dispatch = useDispatch();
   const loading = useSelector(state => state.login.loading);

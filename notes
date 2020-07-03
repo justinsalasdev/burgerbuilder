@@ -3,3 +3,6 @@ to do:
 order start >> login >> must go to checkout instead of '/'
 @checkout must prompt 'please setup delivery information' if no saved profile data
 
+
+
+render alert after signup

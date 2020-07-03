@@ -7,7 +7,6 @@ const signupStart = () => {
     }
 }
 
-
 const signupFail = (error) => {
     return {
         type: actions.SIGNUP_FAIL,
@@ -15,37 +14,17 @@ const signupFail = (error) => {
     }
 }
 
-
-const signupSuccess = () => {
-    return {
-        type: actions.SIGNUP_SUCCESS,
-    }
-}
-
-
-
 //exports3
-export const signupClear = () => {
-    return {
-        type: actions.SIGNUP_CLEAR
-    }
-}
-
-
-
-export const signup = (signupData) =>{
-
-    
+export const signup = (signupData,showAlert) =>{
     const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
     const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`
 
     return dispatch => {
-        dispatch(signupClear())
         dispatch(signupStart())
         
         axios.post(endPoint, {...signupData,returnSecureToken: true})
             .then(response => {
-                dispatch(signupSuccess())
+                showAlert(true);
             })
             .catch(error => {
                 dispatch(signupFail(error))

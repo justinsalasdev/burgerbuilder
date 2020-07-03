@@ -19,13 +19,6 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
-        case actions.SIGNUP_SUCCESS:{
-            const _ = deepClone(state);
-            _.isSignupComplete = true
-            _.error = null
-            _.loading = false
-            return _;
-        }
 
         case actions.SIGNUP_FAIL:{
             const _ = deepClone(state);
@@ -34,12 +27,6 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
-        case actions.SIGNUP_CLEAR:{
-            const _ = deepClone(state);
-            _.isSignupComplete = false
-            return _;
-        }
-        
         default: 
             return (state)
     }
