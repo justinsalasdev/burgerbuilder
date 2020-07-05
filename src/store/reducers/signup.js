@@ -2,8 +2,7 @@ import * as actions from '../actions/actions';
 
 const initialState = {
     error: null,
-    loading: false,
-    isSignupComplete: false
+    loading: false
 }
 
 function deepClone(object){
@@ -19,6 +18,11 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
+        case actions.SIGNUP_COMPLETE:{
+            const _ = deepClone(state);
+            _.loading = false
+            return _;
+        }
 
         case actions.SIGNUP_FAIL:{
             const _ = deepClone(state);

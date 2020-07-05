@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../recycle/Alert/Alert';
+import Alert from '../../recycle/Alert/Alert';
 import useHttpErrorHandler from '../../hooks/useHttpErrorHandler'
 
 
@@ -8,9 +8,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
       const [error, confirmError] = useHttpErrorHandler(axios);
         return(
             <>
-               {error?<Modal show={error !== null} closeModal={confirmError}>
+               {error?<Alert closeAlert={confirmError}>
                    {error.message}
-               </Modal>:null}
+               </Alert>:null}
 
                <WrappedComponent {...props}/>
            </>

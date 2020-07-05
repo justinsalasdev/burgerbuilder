@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports';
@@ -14,11 +14,14 @@ import * as Yup from 'yup';
 const Login = props => {
 
 
-
   const dispatch = useDispatch();
   const loading = useSelector(state => state.login.loading);
   const error = useSelector(state => state.login.error);
 
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus()
+  },[])
   
 
 
@@ -41,28 +44,26 @@ const Login = props => {
     }
   });
   
-  const getFormToolkit = (loading,error) => {
-    if(loading){return <p className='form__toolkit'>Logging you in...</p>}
-    else if(error){return <p className='form__error'>{error.message.replace(/_/g,' ') + ' :('}</p>}
-    else {return <p className='form__toolkit'>Please provide login data</p>}
-  }
+  const formToolkit = (
+    (error && <p className='form__error'>{error.message.replace(/_/g,' ') + ' :('}</p>) || null
+  )
 
-
-  const formErrors = Object.keys(formik.errors).length;
+  const submitDisabled = !Object.keys(formik.errors).length <= 0 
 
   return (
     <div className='form'>
-      {getFormToolkit(loading,error)}
-      {loading? <Spinner/>: <form className='form__form' onSubmit={formik.handleSubmit}>
+    
+      {formToolkit}
 
-        <FormInput formik={formik} identity='email' type="email">Email</FormInput>
+      {loading? <Spinner/>: 
+      <form className='form__form' onSubmit={formik.handleSubmit}>
+        <FormInput formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
         <FormInput formik={formik} identity='password' type="password">Password</FormInput>
 
-        <button disabled={!formErrors <= 0} type="submit" className="button--success form__submit">Submit</button>
+        <button disabled={submitDisabled} type="submit" className="button--success form__submit">Submit</button>
       </form>}
 
-      <Link className='link--to' to="/signup">Create account</Link>
-
+      {loading? null: <Link className='link--to' to='/signup'>Create account</Link>}
     </div>
   );
 };

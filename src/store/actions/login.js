@@ -1,24 +1,24 @@
 import * as actions from './actions';
 import axios from 'axios';
+// import database from '../../axios/database';
 
-const loginStart = () => {
+const startLogin = () => {
     return {
         type: actions.LOGIN_START
     }
 }
 
-const loginStore = (authData) => {
+const storeLoginData = (loginData) => {
     return {
         type: actions.LOGIN_STORE,
-        authData: authData
+        loginData
     }
 }
 
-
-const loginFail = (error) => {
+const handleLoginFailure = (error) => {
     return {
         type: actions.LOGIN_FAIL,
-        error: error
+        error
     }
 }
 
@@ -30,6 +30,8 @@ const setLogoutTimer = (expiration) => {
         },expiration * 900)
     }
 }
+
+
 
 
 
@@ -61,23 +63,25 @@ export const checkAuth = () => {
                 const userId = localStorage.getItem('userId');
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
 
-                dispatch(loginStore({idToken: token, localId: userId}))
+                dispatch(storeLoginData({idToken: token, localId: userId}))
                 dispatch(setLogoutTimer(expiry))
                 }
             }
         }
     }
 
+
+
+
 export const login = (loginData) =>{
     return dispatch => {
-        dispatch(loginStart())
+        dispatch(startLogin())
         
         const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
         const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
 
         //endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
  
-      
         axios.post(endPoint, {...loginData,returnSecureToken: true})
             .then(response => {
                 
@@ -88,13 +92,12 @@ export const login = (loginData) =>{
                 localStorage.setItem('expirationDate',expirationDate)
                 localStorage.setItem('userId',response.data.localId)
 
-
                 dispatch(setLogoutTimer(response.data.expiresIn))
-                dispatch(loginStore(response.data))
+                dispatch(storeLoginData(response.data))
                 
             })
             .catch(error => {
-                dispatch(loginFail(error.response.data.error))
+                dispatch(handleLoginFailure(error.response.data.error))
             })
     }
 }

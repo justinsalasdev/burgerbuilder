@@ -30,47 +30,42 @@ const BurgerBuilder = props => {
     // eslint-disable-next-line
     },[])
 
-    const startOrder = () => {
-        if(isAuthenticated){
-            props.history.replace('/checkout')
-        }else{
-            showAlert(true);
-        }
-    }
+    const startOrder = () => (isAuthenticated && props.history.push('/checkout')) || showAlert(true)
     const cancelOrder = () => showAlert(false)
-    const goToLogin = () => {props.history.replace('/login');showAlert(false)}
+    const goToLogin = () => {
+        props.history.push('/login');
+        showAlert(false)
+    }
 
     const disabledInfo = {...ings}
+
     for (let key in disabledInfo){
         disabledInfo[key] = (disabledInfo[key] <= 0)
     }
-
-
-    let burger = error ? <p>Ingredients can't be loaded :(</p> : <Spinner/>
-
-    if(ings){
-        burger = (
-            <>
-                <Burger ingredients={ings}/>
-                <BuildControls
-                    addIngredient={addIngredient}
-                    removeIngredient={removeIngredient}
-                    disabled={disabledInfo}
-                    price={price}
-                    startOrder={startOrder}
-                />
-                
-            </>
-        )
-    }
-
+    
     return (
         <>
-            {alertShown?<Alert closeAlert={cancelOrder}>
+            {!alertShown? null:
+            <Alert closeAlert={cancelOrder}>
                 <LoginPrompt cancelOrder={cancelOrder} goToLogin={goToLogin}/>
-            </Alert>:null}
+            </Alert>}
 
-            {burger}
+            {(ings && (
+                <>
+                    <Burger ingredients={ings}/>
+                    <BuildControls
+                        addIngredient={addIngredient}
+                        removeIngredient={removeIngredient}
+                        disabled={disabledInfo}
+                        price={price}
+                        startOrder={startOrder}
+                    />
+                </>
+            ))
+            || (error && <p>Ingredients can't be loaded :(</p>)
+            || <Spinner/> 
+            }
+           
         </>
     );
 

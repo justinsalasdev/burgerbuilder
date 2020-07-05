@@ -6,8 +6,6 @@ const initialState = {
     error: false,
 }
 
-
-
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,

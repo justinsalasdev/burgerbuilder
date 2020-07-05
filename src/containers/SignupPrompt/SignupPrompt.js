@@ -7,7 +7,7 @@ const SignupPrompt = props => {
     return (
         <div className='login-prompt'>
             <p className='login-prompt__toolkit'>You account was successfully created</p>
-            <button type="button" className='button--success signup-prompt__button' onClick={goToCheckout}>Continue</button>
+            <button type="button" className='button--success signup-prompt__button' onClick={goToCheckout}>Login</button>
 
         </div>
     )

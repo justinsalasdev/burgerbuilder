@@ -22,8 +22,8 @@ const reducer = (state = initialState, action) => {
 
         case actions.LOGIN_STORE:{
             const _ = deepClone(state);
-            _.token = action.authData.idToken
-            _.userId = action.authData.localId
+            _.token = action.loginData.idToken
+            _.userId = action.loginData.localId
             _.error = null
             _.loading = false
             return _;

@@ -1,6 +1,6 @@
 import React from 'react';
 import './alert.scss';
-import Backdrop from '../../containers/Backdrop/Backdrop';
+import Backdrop from '../../recycle/Backdrop/Backdrop';
 
 
 const Alert = props => {

@@ -1,8 +1,14 @@
 to do: 
 
-order start >> login >> must go to checkout instead of '/'
+--> order start >> login >> must go to checkout instead of '/' --> not possible w/ redirect to "/" in App.js
 @checkout must prompt 'please setup delivery information' if no saved profile data
 
+store profile data
 
+create profile page 
+with edit button
+
+
+--> remove signup promise chain
 
 render alert after signup

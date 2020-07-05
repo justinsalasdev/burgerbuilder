@@ -14,9 +14,11 @@ export const FETCH_ORDERS_FAIL = 'FETCH_ORDER_FAIL';
 
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_STORE = 'LOGIN_STORE';
+export const LOGIN_GET_USER ='LOGIN_GET_USER';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 
 export const SIGNUP_START = 'SIGNUP_START';
+export const SIGNUP_COMPLETE = 'SIGNUP_COMPLETE';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';
