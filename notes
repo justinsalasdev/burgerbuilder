@@ -12,3 +12,6 @@ with edit button
 --> remove signup promise chain --> kept don't want to rewrite
 
 render alert after signup
+
+
+trouble login get userdata error handler

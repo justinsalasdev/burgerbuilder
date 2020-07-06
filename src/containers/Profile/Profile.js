@@ -1,6 +1,6 @@
 import React, {useRef,useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import * as actions from '../../store/actions/exports';
+import {useSelector} from 'react-redux';
+// import * as actions from '../../store/actions/exports';
 import '../../recycle/Button/button.scss'
 import '../../recycle/Form/form.scss'
 import '../../recycle/FormInput/form-input.scss';
@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 const Signup = props => {
 
   const {history} = props;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [alertShown,showAlert] = useAlert(false);
   const loading = useSelector(state => state.signup.loading);
   const error = useSelector(state => state.signup.error);
@@ -58,7 +58,8 @@ const Signup = props => {
             .matches(/^[0-9]+$/,'must be a number')
     }),
     onSubmit: (userData) => {
-      dispatch(actions.editProfile(userData,showAlert))
+      // dispatch(actions.editProfile(userData,showAlert))
+      alert(userData)
     }
   });
   

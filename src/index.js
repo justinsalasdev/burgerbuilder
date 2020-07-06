@@ -12,7 +12,6 @@ import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
 import login from './store/reducers/login'
 import signup from './store/reducers/signup'
-import retrieveProfile from './store/reducers/retrieveProfile'
 import editProfile from './store/reducers/editProfile'
 import thunk from 'redux-thunk';
 
@@ -28,7 +27,6 @@ const rootReducer = combineReducers({
   fetchOrders,
   login,
   signup,
-  retrieveProfile,
   editProfile
 })
 

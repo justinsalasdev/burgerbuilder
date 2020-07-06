@@ -12,10 +12,18 @@ export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
 export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDER_SUCCESS';
 export const FETCH_ORDERS_FAIL = 'FETCH_ORDER_FAIL';
 
+
+//login------------------------------------------
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_STORE = 'LOGIN_STORE';
+export const PROFILE_STORE = 'PROFILE_STORE';
+export const PROFILE_FAIL = 'PROFILE_FAIL';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGIN_END = 'LOGIN_END';
 export const LOGOUT = 'LOGOUT';
+
+
+
 
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_END = 'SIGNUP_END';
@@ -29,7 +37,4 @@ export const PROFILE_SAVE_FAILED = 'PROFILE_SAVE_FAILED';
 export const PROFILE_EDIT_END = 'PROFILE_EDIT_END';
 
 
-export const PROFILE_RETRIEVE_START = 'PROFILE_RETRIEVE_START';
-export const PROFILE_RETRIEVE_END = 'PROFILE_RETRIEVE_END';
-export const PROFILE_RETRIEVE_FAIL = 'PROFILE_RETRIEVE_FAIL';
-export const PROFILE_SAVE_USER = 'PROFILE_SAVE_USER';
+

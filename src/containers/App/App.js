@@ -1,4 +1,4 @@
-import React, {useEffect, Suspense} from 'react';
+import React, {Suspense} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import Logout from '../Logout/Logout';
@@ -6,7 +6,7 @@ import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
 import Spinner from '../../recycle/Spinner/Spinner'
-import database from '../../axios/database';
+// import database from '../../axios/database';
 
 const Checkout = React.lazy(() => import ('../Checkout/Checkout'))
 const Orders = React.lazy(() => import ('../Orders/Orders'))
@@ -17,28 +17,28 @@ const Profile = React.lazy(() => import('../Profile/Profile'))
 const App = props => {
 
   const dispatch = useDispatch();
-  const token = useSelector(state => state.login.token)
-  const userId = useSelector(state => state.login.userId)
+  const idToken = useSelector(state => state.login.idToken)
+  // const userId = useSelector(state => state.login.userId)
   
-  useEffect(() => {
-    console.log(userId)
-    if(userId){
-      const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
-      database.get(`/users.json${queryParams}`)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
-  },[userId,token])
+  // useEffect(() => {
+  //   console.log(userId)
+  //   if(userId){
+  //     const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
+  //     database.get(`/users.json${queryParams}`)
+  //     .then(response => {
+  //       console.log(response)
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  //   }
+  // },[userId,token])
 
 
 
-  dispatch(actions.checkAuth(token))
+  dispatch(actions.checkAuth(idToken))
 
-  const isAuthenticated = token !== null;
+  const isAuthenticated = idToken !== null;
 
 
   const routes = function (isAuthenticated){

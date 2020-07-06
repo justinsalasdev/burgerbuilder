@@ -32,11 +32,11 @@ export const checkoutBurger = () => {
     }
 }
 
-export const purchaseBurger = (orderData,token) => {
+export const purchaseBurger = (orderData,idToken) => {
     return dispatch => {
         
         dispatch(purchaseBurgerStart())
-        database.post('/orders.json?auth=' + token,orderData)
+        database.post('/orders.json?auth=' + idToken,orderData)
         .then(response => {
             dispatch(purchaseBurgerSuccess())
         })

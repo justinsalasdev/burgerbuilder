@@ -173,14 +173,14 @@ const mapStateToProps = (state) => {
         price: state.buildBurger.totalPrice,
         loading: state.placeOrder.loading,
         purchased: state.placeOrder.purchased,
-        token: state.login.token,
+        idToken: state.login.idToken,
         userId: state.login.userId
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
    return {
-     onOrderBurger: (orderData,token) => dispatch(actions.purchaseBurger(orderData,token))
+     onOrderBurger: (orderData,idToken) => dispatch(actions.purchaseBurger(orderData,idToken))
    }
 }
 

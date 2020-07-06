@@ -14,8 +14,7 @@ const reducer = (state = initialState, action) => {
 
 
         case actions.CHECKOUT_BURGER: {
-            const _ = deepClone(state);
-            _.purchased = false
+            const _ = deepClone(initialState);
             return _
         }
 

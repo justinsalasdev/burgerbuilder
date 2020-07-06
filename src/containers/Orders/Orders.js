@@ -11,16 +11,16 @@ const Orders = props => {
         
     const orders = useSelector(state => state.fetchOrders.orders)
     const fetching = useSelector(state => state.fetchOrders.fetching)
-    const token = useSelector(state => state.login.token)
+    const idToken = useSelector(state => state.login.idToken)
     const userId = useSelector(state => state.login.userId)
 
     const dispatch = useDispatch();
  
 
     useEffect(() => {
-        dispatch(actions.fetchOrders(token,userId))
+        dispatch(actions.fetchOrders(idToken,userId))
     // eslint-disable-next-line
-    },[token,userId])
+    },[idToken,userId])
 
     let ordersList = <Spinner/>;
             if (fetching){

@@ -5,7 +5,7 @@ import BuildControls from '../../containers/BuildControls/BuildControls';
 import Alert from '../../recycle/Alert/Alert';
 // import OrderSummary from '../../containers/OrderSummary/OrderSummary';
 import Spinner from '../../recycle/Spinner/Spinner';
-import LoginPrompt from '../LoginPrompt/LoginPrompt';
+import OrderPrompt from '../OrderPrompt/OrderPrompt';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector, useDispatch} from 'react-redux';
 import useAlert from '../../hooks/useAlert';
@@ -23,7 +23,7 @@ const BurgerBuilder = props => {
     const ings = useSelector(state => state.buildBurger.ingredients)
     const price = useSelector(state => state.buildBurger.totalPrice)
     const error = useSelector(state => state.buildBurger.error)
-    const isAuthenticated = useSelector(state => state.login.token !== null)
+    const isAuthenticated = useSelector(state => state.login.idToken !== null)
 
     useEffect(() => {
         dispatch(actions.initIngredients())
@@ -47,7 +47,7 @@ const BurgerBuilder = props => {
         <>
             {!alertShown? null:
             <Alert closeAlert={cancelOrder}>
-                <LoginPrompt cancelOrder={cancelOrder} goToLogin={goToLogin}/>
+                <OrderPrompt cancelOrder={cancelOrder} goToLogin={goToLogin}/>
             </Alert>}
 
             {(ings && (

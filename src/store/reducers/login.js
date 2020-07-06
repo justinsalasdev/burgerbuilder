@@ -1,9 +1,11 @@
 import * as actions from '../actions/actions';
 
 const initialState = {
-    token: null,
+    idToken: null,
     userId: null,
-    error: null,
+    userData: {},
+    loginError: null,
+    getUserError: null,
     loading: false
 }
 
@@ -12,33 +14,50 @@ function deepClone(object){
 }
 
 const reducer = (state = initialState, action) => {
+
     switch(action.type){
         case actions.LOGIN_START:{
-            const _ = deepClone(state);
+            const _ = deepClone(initialState);
             _.loading = true;
-            _.error = null;
             return _;
         }
 
         case actions.LOGIN_STORE:{
             const _ = deepClone(state);
-            _.token = action.loginData.idToken
-            _.userId = action.loginData.localId
-            _.error = null
+            _.idToken = action.idToken
+            _.userId = action.userId
+            return _;
+        }
+
+        case actions.PROFILE_STORE: {
+            const _ = deepClone(state);
+            _.userData = action.userData;
+            return _;
+        }
+
+        case actions.PROFILE_FAIL: {
+            const _ = deepClone(state);
+            _.getUserError = action.error
             _.loading = false
             return _;
         }
 
         case actions.LOGIN_FAIL:{
             const _ = deepClone(state);
-            _.error = action.error
+            _.loginError = action.error
+            _.loading = false
+            return _;
+        }
+
+        case actions.LOGIN_END:{
+            const _ = deepClone(state);
             _.loading = false
             return _;
         }
 
         case actions.LOGOUT:{
             const _ = deepClone(state);
-            _.token = null
+            _.idToken = null
             _.userId = null
             return _;
         }

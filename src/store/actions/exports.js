@@ -1,4 +1,3 @@
-import { editProfile } from './editProfile';
 
 export {
     initIngredients,
@@ -34,11 +33,7 @@ export {
 } from './signup'
 
 
-export {
-    editProfile
-} from './editProfile'
+// export {
+//     editProfile
+// } from './editProfile'
 
-
-export {
-    retrieveProfile
-} from './retrieveProfile'

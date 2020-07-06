@@ -1,19 +1,50 @@
 import * as actions from './actions';
 import axios from 'axios';
-// import database from '../../axios/database';
+import database from '../../axios/database';
 
+
+//-------------------------------------------------------
 const startLogin = () => {
     return {
         type: actions.LOGIN_START
     }
 }
 
-const storeLoginData = (loginData) => {
+const storeLoginData = (idToken,userId) => {
     return {
         type: actions.LOGIN_STORE,
-        loginData
+        idToken,
+        userId
     }
 }
+
+const setLogoutTimer = (expiration) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout())
+        },expiration * 900)
+    }
+}
+
+const getUserData = (idToken, userId) => {
+    const queryParams = `?auth=${idToken}2&orderBy="userId"&equalTo="${userId}"`
+    return database.get(`/users.json${queryParams}`)
+}
+
+const storeUserData = (userData) => {
+    return {
+        type: actions.PROFILE_STORE,
+        userData
+    }
+}
+
+const handleRetrieveFailure = (error) => {
+    return {
+        type: actions.PROFILE_FAIL,
+        error
+    }
+}
+
 
 const handleLoginFailure = (error) => {
     return {
@@ -23,13 +54,7 @@ const handleLoginFailure = (error) => {
 }
 
 
-const setLogoutTimer = (expiration) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout())
-        },expiration * 900)
-    }
-}
+//--------------------------------------------------------------------------------------
 
 //exports
 export const logout = () => {
@@ -44,8 +69,8 @@ export const logout = () => {
 
 export const checkAuth = () => {
     return dispatch => {
-        const token = localStorage.getItem('token');
-        if(!token){
+        const idToken = localStorage.getItem('token');
+        if(!idToken){
             dispatch(logout());
             
         } else {
@@ -59,7 +84,7 @@ export const checkAuth = () => {
                 const userId = localStorage.getItem('userId');
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
 
-                dispatch(storeLoginData({idToken: token, localId: userId}))
+                dispatch(storeLoginData(idToken,userId))
                 dispatch(setLogoutTimer(expiry))
                 }
             }
@@ -69,7 +94,7 @@ export const checkAuth = () => {
 
 
 
-export const login = (loginData) =>{
+export const login = (loginData,showAlert) =>{
     return dispatch => {
         dispatch(startLogin())
         
@@ -80,16 +105,37 @@ export const login = (loginData) =>{
             .then(
                 response => {
                     const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
-                    
-                    localStorage.setItem('token',response.data.idToken)
-                    localStorage.setItem('expirationDate',expirationDate)
-                    localStorage.setItem('userId',response.data.localId)
 
-                    dispatch(setLogoutTimer(response.data.expiresIn))
-                    dispatch(storeLoginData(response.data))
-                
+                    const userId = response.data.localId
+                    const idToken = response.data.idToken
+                    const expiry = response.data.expiresIn
+        
+                    localStorage.setItem('token',idToken)
+                    localStorage.setItem('expirationDate',expirationDate)
+                    localStorage.setItem('userId',userId)
+
+                    dispatch(storeLoginData(idToken,userId))
+                    dispatch(setLogoutTimer(expiry))
+
+                    getUserData(idToken,userId)
+                        .then(
+                            response => {
+                                const userData = {};
+                                for (const id in response.data){
+                                    Object.assign(userData,response.data[id])
+                                }
+                                dispatch(storeUserData(userData))
+                            })
+                            .catch(() => {
+                                const customError = {
+                                    message: 'Network Error! Failed to login'
+                                }
+                                dispatch(handleRetrieveFailure(customError))
+                                showAlert(true)
+                            })
                 },
                 error => {
+                    console.log('error handler2')
                     dispatch(handleLoginFailure(error.response.data.error))
                 })  
     }

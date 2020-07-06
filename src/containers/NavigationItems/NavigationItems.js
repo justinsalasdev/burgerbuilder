@@ -8,8 +8,8 @@ import {useSelector} from 'react-redux';
 
 const NavigationItems = (props) =>{
     const {closeSideDrawer} = props;
-    const token = useSelector(state => state.login.token);
-    const isAuthenticated = token !== null;
+    const idToken = useSelector(state => state.login.idToken);
+    const isAuthenticated = idToken !== null;
 
     return(
         <ul className='navigation-items'  onClick={closeSideDrawer}>

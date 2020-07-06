@@ -13,10 +13,8 @@ function deepClone(object){
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case actions.SIGNUP_START:{
-            const _ = deepClone(state);
+            const _ = deepClone(initialState);
             _.loading = true;
-            _.error = null;
-            _.endType = '';
             return _;
         }
 

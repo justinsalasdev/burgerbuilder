@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
 
         
         case actions.FETCH_ORDERS_START:
-            const _ = deepClone(state);
+            const _ = deepClone(initialState);
             _.fetching = true;
             return _;
 
