@@ -1,1 +1,0 @@
-{"version":3,"sources":["containers/Profile/Profile.js"],"names":["Profile","props"],"mappings":"wGACA,2BAQeA,UALC,SAAAC,GACZ,OAAQ","file":"static/js/8.7dd9bc9c.chunk.js","sourcesContent":["\r\nimport React from 'react'\r\n\r\n\r\nconst Profile = props => {\r\n    return (<div>Hello</div>)\r\n}\r\n\r\n\r\nexport default Profile;"],"sourceRoot":""}
