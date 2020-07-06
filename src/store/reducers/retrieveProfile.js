@@ -1,9 +1,9 @@
 import * as actions from '../actions/actions';
 
 const initialState = {
-    error: null,
+    userData: {},
     loading: false,
-    endType: ''
+    error: null
 }
 
 function deepClone(object){
@@ -12,25 +12,28 @@ function deepClone(object){
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-        case actions.SIGNUP_START:{
+        case actions.PROFILE_RETRIEVE_START:{
             const _ = deepClone(state);
             _.loading = true;
-            _.error = null;
-            _.endType = '';
             return _;
         }
 
-        case actions.SIGNUP_END:{
+        case actions.PROFILE_RETRIEVE_END:{
             const _ = deepClone(state);
-            _.loading = false
-            _.endType = action.endType
+            _.loading = false;
             return _;
         }
 
-        case actions.SIGNUP_CONFLICT:{
+        case actions.PROFILE_SAVE_USER:{
+                const _ = deepClone(state);
+                _.userData = action.userData
+                return _;
+        }
+
+        case actions.PROFILE_RETRIEVE_FAIL:{
             const _ = deepClone(state);
-            _.error = action.error
             _.loading = false
+            _.error = action.error;
             return _;
         }
 

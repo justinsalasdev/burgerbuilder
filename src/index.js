@@ -12,6 +12,8 @@ import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
 import login from './store/reducers/login'
 import signup from './store/reducers/signup'
+import retrieveProfile from './store/reducers/retrieveProfile'
+import editProfile from './store/reducers/editProfile'
 import thunk from 'redux-thunk';
 
 //Basic redux setup
@@ -21,11 +23,13 @@ import thunk from 'redux-thunk';
 const composeEnhancers = (process.env.NODE_ENV === 'development'? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 
 const rootReducer = combineReducers({
-  buildBurger: buildBurger,
-  placeOrder: placeOrder,
-  fetchOrders: fetchOrders,
-  login: login,
-  signup: signup
+  buildBurger,
+  placeOrder,
+  fetchOrders,
+  login,
+  signup,
+  retrieveProfile,
+  editProfile
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(

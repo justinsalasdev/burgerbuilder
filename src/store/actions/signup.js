@@ -2,7 +2,7 @@ import * as actions from './actions';
 import axios from 'axios';
 import database from '../../axios/database';
 
-const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
+
 
 const startSignup = () => {
     return {
@@ -10,21 +10,23 @@ const startSignup = () => {
     }
     
 }
-const completeSignup = () => {
+const endSignup = (endType) => {
     return {
-        type: actions.SIGNUP_COMPLETE
+        type: actions.SIGNUP_END,
+        endType
     }
 }
  
-const handleSignupFailure = (error) => {
+const handleSignupConflict = (error) => {
     return {
-        type: actions.SIGNUP_FAIL,
+        type: actions.SIGNUP_CONFLICT,
         error
     }
 }
 
+const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
 const postUserData = (userData,idToken) => {
-    const queryParams = `?auth=${idToken}2`
+    const queryParams = `?auth=${idToken}`
     return database.post(`/users.json${queryParams}`, userData)
 }
 
@@ -64,24 +66,21 @@ export const signup = (formData,showAlert) => {
                     const idToken = response.data.idToken;
                     const userId = response.data.localId;
                     token = idToken;
-                    return postUserData({...userData, userId},idToken)
+
+                    postUserData({...userData, userId},idToken)
+                        .then(
+                            () => {dispatch(endSignup('userSaved'));showAlert(true);},
+                            error => {
+                                console.log(error.response.data.error)
+                                deleteSignupData(token)
+                                    .then(
+                                        () => {dispatch(endSignup('signupFailed')); showAlert(true)},
+                                        () => {dispatch(endSignup('userNotSaved')); showAlert(true)}
+                                    )
+                            }   
+                        )
                 },
-                error => dispatch(handleSignupFailure(error.response.data.error))
-            )
-            .then(
-                response => {
-                    console.log(response)
-                    showAlert(true);
-                    dispatch(completeSignup());
-                },
-                error => {
-                    console.log(error.response.data.error)
-                    return deleteSignupData(token)
-                }
-            )
-            .then(
-                response => console.log(response),
-                error => console.log(error)
+                error => {dispatch(handleSignupConflict(error.response.data.error))}
             )
     }
 }

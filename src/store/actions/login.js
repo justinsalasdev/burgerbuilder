@@ -31,10 +31,6 @@ const setLogoutTimer = (expiration) => {
     }
 }
 
-
-
-
-
 //exports
 export const logout = () => {
     localStorage.removeItem('token');
@@ -80,24 +76,21 @@ export const login = (loginData) =>{
         const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
         const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
 
-        //endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
- 
         axios.post(endPoint, {...loginData,returnSecureToken: true})
-            .then(response => {
+            .then(
+                response => {
+                    const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
+                    
+                    localStorage.setItem('token',response.data.idToken)
+                    localStorage.setItem('expirationDate',expirationDate)
+                    localStorage.setItem('userId',response.data.localId)
+
+                    dispatch(setLogoutTimer(response.data.expiresIn))
+                    dispatch(storeLoginData(response.data))
                 
-                const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
-
-
-                localStorage.setItem('token',response.data.idToken)
-                localStorage.setItem('expirationDate',expirationDate)
-                localStorage.setItem('userId',response.data.localId)
-
-                dispatch(setLogoutTimer(response.data.expiresIn))
-                dispatch(storeLoginData(response.data))
-                
-            })
-            .catch(error => {
-                dispatch(handleLoginFailure(error.response.data.error))
-            })
+                },
+                error => {
+                    dispatch(handleLoginFailure(error.response.data.error))
+                })  
     }
 }

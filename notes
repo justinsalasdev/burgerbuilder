@@ -9,6 +9,6 @@ create profile page
 with edit button
 
 
---> remove signup promise chain
+--> remove signup promise chain --> kept don't want to rewrite
 
 render alert after signup

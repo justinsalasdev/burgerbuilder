@@ -19,6 +19,7 @@ const Signup = props => {
   const [alertShown,showAlert] = useAlert(false);
   const loading = useSelector(state => state.signup.loading);
   const error = useSelector(state => state.signup.error);
+  const endType = useSelector(state => state.signup.endType);
 
   const inputRef = useRef();
   useEffect(() => {
@@ -28,9 +29,14 @@ const Signup = props => {
 
 
 
-  const goToCheckout = () => {
-    history.replace('/login');
-    showAlert(false);
+  const acknowledgeAlert = () => {
+    if(( endType === 'userSaved' ) || ( endType === 'userNotSaved') ){
+      history.replace('/login');
+      showAlert(false);
+    } else {
+      showAlert(false);
+    }
+    
   }
 
   const formik = useFormik ({
@@ -95,8 +101,8 @@ const Signup = props => {
       </div>
 
       {!alertShown? null :
-      <Alert closeAlert={goToCheckout} >
-        <SignupPrompt goToCheckout={goToCheckout}/>
+      <Alert closeAlert={acknowledgeAlert} >
+        <SignupPrompt endType={endType} acknowledgeAlert={acknowledgeAlert}/>
       </Alert>}
     </>
   );

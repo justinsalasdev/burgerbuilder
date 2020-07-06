@@ -15,7 +15,7 @@ const Login = props => {
 
 
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.login.loading);
+  const loginLoading = useSelector(state => state.login.loading);
   const error = useSelector(state => state.login.error);
 
   const inputRef = useRef();
@@ -55,7 +55,7 @@ const Login = props => {
     
       {formToolkit}
 
-      {loading? <Spinner/>: 
+      {loginLoading? <Spinner/>: 
       <form className='form__form' onSubmit={formik.handleSubmit}>
         <FormInput formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
         <FormInput formik={formik} identity='password' type="password">Password</FormInput>
@@ -63,7 +63,8 @@ const Login = props => {
         <button disabled={submitDisabled} type="submit" className="button--success form__submit">Submit</button>
       </form>}
 
-      {loading? null: <Link className='link--to' to='/signup'>Create account</Link>}
+      {loginLoading? null: 
+        <Link className='link--to' to='/signup'>Create account</Link>}
     </div>
   );
 };
