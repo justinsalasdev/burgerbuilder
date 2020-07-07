@@ -20,10 +20,12 @@ const SignupPrompt = props => {
         }
     }
 
+    const buttonText = (endType === 'signupFailed') ? 'OK' : 'Login'
+
     return (
         <div className='login-prompt'>
             <p className='login-prompt__toolkit'>{createEndMessage(endType)}</p>
-            <button type="button" className='button--success signup-prompt__button' onClick={acknowledgeAlert}>Login</button>
+            <button type="button" className='button--success signup-prompt__button' onClick={acknowledgeAlert}>{buttonText}</button>
         </div>
     )
 }

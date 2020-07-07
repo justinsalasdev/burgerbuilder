@@ -23,7 +23,7 @@ export {
 export {
     login,
     logout,
-    checkAuth
+    refreshAuth
 } from './login'
 
 

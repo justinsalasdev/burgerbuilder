@@ -4,8 +4,8 @@ const initialState = {
     idToken: null,
     userId: null,
     userData: {},
-    loginError: null,
-    getUserError: null,
+    conflictMessage: null,
+    errorMessage: null,
     loading: false
 }
 
@@ -37,14 +37,14 @@ const reducer = (state = initialState, action) => {
 
         case actions.PROFILE_FAIL: {
             const _ = deepClone(state);
-            _.getUserError = action.error
+            _.errorMessage = action.errorMessage
             _.loading = false
             return _;
         }
 
         case actions.LOGIN_FAIL:{
             const _ = deepClone(state);
-            _.loginError = action.error
+            _.conflictMessage = action.conflictMessage
             _.loading = false
             return _;
         }

@@ -9,22 +9,31 @@ import Spinner from '../../recycle/Spinner/Spinner';
 import FormInput from '../../recycle/FormInput/FormInput';
 import Alert from '../../recycle/Alert/Alert';
 import useAlert from '../../hooks/useAlert';
+import LoginPrompt from '../LoginPrompt/LoginPrompt';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
 const Login = props => {
 
+  const {history} = props;
+
   const [alertShown,showAlert] = useAlert(false);  
   const dispatch = useDispatch();
   const loading = useSelector(state => state.login.loading);
-  const loginError = useSelector(state => state.login.loginError);
-  const getUserError = useSelector(state => state.login.getUserError)
+  const conflictMessage = useSelector(state => state.login.conflictMessage);
+  const errorMessage = useSelector(state => state.login.errorMessage);
+
 
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus()
   },[])
+
+  const acknowledgeAlert = () => {
+
+  }
+  
   
 
 
@@ -48,9 +57,8 @@ const Login = props => {
   });
   
   const formToolkit = (
-    (loginError && <p className='form__error'>{loginError.message.replace(/_/g,' ') + ' :('}</p>) || null
+    (conflictMessage && <p className='form__error'>{conflictMessage.replace(/_/g,' ') + ' :('}</p>) || null
   )
-
   const submitDisabled = !Object.keys(formik.errors).length <= 0 
 
   return (
@@ -73,7 +81,7 @@ const Login = props => {
 
       {!alertShown?null:
         <Alert>
-            <h1>HAHAHA</h1>
+            <LoginPrompt>{errorMessage}</LoginPrompt>
         </Alert>
       }
     </>

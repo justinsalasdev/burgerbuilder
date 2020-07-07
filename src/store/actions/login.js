@@ -1,6 +1,5 @@
 import * as actions from './actions';
 import axios from 'axios';
-import database from '../../axios/database';
 
 
 //-------------------------------------------------------
@@ -18,17 +17,19 @@ const storeLoginData = (idToken,userId) => {
     }
 }
 
+let logoutTimer = null;
 const setLogoutTimer = (expiration) => {
     return dispatch => {
-        setTimeout(() => {
+     logoutTimer = setTimeout(() => {
             dispatch(logout())
         },expiration * 900)
-    }
+    } 
 }
 
 const getUserData = (idToken, userId) => {
-    const queryParams = `?auth=${idToken}2&orderBy="userId"&equalTo="${userId}"`
-    return database.get(`/users.json${queryParams}`)
+    const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`
+    const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/users.json${queryParams}`
+    return axios.get(endPoint)
 }
 
 const storeUserData = (userData) => {
@@ -38,18 +39,18 @@ const storeUserData = (userData) => {
     }
 }
 
-const handleRetrieveFailure = (error) => {
+
+const handleLoginFailure = (errorMessage) => {
     return {
         type: actions.PROFILE_FAIL,
-        error
+        errorMessage
     }
 }
 
-
-const handleLoginFailure = (error) => {
+const handleLoginConflict = (conflictMessage) => {
     return {
         type: actions.LOGIN_FAIL,
-        error
+        conflictMessage
     }
 }
 
@@ -58,6 +59,8 @@ const handleLoginFailure = (error) => {
 
 //exports
 export const logout = () => {
+    console.log(logoutTimer)
+    clearTimeout(logoutTimer)
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId')
@@ -67,7 +70,7 @@ export const logout = () => {
 };
 
 
-export const checkAuth = () => {
+export const  refreshAuth = () => {
     return dispatch => {
         const idToken = localStorage.getItem('token');
         if(!idToken){
@@ -95,6 +98,10 @@ export const checkAuth = () => {
 
 
 export const login = (loginData,showAlert) =>{
+    let userId = null;
+    let idToken = null;
+    let expiry = null;
+
     return dispatch => {
         dispatch(startLogin())
         
@@ -102,41 +109,39 @@ export const login = (loginData,showAlert) =>{
         const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
 
         axios.post(endPoint, {...loginData,returnSecureToken: true})
-            .then(
+            .then( //user is authenticated but defer saving of credentials until userData is retrieved
                 response => {
-                    const expirationDate = new Date( new Date().getTime() + new Date(response.data.expiresIn*1000).getTime())
-
-                    const userId = response.data.localId
-                    const idToken = response.data.idToken
-                    const expiry = response.data.expiresIn
-        
-                    localStorage.setItem('token',idToken)
-                    localStorage.setItem('expirationDate',expirationDate)
-                    localStorage.setItem('userId',userId)
-
-                    dispatch(storeLoginData(idToken,userId))
-                    dispatch(setLogoutTimer(expiry))
-
+                    userId = response.data.localId
+                    idToken = response.data.idToken
+                    expiry = response.data.expiresIn
+                   
                     getUserData(idToken,userId)
-                        .then(
+                        .then( //userData is retrieved --> may not save login credentials
                             response => {
+
+                                const expirationDate = new Date( new Date().getTime() + new Date(expiry*1000).getTime())
+                                localStorage.setItem('token',idToken)
+                                localStorage.setItem('expirationDate',expirationDate)
+                                localStorage.setItem('userId',userId)
+
                                 const userData = {};
                                 for (const id in response.data){
                                     Object.assign(userData,response.data[id])
                                 }
+
+                                dispatch(storeLoginData(idToken,userId))
+                                dispatch(setLogoutTimer(expiry))
                                 dispatch(storeUserData(userData))
-                            })
-                            .catch(() => {
-                                const customError = {
-                                    message: 'Network Error! Failed to login'
-                                }
-                                dispatch(handleRetrieveFailure(customError))
-                                showAlert(true)
-                            })
+
+                            },
+                            error => {
+                                dispatch(handleLoginFailure("Network Error! Failed to login :("))
+                            }
+                        )
                 },
                 error => {
-                    console.log('error handler2')
-                    dispatch(handleLoginFailure(error.response.data.error))
+                    const conflictMessage = error.response.data.error.message
+                    dispatch(handleLoginConflict(conflictMessage))
                 })  
     }
 }

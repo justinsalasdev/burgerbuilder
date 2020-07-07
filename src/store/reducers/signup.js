@@ -1,9 +1,9 @@
 import * as actions from '../actions/actions';
 
 const initialState = {
-    error: null,
+    conflictMessage: null,
     loading: false,
-    endType: ''
+    endType: null
 }
 
 function deepClone(object){
@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
 
         case actions.SIGNUP_CONFLICT:{
             const _ = deepClone(state);
-            _.error = action.error
+            _.conflictMessage = action.conflictMessage
             _.loading = false
             return _;
         }

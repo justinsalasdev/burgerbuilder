@@ -18,7 +18,7 @@ const Signup = props => {
   const dispatch = useDispatch();
   const [alertShown,showAlert] = useAlert(false);
   const loading = useSelector(state => state.signup.loading);
-  const error = useSelector(state => state.signup.error);
+  const conflictMessage = useSelector(state => state.signup.conflictMessage);
   const endType = useSelector(state => state.signup.endType);
 
   const inputRef = useRef();
@@ -78,7 +78,7 @@ const Signup = props => {
   
   const toolkit = (
     (loading && <p className='form__toolkit'>Creating your account</p>) ||
-    (error && <p className='form__error'>{error.message.replace(/_/g,' ') + ' :('}</p>) ||
+    (conflictMessage && <p className='form__error'>{conflictMessage.replace(/_/g,' ') + ' :('}</p>) ||
     null
   )
 

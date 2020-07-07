@@ -1,13 +1,18 @@
 import React  from 'react';
 import './navigationitems.scss'
 import '../../recycle/Link/link.scss'
-import {NavLink} from 'react-router-dom';
+import {NavLink,useHistory} from 'react-router-dom';
 // import NavigationItem from '../NavigationItem/NavigationItem';
-import {useSelector} from 'react-redux';
+import * as actions from '../../store/actions/exports';
+import {useSelector,useDispatch} from 'react-redux';
 
 
 const NavigationItems = (props) =>{
+    console.log(props)
     const {closeSideDrawer} = props;
+    
+    const dispatch = useDispatch();
+    const history = useHistory();
     const idToken = useSelector(state => state.login.idToken);
     const isAuthenticated = idToken !== null;
 
@@ -23,34 +28,51 @@ const NavigationItems = (props) =>{
                 >Burger Builder</NavLink>
             </li>
 
-            {isAuthenticated?<li className={'navigation-item'}>
+            {!isAuthenticated ? null:
+            <li className={'navigation-item'}>
                 <NavLink 
                     to='/profile'
                     exact
                     className='link--nav'
                     activeClassName={'active'}
                 >Profile</NavLink>
-            </li>: null}
+            </li>}
 
               
-            {isAuthenticated?<li className={'navigation-item'}>
+            {!isAuthenticated? null:
+            <li className={'navigation-item'}>
                 <NavLink 
                     to='/orders'
                     exact
                     className='link--nav'
                     activeClassName={'active'}
                 >Orders</NavLink>
-            </li>: null}
+            </li>}
 
+            {isAuthenticated ? null:
             <li className={'navigation-item'}>
                 <NavLink 
-                    to={isAuthenticated?'/logout' : '/login'}
+                    to={'/login'}
                     exact
                     className='link--nav'
                     activeClassName={'active'}
-                >{isAuthenticated? 'Logout': 'Login'}</NavLink>
-            </li>
+                >Login</NavLink>
+            </li>}   
 
+            {!isAuthenticated ? null:
+            <li className={'navigation-item'}>
+                <a href='/'
+                    className='link--nav'
+                    onClick={(e) => {
+                        e.preventDefault()
+                        dispatch(actions.logout())
+                        history.replace('/')
+                    }}
+                >Logout</a>
+            </li>}
+
+
+           
         </ul>
 
 

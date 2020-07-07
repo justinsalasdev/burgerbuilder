@@ -17,10 +17,10 @@ const endSignup = (endType) => {
     }
 }
  
-const handleSignupConflict = (error) => {
+const handleSignupConflict = (conflictMessage) => {
     return {
         type: actions.SIGNUP_CONFLICT,
-        error
+        conflictMessage
     }
 }
 
@@ -80,7 +80,10 @@ export const signup = (formData,showAlert) => {
                             }   
                         )
                 },
-                error => {dispatch(handleSignupConflict(error.response.data.error))}
+                error => {
+                    const conflictMessage = error.response.data.error.message
+                    dispatch(handleSignupConflict(conflictMessage))
+                }
             )
     }
 }
