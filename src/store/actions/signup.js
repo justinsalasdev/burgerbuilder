@@ -1,6 +1,5 @@
 import * as actions from './actions';
 import axios from 'axios';
-import database from '../../axios/database';
 
 
 
@@ -27,7 +26,7 @@ const handleSignupConflict = (conflictMessage) => {
 const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
 const postUserData = (userData,idToken) => {
     const queryParams = `?auth=${idToken}`
-    return database.post(`/users.json${queryParams}`, userData)
+    return axios.post(`https://react-burger-builder-12ae6.firebaseio.com/users.json${queryParams}`, userData)
 }
 
 const postSignupData = (signUpData) => {
@@ -85,6 +84,7 @@ export const signup = (formData,showAlert) => {
                     dispatch(handleSignupConflict(conflictMessage))
                 }
             )
+            .catch(() => {dispatch(endSignup('signupFailed')); showAlert(true)})
     }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import './login-prompt.scss'
 
 
 
@@ -7,7 +8,7 @@ const LoginPrompt = props => {
     return (
         <div className='login-prompt'>
             <p className='login-prompt__toolkit'>{children}</p>
-            <button type="button" className='button--success signup-prompt__button' onClick={acknowledgeAlert}>OK</button>
+            <button type="button" className='button--success login-prompt__button' onClick={acknowledgeAlert}>OK</button>
         </div>
     )
 }

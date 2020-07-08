@@ -3,7 +3,7 @@ import Button from '../../recycle/Button/Button';
 import Spinner from '../../recycle/Spinner/Spinner';
 import Input from '../Input/Input';
 import classes from './ContactData.module.css';
-import database from '../../axios/database';
+import axios from 'axios';
 import {connect} from 'react-redux';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/exports';
@@ -184,4 +184,4 @@ const mapDispatchToProps = (dispatch) => {
    }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(ContactData, database));
+export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(ContactData, axios));

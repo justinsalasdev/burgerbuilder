@@ -30,12 +30,9 @@ const Login = props => {
   },[])
 
   const acknowledgeAlert = () => {
-    
+    showAlert(false)
   }
   
-  
-
-
   const formik = useFormik ({
     initialValues: {
       email: '',
@@ -79,8 +76,8 @@ const Login = props => {
       </div>
 
       {!alertShown?null:
-        <Alert>
-            <LoginPrompt>{errorMessage}</LoginPrompt>
+        <Alert closeAlert={acknowledgeAlert}>
+            <LoginPrompt acknowledgeAlert={acknowledgeAlert}>{errorMessage}</LoginPrompt>
         </Alert>
       }
     </>

@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import database from '../../axios/database';
+import axios from 'axios';
 
 
 
@@ -36,7 +36,7 @@ export const purchaseBurger = (orderData,idToken) => {
     return dispatch => {
         
         dispatch(purchaseBurgerStart())
-        database.post('/orders.json?auth=' + idToken,orderData)
+        axios.post('https://react-burger-builder-12ae6.firebaseio.com/orders.json?auth=' + idToken,orderData)
         .then(response => {
             dispatch(purchaseBurgerSuccess())
         })

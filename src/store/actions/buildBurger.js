@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import database from '../../axios/database';
+import axios from 'axios';
 
 
 
@@ -10,9 +10,10 @@ const setIngredients = (ingredients) => {
     }
 }
 
-const fetchIngredientsFailed = () => {
+const fetchIngredientsFailed = (errorMessage) => {
     return {
-        type: actions.FETCH_INGREDIENTS_FAILED
+        type: actions.FETCH_INGREDIENTS_FAILED,
+        errorMessage
     }
 }
 
@@ -34,12 +35,17 @@ export const removeIngredient = (ingredient) => {
 
 export const initIngredients = () => {
     return dispatch  => (
-       database.get('/ingredients.json')
-        .then(response => {
-            dispatch(setIngredients(response.data))
-        })
+       axios.get('https://react-burger-builder-12ae6.firebaseio.com/ingredients.json')
+        .then(
+            response => {
+                dispatch(setIngredients(response.data))
+            },
+            error => {
+                dispatch(fetchIngredientsFailed("Can't initialize burger builder app :("))
+            }
+        )
         .catch(error => {
-            dispatch(fetchIngredientsFailed())
+            alert(error)
         })
     )
 }

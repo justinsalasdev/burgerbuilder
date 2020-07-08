@@ -17,10 +17,11 @@ export const FETCH_ORDERS_FAIL = 'FETCH_ORDER_FAIL';
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_STORE = 'LOGIN_STORE';
 export const PROFILE_STORE = 'PROFILE_STORE';
+export const LOGIN_END = 'LOGIN_END'
 export const PROFILE_FAIL = 'PROFILE_FAIL';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
-export const LOGIN_END = 'LOGIN_END';
 export const LOGOUT = 'LOGOUT';
+export const LOGIN_BROKE = 'LOGIN_BROKE';
 
 
 

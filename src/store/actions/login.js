@@ -17,10 +17,10 @@ const storeLoginData = (idToken,userId) => {
     }
 }
 
-let logoutTimer = null;
+var logoutTimer;
 const setLogoutTimer = (expiration) => {
     return dispatch => {
-     logoutTimer = setTimeout(() => {
+        logoutTimer = setTimeout(() => {
             dispatch(logout())
         },expiration * 900)
     } 
@@ -36,6 +36,12 @@ const storeUserData = (userData) => {
     return {
         type: actions.PROFILE_STORE,
         userData
+    }
+}
+
+const endLogin = () => {
+    return {
+        type: actions.LOGIN_END
     }
 }
 
@@ -133,14 +139,19 @@ export const login = (loginData,showAlert) =>{
                                 dispatch(storeUserData(userData))
 
                             },
-                            error => {
-                                dispatch(handleLoginFailure("Network Error! Failed to login :("))
+                            () => {
+                                dispatch(handleLoginFailure("Failed to login due to some errors :("))
+                                showAlert(true)
                             }
                         )
                 },
                 error => {
                     const conflictMessage = error.response.data.error.message
                     dispatch(handleLoginConflict(conflictMessage))
-                })  
+                }) 
+                .catch(() => {
+                    dispatch(handleLoginFailure("Network Error! Failed to login :("))
+                    showAlert(true)
+                })
     }
 }

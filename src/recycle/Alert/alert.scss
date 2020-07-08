@@ -2,6 +2,7 @@
 
 .alert {
     position: absolute;
+    border-top-right-radius: 2rem;
     z-index: $alert-index;
     background-color: whitesmoke;
     box-shadow: $shadow-inactive;

@@ -36,6 +36,12 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
+        case actions.LOGIN_END:{
+            const _ = deepClone(state);
+            _.loading = false
+            return _;
+        }
+
         case actions.PROFILE_FAIL: {
             const _ = deepClone(state);
             _.errorMessage = action.errorMessage

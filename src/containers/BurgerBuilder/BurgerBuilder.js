@@ -1,12 +1,9 @@
 import React, {useEffect} from 'react';
 import Burger from '../../containers/Burger/Burger';
-import database from '../../axios/database';
 import BuildControls from '../../containers/BuildControls/BuildControls';
 import Alert from '../../recycle/Alert/Alert';
-// import OrderSummary from '../../containers/OrderSummary/OrderSummary';
 import Spinner from '../../recycle/Spinner/Spinner';
 import OrderPrompt from '../OrderPrompt/OrderPrompt';
-import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector, useDispatch} from 'react-redux';
 import useAlert from '../../hooks/useAlert';
 import * as actions from '../../store/actions/exports';
@@ -22,7 +19,7 @@ const BurgerBuilder = props => {
         
     const ings = useSelector(state => state.buildBurger.ingredients)
     const price = useSelector(state => state.buildBurger.totalPrice)
-    const error = useSelector(state => state.buildBurger.error)
+    const errorMessage = useSelector(state => state.buildBurger.errorMessage)
     const isAuthenticated = useSelector(state => state.login.idToken !== null)
 
     useEffect(() => {
@@ -50,6 +47,7 @@ const BurgerBuilder = props => {
                 <OrderPrompt cancelOrder={cancelOrder} goToLogin={goToLogin}/>
             </Alert>}
 
+
             {(ings && (
                 <>
                     <Burger ingredients={ings}/>
@@ -62,7 +60,7 @@ const BurgerBuilder = props => {
                     />
                 </>
             ))
-            || (error && <p>Ingredients can't be loaded :(</p>)
+            || (errorMessage && <p style={{color:'lightgrey'}}>{errorMessage}</p>)
             || <Spinner/> 
             }
            
@@ -74,4 +72,4 @@ const BurgerBuilder = props => {
 
 
 
-export default withErrorHandler(BurgerBuilder,database);
+export default BurgerBuilder;

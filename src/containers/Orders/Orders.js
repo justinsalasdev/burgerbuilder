@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Order from '../Order/Order';
-import database from '../../axios/database';
+import axios from 'axios';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
@@ -42,4 +42,4 @@ const Orders = props => {
         )
 }
 
-export default withErrorHandler(Orders,database);
+export default withErrorHandler(Orders,axios);

@@ -3,7 +3,7 @@ import * as actions from '../actions/actions';
 const initialState = {
     ingredients: null,
     totalPrice: 4,
-    error: false,
+    errorMessage: null
 }
 
 const INGREDIENT_PRICES = {
@@ -44,7 +44,7 @@ const reducer = (state = initialState, action) => {
         
         case actions.FETCH_INGREDIENTS_FAILED:{
             const _ = deepClone(state)
-            _.error = true;
+            _.errorMessage = action.errorMessage;
             return _;       
         }
 

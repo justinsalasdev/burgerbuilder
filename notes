@@ -2,6 +2,9 @@
 create profile page 
 with edit button
 @checkout must prompt 'please setup delivery information' if no saved profile data
+use withErrorhandler to handle network errors
+make 'something went wrong page'
+
 
 ----------DONE
 --> remove signup promise chain --> kept don't want to rewrite
@@ -10,3 +13,7 @@ trouble login get userdata error handler
 store profile data
 --> order start >> login >> must go to checkout instead of '/' --> not possible w/ redirect to "/" in App.js
 --> fixed bug (input ref undefined) when login afte logout
+remove axios instances --> use root axios only
+optimize refresh auth timer --> leave as is 
+enhance burger builder error handling --> removed withErrorHandler
+

@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import database from '../../axios/database';
+import axios from 'axios';
 
 
 
@@ -30,7 +30,7 @@ export const fetchOrders = (token,userId) => {
     return dispatch => {
         dispatch(fetchOrdersStart())
         const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
-        database.get(`/orders.json${queryParams}`)
+        axios.get(`https://react-burger-builder-12ae6.firebaseio.com/orders.json${queryParams}`)
             .then(res => {
                 const fetchedOrders = [];
                 for (let key in res.data){

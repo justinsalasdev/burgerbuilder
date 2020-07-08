@@ -1,6 +1,5 @@
 // import * as actions from './actions';
 // import axios from 'axios';
-// import database from '../../axios/database';
 
 
 
