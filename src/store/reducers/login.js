@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
         case actions.PROFILE_STORE: {
             const _ = deepClone(state);
             _.userData = action.userData;
+            _.loading = false;
             return _;
         }
 
@@ -49,11 +50,7 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
-        case actions.LOGIN_END:{
-            const _ = deepClone(state);
-            _.loading = false
-            return _;
-        }
+    
 
         case actions.LOGOUT:{
             const _ = deepClone(state);

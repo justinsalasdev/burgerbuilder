@@ -9,4 +9,4 @@ render alert after signup
 trouble login get userdata error handler
 store profile data
 --> order start >> login >> must go to checkout instead of '/' --> not possible w/ redirect to "/" in App.js
-
+--> fixed bug (input ref undefined) when login afte logout

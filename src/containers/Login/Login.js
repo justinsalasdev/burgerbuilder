@@ -16,7 +16,6 @@ import * as Yup from 'yup';
 
 const Login = props => {
 
-  const {history} = props;
 
   const [alertShown,showAlert] = useAlert(false);  
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const Login = props => {
   },[])
 
   const acknowledgeAlert = () => {
-
+    
   }
   
   

@@ -59,7 +59,6 @@ const handleLoginConflict = (conflictMessage) => {
 
 //exports
 export const logout = () => {
-    console.log(logoutTimer)
     clearTimeout(logoutTimer)
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');

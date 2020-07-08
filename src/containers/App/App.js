@@ -1,7 +1,7 @@
 import React, {Suspense, useEffect} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
-import Logout from '../Logout/Logout';
+// import Logout from '../Logout/Logout';
 import {Route, Switch,Redirect} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as actions from '../../store/actions/exports'
@@ -19,9 +19,6 @@ const App = props => {
   const dispatch = useDispatch();
   const idToken = useSelector(state => state.login.idToken)
   
-  
-
-
   dispatch(actions.refreshAuth(idToken))
 
   const isAuthenticated = idToken !== null;
@@ -34,7 +31,7 @@ const App = props => {
             <Suspense fallback={<Spinner/>}><Route path="/checkout" component={Checkout}/></Suspense>
             <Suspense fallback={<Spinner/>}><Route path="/orders" component={Orders}/></Suspense>
             <Suspense fallback={<Spinner/>}><Route path="/profile" component={Profile}/></Suspense>
-            <Route path="/logout" component={Logout}/>
+            {/* <Route path="/logout" component={Logout}/> */}
             <Route path="/" exact component={BurgerBuilder}/>
             <Redirect to ="/" />
           </>

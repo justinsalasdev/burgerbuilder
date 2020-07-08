@@ -8,7 +8,6 @@ import {useSelector,useDispatch} from 'react-redux';
 
 
 const NavigationItems = (props) =>{
-    console.log(props)
     const {closeSideDrawer} = props;
     
     const dispatch = useDispatch();
