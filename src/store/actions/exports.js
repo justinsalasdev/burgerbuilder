@@ -33,7 +33,9 @@ export {
 } from './signup'
 
 
-// export {
-//     editProfile
-// } from './editProfile'
+export {
+    updateProfile,
+    startEdit,
+    endEdit
+} from './updateProfile'
 

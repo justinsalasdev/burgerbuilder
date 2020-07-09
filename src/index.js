@@ -12,7 +12,7 @@ import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
 import login from './store/reducers/login'
 import signup from './store/reducers/signup'
-import editProfile from './store/reducers/editProfile'
+import updateProfile from './store/reducers/updateProfile'
 import thunk from 'redux-thunk';
 
 //Basic redux setup
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   fetchOrders,
   login,
   signup,
-  editProfile
+  updateProfile
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(

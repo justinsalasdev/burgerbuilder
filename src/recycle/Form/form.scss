@@ -8,6 +8,16 @@
     color: $secondary-dark;
     padding: 2rem;
 
+    &--edit{
+        border: 3px double $secondary-dark;
+    }
+
+    &__edit{
+        position: absolute;
+        right: 1.5rem;
+        top: 1.5rem;
+    }
+
     &__toolkit{
         margin-bottom: 3rem;
         font-size: 2rem;

@@ -24,6 +24,11 @@ select:-webkit-autofill:focus {
     margin-bottom: 2rem;
     background-color: rgba($secondary-dark,0.15);
 
+    &--inactive{
+        @extend .form-input;
+        background-color: transparent;
+    }
+
 
     &__label{
         font-size: 1.6rem;

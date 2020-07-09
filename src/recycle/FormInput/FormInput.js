@@ -7,6 +7,7 @@ const FormInput = React.forwardRef((props,ref) => {
         type,
         formik,
         children,
+        editing
     } = props;
     
     const getInputError = name =>{
@@ -16,9 +17,10 @@ const FormInput = React.forwardRef((props,ref) => {
       }
 
     return (
-        <div className='form-input'>
+        <div className={editing? 'form-input': 'form-input--inactive'}>
             <label className='form-input__label' htmlFor={identity}>{children} {getInputError(identity)}</label>
             <input 
+                disabled={!editing}
                 ref={ref}
                 type={type}
                 className='form-input__field' 

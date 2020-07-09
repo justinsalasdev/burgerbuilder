@@ -82,6 +82,7 @@ const Signup = props => {
     null
   )
 
+
   const formErrors = Object.keys(formik.errors).length;
   return (
     <>
@@ -89,12 +90,12 @@ const Signup = props => {
         {toolkit}
         {loading? <Spinner/>
         :<form className='form__form' onSubmit={formik.handleSubmit}>
-          <FormInput formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
-          <FormInput formik={formik} identity='password' type="password">Password</FormInput>
-          <FormInput formik={formik} identity='name' type="text">Name</FormInput>
-          <FormInput formik={formik} identity='country' type="text">Country</FormInput>
-          <FormInput formik={formik} identity='zipCode' type="text">Zip Code</FormInput>
-          <FormInput formik={formik} identity='contactNumber' type="text">Contact Number</FormInput>
+          <FormInput editing={true}  formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
+          <FormInput editing={true} formik={formik} identity='password' type="password">Password</FormInput>
+          <FormInput editing={true} formik={formik} identity='name' type="text">Name</FormInput>
+          <FormInput editing={true} formik={formik} identity='country' type="text">Country</FormInput>
+          <FormInput editing={true} formik={formik} identity='zipCode' type="text">Zip Code</FormInput>
+          <FormInput editing={true} formik={formik} identity='contactNumber' type="text">Contact Number</FormInput>
 
           <button disabled={!formErrors <= 0} type="submit" className="button--success form__submit">Create</button>
         </form>}

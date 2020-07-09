@@ -65,8 +65,8 @@ const Login = props => {
 
         {loading? <Spinner/>: 
         <form className='form__form' onSubmit={formik.handleSubmit}>
-          <FormInput formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
-          <FormInput formik={formik} identity='password' type="password">Password</FormInput>
+          <FormInput editing={true} formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
+          <FormInput editing={true} formik={formik} identity='password' type="password">Password</FormInput>
 
           <button disabled={submitDisabled} type="submit" className="button--success form__submit">Submit</button>
         </form>}

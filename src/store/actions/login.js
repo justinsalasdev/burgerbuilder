@@ -39,11 +39,7 @@ const storeUserData = (userData) => {
     }
 }
 
-const endLogin = () => {
-    return {
-        type: actions.LOGIN_END
-    }
-}
+
 
 
 const handleLoginFailure = (errorMessage) => {
@@ -69,6 +65,8 @@ export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId')
+    localStorage.removeItem('userData')
+
     return {
         type: actions.LOGOUT
     }
@@ -90,17 +88,17 @@ export const  refreshAuth = () => {
 
             } else {
                 const userId = localStorage.getItem('userId');
+                const userData = JSON.parse(localStorage.getItem('userData'))
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
 
+                dispatch(storeUserData(userData))
                 dispatch(storeLoginData(idToken,userId))
                 dispatch(setLogoutTimer(expiry))
+                
                 }
             }
         }
     }
-
-
-
 
 export const login = (loginData,showAlert) =>{
     let userId = null;
@@ -131,8 +129,10 @@ export const login = (loginData,showAlert) =>{
 
                                 const userData = {};
                                 for (const id in response.data){
-                                    Object.assign(userData,response.data[id])
+                                    Object.assign(userData,{...response.data[id], id:id})
                                 }
+
+                                localStorage.setItem('userData',JSON.stringify(userData))
 
                                 dispatch(storeLoginData(idToken,userId))
                                 dispatch(setLogoutTimer(expiry))
