@@ -22,24 +22,22 @@ const setLogoutTimer = (expiration) => {
     return dispatch => {
         logoutTimer = setTimeout(() => {
             dispatch(logout())
-        },expiration * 900)
+        },expiration*1000)
     } 
 }
 
-const getUserData = (idToken, userId) => {
+export const getUserData = (idToken, userId) => {
     const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`
     const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/users.json${queryParams}`
     return axios.get(endPoint)
 }
 
-const storeUserData = (userData) => {
+export const storeUserData = (userData) => {
     return {
         type: actions.PROFILE_STORE,
         userData
     }
 }
-
-
 
 
 const handleLoginFailure = (errorMessage) => {
@@ -66,22 +64,18 @@ export const logout = () => {
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId')
     localStorage.removeItem('userData')
-
     return {
         type: actions.LOGOUT
     }
 };
 
 
-export const  refreshAuth = () => {
+export const  refreshAuth = (localToken) => {
     return dispatch => {
-        const idToken = localStorage.getItem('token');
-        if(!idToken){
-            dispatch(logout());
-            
+        if(!localToken){
+            return
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
-
             if (expirationDate <= new Date()){
 
                 dispatch(logout());
@@ -92,7 +86,7 @@ export const  refreshAuth = () => {
                 const expiry = (expirationDate.getTime() - new Date().getTime())/1000;
 
                 dispatch(storeUserData(userData))
-                dispatch(storeLoginData(idToken,userId))
+                dispatch(storeLoginData(localToken,userId))
                 dispatch(setLogoutTimer(expiry))
                 
                 }
@@ -114,6 +108,7 @@ export const login = (loginData,showAlert) =>{
         axios.post(endPoint, {...loginData,returnSecureToken: true})
             .then( //user is authenticated but defer saving of credentials until userData is retrieved
                 response => {
+
                     userId = response.data.localId
                     idToken = response.data.idToken
                     expiry = response.data.expiresIn
@@ -123,6 +118,7 @@ export const login = (loginData,showAlert) =>{
                             response => {
 
                                 const expirationDate = new Date( new Date().getTime() + new Date(expiry*1000).getTime())
+
                                 localStorage.setItem('token',idToken)
                                 localStorage.setItem('expirationDate',expirationDate)
                                 localStorage.setItem('userId',userId)
@@ -131,9 +127,7 @@ export const login = (loginData,showAlert) =>{
                                 for (const id in response.data){
                                     Object.assign(userData,{...response.data[id], id:id})
                                 }
-
                                 localStorage.setItem('userData',JSON.stringify(userData))
-
                                 dispatch(storeLoginData(idToken,userId))
                                 dispatch(setLogoutTimer(expiry))
                                 dispatch(storeUserData(userData))

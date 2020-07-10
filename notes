@@ -2,8 +2,9 @@
 create profile page 
 with edit button
 @checkout must prompt 'please setup delivery information' if no saved profile data
-fix patch request
 update UI with updates in profile
+live update
+
 
 
 ----------DONE
@@ -18,6 +19,6 @@ optimize refresh auth timer --> leave as is
 enhance burger builder error handling --> removed withErrorHandler
 make 'something went wrong page' // not needed anymore
 use withErrorhandler to handle network errors // not needed anymore
-
-
+fix patch request
+optimized refreshAuth using useEffect & localToken
 

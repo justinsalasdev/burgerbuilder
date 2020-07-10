@@ -23,7 +23,9 @@ const BurgerBuilder = props => {
     const isAuthenticated = useSelector(state => state.login.idToken !== null)
 
     useEffect(() => {
-        dispatch(actions.initIngredients())
+        if(!ings){
+            dispatch(actions.initIngredients())
+        }
     // eslint-disable-next-line
     },[])
 

@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {Suspense,useEffect} from 'react';
 import Layout from '../Layout/Layout';
 import BurgerBuilder from '../BurgerBuilder/BurgerBuilder';
 import {Route, Switch,Redirect} from 'react-router-dom';
@@ -15,10 +15,17 @@ const Profile = React.lazy(() => import('../Profile/Profile'))
 const App = props => {
 
   const dispatch = useDispatch();
-  const idToken = useSelector(state => state.login.idToken)
-  dispatch(actions.refreshAuth(idToken))
+  const reduxToken = useSelector(state => state.login.idToken);
 
-  const isAuthenticated = idToken !== null;
+  const localToken = localStorage.getItem('token');  
+  useEffect(() => {
+      dispatch(actions.refreshAuth(localToken))
+  // eslint-disable-next-line 
+  },[])
+
+
+
+  const isAuthenticated = reduxToken !== null;
 
 
   const routes = function (isAuthenticated){

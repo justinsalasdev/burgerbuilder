@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
 
         case actions.PROFILE_SAVE_FAILED:{
                 const _ = deepClone(state);
-                _.error = action.errorMessage
+                _.errorMessage = action.errorMessage
                 _.loading = false
                 return _;
         }

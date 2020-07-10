@@ -9,13 +9,12 @@ import Spinner from '../../recycle/Spinner/Spinner';
 import FormInput from '../../recycle/FormInput/FormInput';
 import Alert from '../../recycle/Alert/Alert';
 import useAlert from '../../hooks/useAlert';
-import LoginPrompt from '../LoginPrompt/LoginPrompt';
+import ErrorPrompt from '../../recycle/ErrorPrompt/ErrorPrompt';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
 const Login = props => {
-
 
   const [alertShown,showAlert] = useAlert(false);  
   const dispatch = useDispatch();
@@ -77,7 +76,7 @@ const Login = props => {
 
       {!alertShown?null:
         <Alert closeAlert={acknowledgeAlert}>
-            <LoginPrompt acknowledgeAlert={acknowledgeAlert}>{errorMessage}</LoginPrompt>
+            <ErrorPrompt acknowledgeAlert={acknowledgeAlert}>{errorMessage}</ErrorPrompt>
         </Alert>
       }
     </>

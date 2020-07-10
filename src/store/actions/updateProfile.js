@@ -1,4 +1,5 @@
 import * as actions from './actions';
+import {storeUserData} from './login';
 import axios from 'axios';
 
 
@@ -21,7 +22,7 @@ const endSavingProfile = () => {
     }
 }
 
-const handleSaveFail = (errorMessage) => {
+export const handleSaveFail = (errorMessage) => {
     return {
         type: actions.PROFILE_SAVE_FAILED,
         errorMessage
@@ -37,33 +38,41 @@ export const endEdit = () => {
 }
 
 
-export const updateProfile = (userData,id,idToken) => {
+export const updateProfile = (formData,id,userId,idToken,showAlert) => {
+    
+    const config = {
+        method: 'post',
+        headers:{
+            'X-HTTP-Method-Override':'PATCH'
+        },
+        params: {
+            auth: idToken,
 
-    // const updateObject = {
-    //     [id]:{
-    //         ...userData
-    //     }
-    // }
-
-    const updateObject = '{-MBnu-SHLYrk4j7TnZmL:{"name":"hahaha"}}'
-
-    const queryParams = `auth=${idToken}&http-method-override=PUT`
-    const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/users.json?${queryParams}`
-
+        }
+    }
+    const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/users/${id}.jso`;
 
     return dispatch => {
         dispatch(startSavingProfile())
-        axios.post(endPoint,updateObject)
+        axios.post(endPoint,formData,config)
             .then(
                 response => {
-                    console.log(response)
+                    const updatedUserData = {...response.data,userId:userId,id:id}
+                    console.log(updatedUserData)
+                    localStorage.setItem('userData', JSON.stringify(updatedUserData))
+                    dispatch(storeUserData(response.data))
                     dispatch(endSavingProfile())
+                    dispatch(endEdit())
                 },
-                error => dispatch(handleSaveFail('error1'))
+                () => {
+                    dispatch(handleSaveFail('Failed to save changes'))
+                    showAlert(true);
+                }
             )
-            .catch(
-                error => dispatch(handleSaveFail('error2'))
-            )
+            .catch(() => {
+                dispatch(handleSaveFail('Failed to save changes'))
+                    showAlert(true);
+            })
     }
 }
 

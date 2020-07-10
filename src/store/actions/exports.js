@@ -23,7 +23,9 @@ export {
 export {
     login,
     logout,
-    refreshAuth
+    refreshAuth,
+    getUserData,
+    storeUserData
 } from './login'
 
 
@@ -36,6 +38,7 @@ export {
 export {
     updateProfile,
     startEdit,
-    endEdit
+    endEdit,
+    handleSaveFail
 } from './updateProfile'
 
