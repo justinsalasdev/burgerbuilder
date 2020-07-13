@@ -7,7 +7,7 @@ const startSignup = () => {
     return {
         type: actions.SIGNUP_START
     }
-    
+
 }
 const endSignup = (endType) => {
     return {
@@ -15,7 +15,7 @@ const endSignup = (endType) => {
         endType
     }
 }
- 
+
 const handleSignupConflict = (conflictMessage) => {
     return {
         type: actions.SIGNUP_CONFLICT,
@@ -24,23 +24,23 @@ const handleSignupConflict = (conflictMessage) => {
 }
 
 const apiKey = 'AIzaSyB9KjbBy3MryQYOKkZDjOXiYzScBLApRFE';
-const postUserData = (userData,idToken) => {
+const postUserData = (userData, idToken) => {
     const queryParams = `?auth=${idToken}`
     return axios.post(`https://react-burger-builder-12ae6.firebaseio.com/users.json${queryParams}`, userData)
 }
 
 const postSignupData = (signUpData) => {
     const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`
-    return axios.post(endPoint, {...signUpData, returnSecureToken: true})
+    return axios.post(endPoint, { ...signUpData, returnSecureToken: true })
 }
-    
+
 const deleteSignupData = (idToken) => {
     const endPoint = `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${apiKey}`
-    return axios.post(endPoint, {idToken})
+    return axios.post(endPoint, { idToken })
 }
 
 //exports
-export const signup = (formData,showAlert) => {
+export const signup = (formData, showAlert) => {
     const {
         email,
         password,
@@ -51,13 +51,13 @@ export const signup = (formData,showAlert) => {
     } = formData
 
     let token = null;
-    const signUpData = {email,password};
-    const userData = {name,country,zipCode,contactNumber};
-     
+    const signUpData = { email, password };
+    const userData = { name, country, zipCode, contactNumber };
+
     return dispatch => {
 
         dispatch(startSignup())
-        
+
         postSignupData(signUpData)
             .then(
                 response => {
@@ -66,17 +66,23 @@ export const signup = (formData,showAlert) => {
                     const userId = response.data.localId;
                     token = idToken;
 
-                    postUserData({...userData, userId},idToken)
+                    postUserData({ ...userData, userId }, idToken)
                         .then(
-                            () => {dispatch(endSignup('userSaved'));showAlert(true);},
+                            () => { dispatch(endSignup('userSaved')); showAlert(true); },
                             error => {
                                 console.log(error.response.data.error)
                                 deleteSignupData(token)
                                     .then(
-                                        () => {dispatch(endSignup('signupFailed')); showAlert(true)},
-                                        () => {dispatch(endSignup('userNotSaved')); showAlert(true)}
+                                        () => {
+                                            dispatch(endSignup('signupFailed'));
+                                            showAlert(true)
+                                        },
+                                        () => {
+                                            dispatch(endSignup('userNotSaved'));
+                                            showAlert(true)
+                                        }
                                     )
-                            }   
+                            }
                         )
                 },
                 error => {
@@ -84,10 +90,12 @@ export const signup = (formData,showAlert) => {
                     dispatch(handleSignupConflict(conflictMessage))
                 }
             )
-            .catch(() => {dispatch(endSignup('signupFailed')); showAlert(true)})
+            .catch(() => {
+                dispatch(endSignup('signupFailed'))
+                showAlert(true)
+            })
     }
 }
 
-    
 
-       
+

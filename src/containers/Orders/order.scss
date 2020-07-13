@@ -1,0 +1,13 @@
+@import '../../assets/styles//variables.scss';
+
+
+.order{
+    width: 40rem;
+    border-top-right-radius: 1.5rem;
+    background-color: rgba($secondary-light,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem .5rem .5rem;
+    box-shadow: .2rem .2rem .4rem $shadow-inactive;
+}

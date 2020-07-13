@@ -8,9 +8,9 @@ export const PURCHASE_BURGER_START = 'PURCHASE_BURGER_START';
 export const PURCHASE_BURGER_SUCCESS = 'PURCHASE_BURGER_SUCCESS';
 export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
 
-export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
-export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDER_SUCCESS';
-export const FETCH_ORDERS_FAIL = 'FETCH_ORDER_FAIL';
+export const FETCH_START = 'FETCH_START';
+export const FETCH_STORE = 'FETCH_STORE';
+export const FETCH_FAIL = 'FETCH_FAIL';
 
 
 //login------------------------------------------

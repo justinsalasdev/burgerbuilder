@@ -2,47 +2,52 @@ import * as actions from './actions';
 import axios from 'axios';
 
 
-
-const fetchOrdersSuccess = (orders) => {
+const startFetching = () => {
     return {
-        type: actions.FETCH_ORDERS_SUCCESS,
+        type: actions.FETCH_START
+    }
+}
+
+const storeOrders = (orders) => {
+    return {
+        type: actions.FETCH_STORE,
         orders: orders
     }
 }
 
 
-const fetchOrdersFail = (error) => {
+const handleFetchFailure = (fetchMessage) => {
     return {
-        type: actions.FETCH_ORDERS_FAIL,
-        error: error
+        type: actions.FETCH_FAIL,
+        fetchMessage,
     }
 }
 
-const fetchOrdersStart = () => {
-    return {
-        type: actions.FETCH_ORDERS_START
-    }
-}
 
 //EXPORTS
-
-export const fetchOrders = (token,userId) => {
+export const fetchOrders = (idToken,userId) => {
     return dispatch => {
-        dispatch(fetchOrdersStart())
-        const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
-        axios.get(`https://react-burger-builder-12ae6.firebaseio.com/orders.json${queryParams}`)
-            .then(res => {
-                const fetchedOrders = [];
-                for (let key in res.data){
-                    fetchedOrders.unshift({
-                        ...res.data[key],
-                        id: key
-                    })
+        dispatch(startFetching())
+        const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`
+        const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/orders.json${queryParams}`
+        axios.get(endPoint)
+            .then(
+                response => {
+                    const fetchedOrders = [];
+                    for (let key in response.data){
+                        fetchedOrders.unshift({
+                            ...response.data[key],
+                            key
+                        })
+                    }
+                console.log(fetchedOrders)
+                dispatch(storeOrders(fetchedOrders))
+                },
+                () => {
+                    dispatch(handleFetchFailure("Can't retrieve your orders :("))
                 }
-                dispatch(fetchOrdersSuccess(fetchedOrders))
-            })
-            .catch(err => {
-                dispatch(fetchOrdersFail(err))
-            })
+
+            )
+            .catch(error => dispatch(handleFetchFailure("Something went wrong. Unable to fetch your orders")))
     }
 }
