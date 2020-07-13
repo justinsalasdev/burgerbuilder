@@ -1,0 +1,40 @@
+@import '../../assets/styles/variables.scss';
+
+.profile{
+    position: relative;
+    width: 60%;
+    max-width: 50rem;
+    text-align: center;
+    color: $secondary-dark;
+    padding: 2rem;
+
+    border: 3px double rgba($secondary-light,0.5);
+    border-top-right-radius: 2rem;
+    background-color: .2rem .2rem .4rem $shadow-active;
+    background-color: rgba($secondary-light,0.1);
+
+    &__item{
+        border-radius: .5rem;
+        padding: .7rem;
+        text-align: left;
+        margin-bottom: 1rem;
+        // background-color: rgba($secondary-dark,0.15);
+
+        &>dt{
+            font-size: 1.6rem;
+            display: block;
+            color: whitesmoke;
+        }
+    }
+
+    &__edit{
+        position: absolute;
+        right: 1.5rem;
+        top: 1.5rem;
+    }
+
+    @media screen and (max-width: $form-input-breakpoint){
+        width: 90%;
+    }
+}
+

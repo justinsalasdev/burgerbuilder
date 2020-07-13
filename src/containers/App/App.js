@@ -10,7 +10,8 @@ const Checkout = React.lazy(() => import ('../Checkout/Checkout'))
 const Orders = React.lazy(() => import ('../Orders/Orders'))
 const Login = React.lazy(() => import ('../Login/Login'))
 const Signup = React.lazy(() => import ('../Signup/Signup'))
-const Profile = React.lazy(() => import('../Profile/Profile'))
+const EditProfile = React.lazy(() => import('../EditProfile/EditProfile'))
+const StaticProfile = React.lazy(() => import('../StaticProfile/StaticProfile'))
 
 const App = props => {
 
@@ -34,7 +35,8 @@ const App = props => {
           <>
             <Suspense fallback={<Spinner/>}><Route path="/checkout" component={Checkout}/></Suspense>
             <Suspense fallback={<Spinner/>}><Route path="/orders" component={Orders}/></Suspense>
-            <Suspense fallback={<Spinner/>}><Route path="/profile" component={Profile}/></Suspense>
+            <Suspense fallback={<Spinner/>}><Route path="/profile-edit" component={EditProfile}/></Suspense>
+            <Suspense fallback={<Spinner/>}><Route path="/profile" component={StaticProfile}/></Suspense>
             <Route path="/" exact component={BurgerBuilder}/>
             <Redirect to ="/" />
           </>

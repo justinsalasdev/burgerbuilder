@@ -4,6 +4,10 @@ with edit button
 @checkout must prompt 'please setup delivery information' if no saved profile data
 update UI with updates in profile
 live update
+Profile --> cancel edit must return initial values
+refactor using react form hook
+
+
 
 
 
@@ -21,4 +25,5 @@ make 'something went wrong page' // not needed anymore
 use withErrorhandler to handle network errors // not needed anymore
 fix patch request
 optimized refreshAuth using useEffect & localToken
+convert navigation-buttons to link // no need
 

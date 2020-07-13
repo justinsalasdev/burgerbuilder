@@ -17,13 +17,13 @@ const BurgerBuilder = props => {
     const removeIngredient = (ingName) => dispatch(actions.removeIngredient(ingName))
 
         
-    const ings = useSelector(state => state.buildBurger.ingredients)
-    const price = useSelector(state => state.buildBurger.totalPrice)
+    const ingredients = useSelector(state => state.buildBurger.ingredients)
+    const price = useSelector(state => state.buildBurger.totalPrice.toFixed(2))
     const errorMessage = useSelector(state => state.buildBurger.errorMessage)
     const isAuthenticated = useSelector(state => state.login.idToken !== null)
 
     useEffect(() => {
-        if(!ings){
+        if(!ingredients){
             dispatch(actions.initIngredients())
         }
     // eslint-disable-next-line
@@ -36,7 +36,7 @@ const BurgerBuilder = props => {
         showAlert(false)
     }
 
-    const disabledInfo = {...ings}
+    const disabledInfo = {...ingredients}
 
     for (let key in disabledInfo){
         disabledInfo[key] = (disabledInfo[key] <= 0)
@@ -50,9 +50,9 @@ const BurgerBuilder = props => {
             </Alert>}
 
 
-            {(ings && (
+            {(ingredients && (
                 <>
-                    <Burger ingredients={ings}/>
+                    <Burger ingredients={ingredients}/>
                     <BuildControls
                         addIngredient={addIngredient}
                         removeIngredient={removeIngredient}

@@ -38,7 +38,7 @@ export const endEdit = () => {
 }
 
 
-export const updateProfile = (formData,id,userId,idToken,showAlert) => {
+export const updateProfile = (formData,id,userId,idToken,showAlert,history) => {
     
     const config = {
         method: 'post',
@@ -50,7 +50,7 @@ export const updateProfile = (formData,id,userId,idToken,showAlert) => {
 
         }
     }
-    const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/users/${id}.jso`;
+    const endPoint = `https://react-burger-builder-12ae6.firebaseio.com/users/${id}.json`;
 
     return dispatch => {
         dispatch(startSavingProfile())
@@ -62,7 +62,7 @@ export const updateProfile = (formData,id,userId,idToken,showAlert) => {
                     localStorage.setItem('userData', JSON.stringify(updatedUserData))
                     dispatch(storeUserData(response.data))
                     dispatch(endSavingProfile())
-                    dispatch(endEdit())
+                    history.replace('/profile')
                 },
                 () => {
                     dispatch(handleSaveFail('Failed to save changes'))

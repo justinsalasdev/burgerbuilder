@@ -2,7 +2,7 @@ import '../../recycle/Button/button.scss'
 import '../../recycle/Form/form.scss'
 import '../../recycle/FormInput/form-input.scss';
 
-import React, {useRef, useEffect} from 'react';
+import React,{useEffect} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
 import Spinner from '../../recycle/Spinner/Spinner';
@@ -18,29 +18,29 @@ const Profile = props => {
 
   const userData = useSelector(state => state.login.userData)
   const {contactNumber,country,name,userId,zipCode,id} = userData;
-  const editing = useSelector(state => state.updateProfile.editing);
   const loading = useSelector(state => state.updateProfile.loading);
   const errorMessage = useSelector(state => state.updateProfile.errorMessage);
   const idToken = useSelector(state => state.login.idToken);
 
   const dispatch = useDispatch();
-  const inputRef = useRef();
+
   const [alertShown,showAlert] = useAlert(false);
 
+  const {history} = props;
+
   useEffect(() => {
-    return (() => {
+    dispatch(actions.startEdit())
+    return () => {
       dispatch(actions.endEdit())
-    })
+    }
+
   // eslint-disable-next-line
   },[])
 
 
-  
-  
 
-  const startEdit = () => {
-    dispatch(actions.startEdit())
-    inputRef.current.focus()
+  const goToProfile = () => {
+    history.replace('/profile')
   }
 
   const acknowledgeAlert = () => {
@@ -56,46 +56,54 @@ const Profile = props => {
     },
     validationSchema: Yup.object ({  
         name: Yup.string()
-            .required('is required'),
+            .required('is required')
+            .max(20,'must not be longer than 20 characters'),
         country: Yup.string()
-            .required('is required'),
+            .required('is required')
+            .max(20,'must not be longer than 20 characters'),
         zipCode: Yup.string()
             .required('is required')
             .matches(/^[0-9]+$/,'must be a number')
             .min(4,'must be 4 characters at least')
-            .max(4,'should only contain 4 digits'),
+            .max(4,'should not be more than 4 digits'),
         contactNumber: Yup.string()
             .required('is required')
             .matches(/^[0-9]+$/,'must be a number')
+            .max(20,'must not be longer than 20 digits')
     }),
     onSubmit: (formData) => {
-      dispatch(actions.updateProfile(formData,id,userId,idToken,showAlert))
+      dispatch(actions.updateProfile(formData,id,userId,idToken,showAlert,history))
     }
   });
   
+  useEffect(() => {
+    setTimeout(() => {
+      
+    },500)
+  })
 
-  const formErrors = Object.keys(formik.errors).length;
+
+  const formHasErrors = Object.keys(formik.errors).length > 0;
+  const valuesChanged = JSON.stringify(formik.initialValues) !== JSON.stringify(formik.values)
+  const saveText = (  valuesChanged && 'Save') || 'No changes'
+
+
   return (
     <>
-      <div className={editing?'form':'form form--edit'}>
-        
+      <div className='form'>
         {loading? <Spinner/>
-        :<form className='form__form' onSubmit={formik.handleSubmit}>
+          :<form className='form__form' onSubmit={formik.handleSubmit}>
 
-          <FormInput editing={editing} formik={formik} identity='name' type="text" ref={inputRef}>Name</FormInput>
-          <FormInput editing={editing} formik={formik} identity='country' type="text">Country</FormInput>
-          <FormInput editing={editing} formik={formik} identity='zipCode' type="text">Zip Code</FormInput>
-          <FormInput editing={editing} formik={formik} identity='contactNumber' type="text">Contact Number</FormInput>
+              <FormInput formik={formik} identity='name' type="text">Name</FormInput>
+              <FormInput formik={formik} identity='country' type="text">Country</FormInput>
+              <FormInput formik={formik} identity='zipCode' type="text">Zip Code</FormInput>
+              <FormInput formik={formik} identity='contactNumber' type="text">Contact Number</FormInput>
 
-          {editing? null:
-          <button type="button" className='button--more form__edit' onClick={startEdit}>Edit</button>}
-
-          {!editing? null:
-          <button disabled={!formErrors <= 0} type="submit" className="button--success form__submit">Save</button>}
-          
-
-        </form>}
-      </div>
+              <button type="button" className="button--more form__cancel" onClick={goToProfile}>Cancel</button>
+              <button disabled={(!valuesChanged || formHasErrors)} type="submit" className="button--success form__submit">{saveText}</button>
+          </form>}
+       </div>
+      
 
       {!alertShown? null :
       <Alert closeAlert={acknowledgeAlert} >
