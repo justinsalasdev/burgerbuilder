@@ -4,44 +4,47 @@ import axios from 'axios';
 
 
 
-const purchaseBurgerStart = () => {
+const startPurchase = () => {
     return {
         type: actions.PURCHASE_BURGER_START
     }
 }
 
 
-const purchaseBurgerSuccess = (id, orderData) => {
+const notifySuccess = (checkOutMessage) => {
     return {
         type: actions.PURCHASE_BURGER_SUCCESS,
+        checkOutMessage
     }
 }
 
 
-const purchaseBurgerFail = (error) => {
+const notifyFailure = (checkOutMessage) => {
     return {
         type: actions.PURCHASE_BURGER_FAIL,
-        error: error
+        checkOutMessage
     }
 }
 
-//EXPORTS
-export const checkoutBurger = () => {
-    return {
-        type: actions.CHECKOUT_BURGER
-    }
-}
-
-export const purchaseBurger = (orderData,idToken) => {
+export const purchaseBurger = (orderData,idToken,showAlert) => {
     return dispatch => {
+
+        const endPoint = 'https://react-burger-builder-12ae6.firebaseio.com/orders.json?auth=' + idToken
         
-        dispatch(purchaseBurgerStart())
-        axios.post('https://react-burger-builder-12ae6.firebaseio.com/orders.json?auth=' + idToken,orderData)
-        .then(response => {
-            dispatch(purchaseBurgerSuccess())
-        })
-        .catch(error => {
-            dispatch(purchaseBurgerFail(error))
+        dispatch(startPurchase())
+        axios.post(endPoint, orderData)
+        .then(
+            () => {
+                dispatch(notifySuccess('Thank you for purchasing!'))
+                showAlert(true)
+            },
+            () => {
+                dispatch(notifyFailure('Failed to place your order :( Please try again'))
+                showAlert(true)
+            }
+        )
+        .catch(() => {
+            dispatch(notifyFailure('Network Error! Failed to place your order :('))
         })
     }
 }

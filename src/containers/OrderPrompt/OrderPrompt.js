@@ -2,7 +2,7 @@ import React from 'react';
 import '../../recycle/Button/button.scss'
 import './order-prompt.scss';
 
-const LoginPrompt = props => {
+const OrderPrompt = props => {
     const {cancelOrder,goToLogin} = props;
     return (
         <div className='order-prompt'>
@@ -14,5 +14,5 @@ const LoginPrompt = props => {
 }
 
 
-export default LoginPrompt
+export default OrderPrompt
 

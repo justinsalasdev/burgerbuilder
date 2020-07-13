@@ -1,7 +1,7 @@
 import React from 'react';
-import './error-prompt.scss'
+import './prompt.scss'
 
-const ErrorPrompt = props => {
+const Prompt = props => {
     const {children,acknowledgeAlert} = props 
     return (
         <div className='error-prompt'>
@@ -10,5 +10,5 @@ const ErrorPrompt = props => {
         </div>
     )
 }
-export default ErrorPrompt;
+export default Prompt;
 

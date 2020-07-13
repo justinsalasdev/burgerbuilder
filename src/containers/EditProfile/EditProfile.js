@@ -11,7 +11,7 @@ import Alert from '../../recycle/Alert/Alert';
 import useAlert from '../../hooks/useAlert';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import ErrorPrompt from '../../recycle/ErrorPrompt/ErrorPrompt';
+import ErrorPrompt from '../../recycle/Prompt/Prompt';
 
 
 const Profile = props => {
@@ -91,7 +91,12 @@ const Profile = props => {
   return (
     <>
       <div className='form'>
-        {loading? <Spinner/>
+        {loading? (
+          <div>
+            <p style={{color:'wheat',marginBottom:'1rem'}}>Saving changes...</p>
+            <Spinner/>
+          </div>
+        )
           :<form className='form__form' onSubmit={formik.handleSubmit}>
 
               <FormInput formik={formik} identity='name' type="text">Name</FormInput>

@@ -9,7 +9,7 @@ import Spinner from '../../recycle/Spinner/Spinner';
 import FormInput from '../../recycle/FormInput/FormInput';
 import Alert from '../../recycle/Alert/Alert';
 import useAlert from '../../hooks/useAlert';
-import ErrorPrompt from '../../recycle/ErrorPrompt/ErrorPrompt';
+import ErrorPrompt from '../../recycle/Prompt/Prompt';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -22,6 +22,7 @@ const Login = props => {
   const conflictMessage = useSelector(state => state.login.conflictMessage);
   const errorMessage = useSelector(state => state.login.errorMessage);
 
+  
 
   const inputRef = useRef();
   useEffect(() => {
@@ -63,7 +64,13 @@ const Login = props => {
       
         {formToolkit}
 
-        {loading? <Spinner/>: 
+        {loading? (
+          <div>
+            <p style={{color:'wheat',marginBottom:'1rem'}}>Signing in...</p>
+            <Spinner/>
+          </div>
+          
+        ): 
         <form className='form__form' onSubmit={formik.handleSubmit}>
           <FormInput editing={true} formik={formik} identity='email' type="email" ref={inputRef}>Email</FormInput>
           <FormInput editing={true} formik={formik} identity='password' type="password">Password</FormInput>

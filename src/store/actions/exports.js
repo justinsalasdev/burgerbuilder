@@ -8,7 +8,6 @@ export {
 } from './buildBurger';
 
 export {
-    checkoutBurger,
     purchaseBurger
    
 } from './placeOrder';

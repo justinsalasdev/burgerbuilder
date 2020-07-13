@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react';
 import Order from '../Order/Order';
-import axios from 'axios';
-import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import {useSelector,useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/exports';
 import Spinner from '../../recycle/Spinner/Spinner';
@@ -42,4 +40,4 @@ const Orders = props => {
         )
 }
 
-export default withErrorHandler(Orders,axios);
+export default Orders;
