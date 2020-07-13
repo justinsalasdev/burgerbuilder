@@ -11,6 +11,7 @@ const Orders = props => {
 
     const userId = useSelector(state => state.login.userId)
     const idToken = useSelector(state => state.login.idToken)
+    const orders = useSelector(state => state.fetchOrders.orders)
 
     useEffect(() => {
         dispatch(actions.fetchOrders(idToken,userId))
