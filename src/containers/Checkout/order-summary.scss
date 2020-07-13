@@ -10,7 +10,7 @@
 
 
 .order-summary{
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     color: $secondary-dark;
     padding: 2rem;
     border-top-right-radius: 2rem;
@@ -26,7 +26,7 @@
 
     &__items{
         margin-bottom: 1rem;
-        @include formatKey(inherit)
+        @include formatKey(wheat)
     }
 
     &__item{
@@ -53,13 +53,13 @@
 
     &__price{
         margin-bottom: 1rem;
-        color: whitesmoke;
-        @include formatKey(inherit)
+        color: $more;
+        @include formatKey(wheat)
     }
 
     &__address{
         @include formatKey(wheat);
-        color: lighten($success,30%);
+        color: lighten($success,40%);
         font-style: normal;
     }
 
