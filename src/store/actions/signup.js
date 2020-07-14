@@ -61,7 +61,6 @@ export const signup = (formData, showAlert) => {
         postSignupData(signUpData)
             .then(
                 response => {
-                    console.log(response)
                     const idToken = response.data.idToken;
                     const userId = response.data.localId;
                     token = idToken;
@@ -70,7 +69,6 @@ export const signup = (formData, showAlert) => {
                         .then(
                             () => { dispatch(endSignup('userSaved')); showAlert(true); },
                             error => {
-                                console.log(error.response.data.error)
                                 deleteSignupData(token)
                                     .then(
                                         () => {

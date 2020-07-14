@@ -3,7 +3,8 @@ import * as actions from '../actions/actions';
 const initialState = {
     orders: [],
     loading: false,
-    fetchMessage: null
+    fetchMessage: null,
+    ordersStatus: 'outdated'
 }
 
 function deepClone(object){
@@ -14,7 +15,7 @@ const reducer = (state = initialState, action) => {
     switch(action.type){
 
         case actions.FETCH_START:
-            const _ = deepClone(initialState);
+            const _ = deepClone(state); 
             _.loading = true;
             return _;
 
@@ -22,6 +23,12 @@ const reducer = (state = initialState, action) => {
             const _ = deepClone(state);
             _.orders = action.orders;
             _.loading = false;
+            return _
+        }
+        
+        case actions.UPDATE_ORDER_STATUS:{
+            const _ = deepClone(state);
+            _.ordersStatus = action.status
             return _
         }
 

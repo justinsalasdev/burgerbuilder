@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './layout.scss';
+import '../../recycle/Scrollbar/scrollbar.scss'
 import Toolbar from '../Toolbar/Toolbar'; 
 import SideDrawer from '../SideDrawer/SideDrawer';
 import {useSelector} from 'react-redux';

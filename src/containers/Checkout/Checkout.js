@@ -34,7 +34,6 @@ const Checkout = props => {
         userId,
     }
 
-    console.log(orderData)
 
 
     const acknowledgeAlert = () => {
@@ -51,8 +50,8 @@ const Checkout = props => {
 
     const purchase = () => {
         const date = new Date()
-        const purchaseDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-        dispatch(actions.purchaseBurger({...orderData,purchaseDate},idToken,showAlert))
+        // const purchaseDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+        dispatch(actions.purchaseBurger({...orderData,purchaseDate:date},idToken,showAlert))
     }
 
     const cancelPurchase = () => {

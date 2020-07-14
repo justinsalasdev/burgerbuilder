@@ -18,9 +18,11 @@ const App = props => {
   const dispatch = useDispatch();
   const reduxToken = useSelector(state => state.login.idToken);
 
+
   const localToken = localStorage.getItem('token');  
   useEffect(() => {
       dispatch(actions.refreshAuth(localToken))
+      localStorage.setItem('purchaseCount','0')
   // eslint-disable-next-line 
   },[])
 

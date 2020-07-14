@@ -1,0 +1,25 @@
+@import '../../assets/styles/variables.scss';
+
+.ingredient{
+    display: flex;
+    align-items: center;
+    margin: .5rem;
+
+    // @media screen and (max-width: $order-breakpoint) {
+    //     flex-direction: column;
+    // }
+
+    &__logo{
+        height: 4rem;
+        width: 4rem;
+        text-align: center;
+        margin-right: .5rem;
+
+        
+
+        & > img{
+            width:100%;
+        }
+    }
+
+}

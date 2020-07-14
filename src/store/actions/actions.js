@@ -11,6 +11,7 @@ export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
 export const FETCH_START = 'FETCH_START';
 export const FETCH_STORE = 'FETCH_STORE';
 export const FETCH_FAIL = 'FETCH_FAIL';
+export const UPDATE_ORDER_STATUS = 'UDPATE_ORDER_STATUS';
 
 
 //login------------------------------------------

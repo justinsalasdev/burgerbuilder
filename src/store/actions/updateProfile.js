@@ -58,7 +58,6 @@ export const updateProfile = (formData,id,userId,idToken,showAlert,history) => {
             .then(
                 response => {
                     const updatedUserData = {...response.data,userId:userId,id:id}
-                    console.log(updatedUserData)
                     localStorage.setItem('userData', JSON.stringify(updatedUserData))
                     dispatch(storeUserData(response.data))
                     dispatch(endSavingProfile())

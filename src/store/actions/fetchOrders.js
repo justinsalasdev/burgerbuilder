@@ -15,6 +15,13 @@ const storeOrders = (orders) => {
     }
 }
 
+export const updateOrdersStatus = (status) => {
+    return {
+        type: actions.UPDATE_ORDER_STATUS,
+        status
+    }
+}
+
 
 const handleFetchFailure = (fetchMessage) => {
     return {
@@ -40,8 +47,8 @@ export const fetchOrders = (idToken,userId) => {
                             key
                         })
                     }
-                console.log(fetchedOrders)
                 dispatch(storeOrders(fetchedOrders))
+                dispatch(updateOrdersStatus('updated'))
                 },
                 () => {
                     dispatch(handleFetchFailure("Can't retrieve your orders :("))

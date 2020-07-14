@@ -1,9 +1,10 @@
 import * as actions from '../actions/actions';
 
+
 const initialState = {
     loading: false,
     purchased: false,
-    checkOutMessage: null
+    checkOutMessage: null,
 }
 
 function deepClone(object){

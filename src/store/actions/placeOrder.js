@@ -1,5 +1,6 @@
 import * as actions from './actions';
 import axios from 'axios';
+import {updateOrdersStatus} from '../actions/fetchOrders';
 
 
 
@@ -26,6 +27,7 @@ const notifyFailure = (checkOutMessage) => {
     }
 }
 
+
 export const purchaseBurger = (orderData,idToken,showAlert) => {
     return dispatch => {
 
@@ -36,6 +38,7 @@ export const purchaseBurger = (orderData,idToken,showAlert) => {
         .then(
             () => {
                 dispatch(notifySuccess('Thank you for purchasing!'))
+                dispatch(updateOrdersStatus('outdated'))
                 showAlert(true)
             },
             () => {

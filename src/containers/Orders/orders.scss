@@ -1,0 +1,27 @@
+@import '../../assets/styles/variables.scss';
+
+.orders{
+    overflow: auto;
+    color: wheat;
+    width: 80%;
+    height: 60rem;
+    @media screen and (max-width: $order-breakpoint){
+        width: 100%;
+    }
+
+    @media screen and (max-width: $app-breakpoint){
+       height: auto;
+    }
+
+    &>ul {
+        padding: .1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__order{
+        list-style: none;
+        margin: .8rem;
+    }
+}
