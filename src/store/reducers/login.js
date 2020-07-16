@@ -58,10 +58,20 @@ const reducer = (state = initialState, action) => {
             return _;
         }
 
-    
+        case actions.LOGIN_EXPIRED_ACK:{
+            const _ = deepClone(state);
+            _.timerExpired = false;
+            return _;
+        }
+
 
         case actions.LOGOUT:{
+            
             const _ = deepClone(state);
+
+            if(action.method === 'auto'){
+                _.timerExpired = true;
+            }
             _.idToken = null
             _.userId = null
             return _;

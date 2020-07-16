@@ -80,7 +80,7 @@ const NavigationItems = (props) =>{
                     className='link--nav'
                     onClick={(e) => {
                         e.preventDefault()
-                        dispatch(actions.logout())
+                        dispatch(actions.logout('manual'))
                         history.replace('/')
                     }}
                 >

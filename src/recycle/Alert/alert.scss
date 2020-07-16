@@ -1,13 +1,15 @@
 @import '../../assets/styles/variables.scss';
 
 .alert {
-    position: absolute;
+    position: fixed;
     border-top-right-radius: 2rem;
     z-index: $alert-index;
     background-color: whitesmoke;
     box-shadow: $shadow-inactive;
-    margin: auto;
     padding: 2rem;
 
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 

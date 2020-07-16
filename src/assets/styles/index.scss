@@ -85,10 +85,11 @@ body {
 #root{
   width: 90%;
   max-width: 100rem;
-  min-height: 80rem;
+  height: 80vh;
 
   @media screen and (max-width: $app-breakpoint) {
     width: 100%;
+    height: auto;
   }
 
   background: linear-gradient(20deg, rgba($secondary-dark,0.9), rgba($primary-dark,0.9)),
