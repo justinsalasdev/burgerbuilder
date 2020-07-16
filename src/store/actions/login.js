@@ -22,7 +22,7 @@ const setLogoutTimer = (expiration) => {
     return dispatch => {
         logoutTimer = setTimeout(() => {
             dispatch(logout())
-        },expiration*1000)
+        },expiration)
     } 
 }
 
@@ -54,6 +54,12 @@ const handleLoginConflict = (conflictMessage) => {
     }
 }
 
+const handleTimerExpiration = () => {
+    return {
+        type: actions.LOGIN_EXPIRED,
+    }
+}
+
 
 //--------------------------------------------------------------------------------------
 
@@ -78,7 +84,9 @@ export const  refreshAuth = (localToken) => {
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
             if (expirationDate <= new Date()){
 
+                dispatch(handleTimerExpiration());
                 dispatch(logout());
+                
 
             } else {
                 const userId = localStorage.getItem('userId');

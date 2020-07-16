@@ -8,9 +8,10 @@
     width: 5rem;    
     height: 5rem;
    
-    @media screen and (max-width: $nav-breakpoint) {
+    @media screen and (max-width: $nav-logout-breakpoint) {
         display: none;
     }
+
 }
 
 

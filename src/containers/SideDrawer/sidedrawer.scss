@@ -1,6 +1,7 @@
 @import '../../assets/styles/variables.scss';
 
 .sidedrawer{
+    display: none;
     position: absolute;
     width: 28rem;
     max-width: 70%;
@@ -22,8 +23,8 @@
         transform: translateX(-100%);
     }
 
-    @media screen and (min-width: $nav-breakpoint) {
-        display: none;
+    @media screen and (max-width: $nav-logout-breakpoint) {
+        display: block;
     }
 }
 

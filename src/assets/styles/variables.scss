@@ -1,10 +1,16 @@
 
 //breakpoints
-$nav-breakpoint: 20em; //320px
-$app-breakpoint: 55em; //873
+$nav-breakpoint: 24em; //320px
+$app-breakpoint: 51em; //873
 $nav-login-breakpoint: 45em; //680px
 $form-input-breakpoint: 30em; //450px
-$order-breakpoint: 40em; 
+
+$order-breakpoint: 39em; 
+$order-column-breakpoint: 32em;
+
+$nav-in-breakpoint: 46em;
+$nav-in-breakpoint-2: 33em;
+$nav-logout-breakpoint: 24em;
 
 //colors
 $primary-dark: #581c0c;

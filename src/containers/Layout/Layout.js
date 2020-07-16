@@ -19,13 +19,13 @@ const Layout = props => {
     }
 
     return(
-        <div className="app">
+        <>
             <Toolbar toggleSideDrawer={toggleSideDrawer} isAuthenticated={isAuthenticated}/>
             <SideDrawer isAuthenticated={isAuthenticated} sideDrawerOpen={sideDrawerOpen} closeSideDrawer={closeSideDrawer}/>
             <main className='main'>
                 {children}
             </main>
-        </div>
+        </>
 
     )
 

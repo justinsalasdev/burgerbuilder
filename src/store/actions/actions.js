@@ -22,6 +22,7 @@ export const LOGIN_END = 'LOGIN_END'
 export const PROFILE_FAIL = 'PROFILE_FAIL';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+export const LOGIN_EXPIRED = 'LOGIN_EXPIRED';
 export const LOGIN_BROKE = 'LOGIN_BROKE';
 
 

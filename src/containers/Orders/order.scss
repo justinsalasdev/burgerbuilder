@@ -12,6 +12,15 @@
     box-shadow: .2rem .2rem .4rem $shadow-inactive;
     min-width: 48rem;
 
+    
+    @media screen and (max-width: $order-column-breakpoint){
+        flex-direction: column;
+        padding: 1.5rem 0 1.5rem 0;
+        min-width: unset;
+        border-radius: 1.2rem;
+    }
+
+
 
     &__ingredients{
         display: flex;

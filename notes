@@ -7,6 +7,7 @@ live update
 Profile --> cancel edit must return initial values
 refactor using react form hook
 
+add auto logout prompt
 
 
 

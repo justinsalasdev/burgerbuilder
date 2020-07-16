@@ -9,7 +9,7 @@
     &__nav{
         height: 100%;
         padding-right: 1rem;
-        @media screen and (max-width: $nav-breakpoint) {
+        @media screen and (max-width: $nav-logout-breakpoint) {
             display: none;
         }
     }

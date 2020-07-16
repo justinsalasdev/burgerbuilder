@@ -17,6 +17,8 @@ const App = props => {
 
   const dispatch = useDispatch();
   const reduxToken = useSelector(state => state.login.idToken);
+  const timerExpired = useSelector(state => state.login.timerExpired);
+  console.log(timerExpired)
 
 
   const localToken = localStorage.getItem('token');  
@@ -26,6 +28,12 @@ const App = props => {
   // eslint-disable-next-line 
   },[])
 
+  console.log('app renders')
+  if(timerExpired){
+    alert('timer expired')
+  }
+
+  
 
 
   const isAuthenticated = reduxToken !== null;

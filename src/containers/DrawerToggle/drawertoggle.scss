@@ -4,15 +4,15 @@
     // display: none;
     width: 5rem;
     height: 5rem;
-    display: flex;
+    display: none;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     cursor: pointer;
 
-    @media (min-width: $nav-breakpoint) {
-        display: none;
+    @media (max-width: $nav-logout-breakpoint) {
+        display: flex;
     }
 
     &__bar{
@@ -20,6 +20,6 @@
         margin-bottom: .5rem;
         width: 90%;
         height: .5rem;
-        background-color: whitesmoke;
+        background-color: wheat;
     }
 }

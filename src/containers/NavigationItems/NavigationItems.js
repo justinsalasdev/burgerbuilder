@@ -6,6 +6,11 @@ import {NavLink,useHistory} from 'react-router-dom';
 import * as actions from '../../store/actions/exports';
 import {useSelector,useDispatch} from 'react-redux';
 
+import spatula from '../../assets/icons/spatula.svg'
+import profile from '../../assets/icons/profile.svg'
+import notes from '../../assets/icons/notes.svg'
+
+
 
 const NavigationItems = (props) =>{
     const {closeSideDrawer} = props;
@@ -18,48 +23,59 @@ const NavigationItems = (props) =>{
     return(
         <ul className='navigation-items'  onClick={closeSideDrawer}>
             
-            <li className={'navigation-item'}>
+            <li>
                 <NavLink 
                     to='/'
                     exact
                     className='link--nav'
                     activeClassName={'active'}
-                >Burger Builder</NavLink>
+                >
+                    <img className='navigation-items__img' src={spatula} alt='to burger builder'/>
+                    <span className='navigation-items__text'>Burger Builder</span>
+                </NavLink>
             </li>
 
             {!isAuthenticated ? null:
-            <li className={'navigation-item'}>
+            <li>
                 <NavLink 
                     to='/profile'
                     exact
                     className='link--nav'
                     activeClassName={'active'}
-                >Profile</NavLink>
+                >
+                    <img className='navigation-items__img' src={profile} alt='to your profile'/>
+                    <span className='navigation-items__text'>Profile</span>
+                </NavLink>
             </li>}
 
               
             {!isAuthenticated? null:
-            <li className={'navigation-item'}>
+            <li>
                 <NavLink 
                     to='/orders'
                     exact
                     className='link--nav'
                     activeClassName={'active'}
-                >Orders</NavLink>
+                >
+                    <img className='navigation-items__img' src={notes} alt='to your order list'/>
+                    <span className='navigation-items__text'>Orders</span>
+                </NavLink>
             </li>}
 
             {isAuthenticated ? null:
-            <li className={'navigation-item'}>
+            <li>
                 <NavLink 
                     to={'/login'}
                     exact
                     className='link--nav'
                     activeClassName={'active'}
-                >Login</NavLink>
+                >
+                    Login
+                </NavLink>
             </li>}   
 
             {!isAuthenticated ? null:
-            <li className={'navigation-item'}>
+            <li>
                 <a href='/'
                     className='link--nav'
                     onClick={(e) => {
@@ -67,7 +83,9 @@ const NavigationItems = (props) =>{
                         dispatch(actions.logout())
                         history.replace('/')
                     }}
-                >Logout</a>
+                >
+                   Logout
+                </a>
             </li>}
 
 

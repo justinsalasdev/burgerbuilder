@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import './assets/styles/index.scss';
 import App from './containers/App/App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
-// import reducer from './store/reducer';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import buildBurger from './store/reducers/buildBurger'
 import placeOrder from './store/reducers/placeOrder'
 import fetchOrders from './store/reducers/fetchOrders'
@@ -15,11 +14,8 @@ import signup from './store/reducers/signup'
 import updateProfile from './store/reducers/updateProfile'
 import thunk from 'redux-thunk';
 
-//Basic redux setup
-// const store = createStore(burgerBuilderReducer,
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-const composeEnhancers = (process.env.NODE_ENV === 'development'? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 
 const rootReducer = combineReducers({
   buildBurger,
@@ -31,24 +27,22 @@ const rootReducer = combineReducers({
 })
 
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
-      applyMiddleware(thunk)
-    ));
+  applyMiddleware(thunk)
+));
 
 
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <App />
     </BrowserRouter>
   </Provider>
 )
 
 ReactDOM.render(
-  // <React.StrictMode>//disabled to show popUp :(
-    <>
+  <React.StrictMode>
       {app}
-    </>,
-  // </React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

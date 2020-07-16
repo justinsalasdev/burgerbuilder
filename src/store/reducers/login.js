@@ -6,7 +6,8 @@ const initialState = {
     userData: {},
     conflictMessage: null,
     errorMessage: null,
-    loading: false
+    loading: false,
+    timerExpired: false
 }
 
 function deepClone(object){
@@ -48,6 +49,12 @@ const reducer = (state = initialState, action) => {
             const _ = deepClone(state);
             _.conflictMessage = action.conflictMessage
             _.loading = false
+            return _;
+        }
+
+        case actions.LOGIN_EXPIRED:{
+            const _ = deepClone(state);
+            _.timerExpired = true;
             return _;
         }
 
