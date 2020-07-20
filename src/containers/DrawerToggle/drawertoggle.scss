@@ -1,7 +1,6 @@
 @import '../../assets/styles/variables.scss';
 
 .drawertoggle {
-    // display: none;
     width: 5rem;
     height: 5rem;
     display: none;
@@ -18,7 +17,7 @@
     &__bar{
         border-radius: 2rem;
         margin-bottom: .5rem;
-        width: 90%;
+        width: 80%;
         height: .5rem;
         background-color: wheat;
     }

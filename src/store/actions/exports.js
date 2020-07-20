@@ -24,7 +24,8 @@ export {
     logout,
     refreshAuth,
     getUserData,
-    storeUserData
+    storeUserData,
+    acknowledgeTimerExpiration
 } from './login'
 
 
