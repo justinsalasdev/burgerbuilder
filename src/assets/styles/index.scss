@@ -89,10 +89,11 @@ body {
   min-height: unset;
 
  
-  @media screen and (max-width: $app-breakpoint){
+  @media screen and (max-width: $app-breakpoint), (max-height: $app-breakpoint){
     width: 100%;
-    min-height: 100vh;
+    max-width: unset;
     height: auto;
+    min-height: 100vh;
   }
 
   
