@@ -58,7 +58,7 @@ const App = props => {
             <Suspense fallback={<Spinner/>}><Route path="/profile-edit" component={EditProfile}/></Suspense>
             <Suspense fallback={<Spinner/>}><Route path="/profile" component={StaticProfile}/></Suspense>
             <Route path="/" exact component={BurgerBuilder}/>
-            <Redirect to ="/" />
+            
           </>
       )
     } else {
@@ -72,8 +72,6 @@ const App = props => {
       )
     }
   }
-
-  
 
   return(
     <>
