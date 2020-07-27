@@ -29,7 +29,6 @@ const App = props => {
 
   useEffect(() => {
       dispatch(actions.refreshAuth(localToken))
-      localStorage.setItem('purchaseCount','0')
   // eslint-disable-next-line 
   },[])
 
