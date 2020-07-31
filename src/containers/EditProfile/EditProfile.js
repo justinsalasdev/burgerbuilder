@@ -13,6 +13,25 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import ErrorPrompt from '../../recycle/Prompt/Prompt';
 
+const profileSchema = Yup.object ({  
+  name: Yup.string()
+      .required('is required')
+      .max(20,'must not be longer than 20 characters'),
+  country: Yup.string()
+      .required('is required')
+      .max(20,'must not be longer than 20 characters'),
+  zipCode: Yup.string()
+      .required('is required')
+      .matches(/^[0-9]+$/,'must be a number')
+      .min(4,'must be 4 characters at least')
+      .max(4,'should not be more than 4 digits'),
+  contactNumber: Yup.string()
+      .required('is required')
+      .matches(/^[0-9]+$/,'must be a number')
+      .max(20,'must not be longer than 20 digits')
+})
+
+
 
 const Profile = props => {
 
@@ -54,23 +73,7 @@ const Profile = props => {
       zipCode: zipCode,
       contactNumber: contactNumber
     },
-    validationSchema: Yup.object ({  
-        name: Yup.string()
-            .required('is required')
-            .max(20,'must not be longer than 20 characters'),
-        country: Yup.string()
-            .required('is required')
-            .max(20,'must not be longer than 20 characters'),
-        zipCode: Yup.string()
-            .required('is required')
-            .matches(/^[0-9]+$/,'must be a number')
-            .min(4,'must be 4 characters at least')
-            .max(4,'should not be more than 4 digits'),
-        contactNumber: Yup.string()
-            .required('is required')
-            .matches(/^[0-9]+$/,'must be a number')
-            .max(20,'must not be longer than 20 digits')
-    }),
+    validationSchema: profileSchema,
     onSubmit: (formData) => {
       dispatch(actions.updateProfile(formData,id,userId,idToken,showAlert,history))
     }

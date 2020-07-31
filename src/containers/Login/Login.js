@@ -14,6 +14,17 @@ import ErrorPrompt from '../../recycle/Prompt/Prompt';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+
+const authSchema = Yup.object ({
+  email: Yup.string ()
+    .email ('is invalid')
+    .required ('is required')
+    .max(64,'must not be longer than 20 characters'),
+  password: Yup.string ()
+    .required ('is required')
+    .min (6, 'must be 6 characters atleast')
+})
+
 const Login = props => {
 
   const [alertShown,showAlert] = useAlert(false);  
@@ -38,15 +49,7 @@ const Login = props => {
       email: '',
       password: '',
     },
-    validationSchema: Yup.object ({
-      email: Yup.string ()
-        .email ('is invalid')
-        .required ('is required')
-        .max(64,'must not be longer than 20 characters'),
-      password: Yup.string ()
-        .required ('is required')
-        .min (6, 'must be 6 characters atleast')
-    }),
+    validationSchema: authSchema,
 
     onSubmit: loginData => {
       dispatch(actions.login(loginData,showAlert))

@@ -12,6 +12,30 @@ import SignupPrompt from '../SignupPrompt/SignupPrompt';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+const signupSchema = Yup.object ({  
+  email: Yup.string()
+      .email ('is invalid')
+      .required ('is required')
+      .max(64,'must not be longer than 20 characters'),
+  password: Yup.string()
+      .required ('is required')
+      .min (6, 'must be 6 characters at least'),
+  name: Yup.string()
+      .required('is required'),
+  country: Yup.string()
+      .required('is required'),
+  zipCode: Yup.string()
+      .required('is required')
+      .matches(/^[0-9]+$/,'must be a number')
+      .min(4,'must be 4 characters at least')
+      .max(4,'should only contain 4 digits'),
+  contactNumber: Yup.string()
+      .required('is required')
+      .matches(/^[0-9]+$/,'must be a number')
+    
+
+})
+
 const Signup = props => {
 
   const {history} = props;
@@ -48,29 +72,7 @@ const Signup = props => {
       zipCode:'',
       contactNumber:'',
     },
-    validationSchema: Yup.object ({  
-        email: Yup.string()
-            .email ('is invalid')
-            .required ('is required')
-            .max(64,'must not be longer than 20 characters'),
-        password: Yup.string()
-            .required ('is required')
-            .min (6, 'must be 6 characters at least'),
-        name: Yup.string()
-            .required('is required'),
-        country: Yup.string()
-            .required('is required'),
-        zipCode: Yup.string()
-            .required('is required')
-            .matches(/^[0-9]+$/,'must be a number')
-            .min(4,'must be 4 characters at least')
-            .max(4,'should only contain 4 digits'),
-        contactNumber: Yup.string()
-            .required('is required')
-            .matches(/^[0-9]+$/,'must be a number')
-          
-
-    }),
+    validationSchema: signupSchema,
 
     onSubmit: (signupData) => {
       dispatch(actions.signup(signupData,showAlert))
