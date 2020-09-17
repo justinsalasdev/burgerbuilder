@@ -1,44 +1,25 @@
+export { initIngredients, addIngredient, removeIngredient } from "./buildBurger"
+
+export { purchaseBurger } from "./placeOrder"
+
+export { fetchOrders } from "./fetchOrders"
 
 export {
-    initIngredients,
-    addIngredient,
-    removeIngredient
+	login,
+	logout,
+	refreshAuth,
+	getUserData,
+	storeUserData,
+	acknowledgeTimerExpiration
+} from "./login"
 
-    
-} from './buildBurger';
+//haha
 
-export {
-    purchaseBurger
-   
-} from './placeOrder';
-
-
-export {
-    fetchOrders
-} from './fetchOrders'
-
-
+export { signup } from "./signup"
 
 export {
-    login,
-    logout,
-    refreshAuth,
-    getUserData,
-    storeUserData,
-    acknowledgeTimerExpiration
-} from './login'
-
-
-
-export {
-    signup
-} from './signup'
-
-
-export {
-    updateProfile,
-    startEdit,
-    endEdit,
-    handleSaveFail
-} from './updateProfile'
-
+	updateProfile,
+	startEdit,
+	endEdit,
+	handleSaveFail
+} from "./updateProfile"
